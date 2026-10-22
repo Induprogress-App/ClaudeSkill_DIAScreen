@@ -1,0 +1,391 @@
+zakres;klucz;typy;domyslna;wartosci;opis;pewnosc
+ekran;AutoCloseTime;*;0;0|3;automatyczne zamkniecie podekranu;?
+ekran;BaseScreenID;*;0;0|65005|65004|65003|1000|65002|65001;ekran bazowy (tlo), 0 = brak;?
+ekran;BgColor;*;16579836;16579836|8421631|8454143|11827320|12632256|8421504|15329769|15790320;"w ekranie: kolor tla ekranu; w stanie: kolor tla";ok
+ekran;CenterSubScreen;*;0;0|1;podekran na srodku;?
+ekran;CloseMacroLen;*;0;0;makro zamkniecia (binarne);?
+ekran;CycleMacroDelayTime;*;100;100;okres makra cyklicznego [ms];?
+ekran;CycleMacroLen;*;0;0|466;makro cykliczne (binarne);?
+ekran;DocSizeX;*;1024;1024|350|600|1920|612|460|512|430;szerokosc ekranu [px];ok
+ekran;DocSizeY;*;768;768|250|1080|512|600|252|400|260;wysokosc ekranu [px];ok
+ekran;EnableCycleMacro;*;1;1;makro cykliczne wl;?
+ekran;HardCopyBottom;*;767;767|599|1079|982;obszar wydruku;?
+ekran;HardCopyLeft;*;0;0;obszar wydruku;?
+ekran;HardCopyRight;*;1023;1023|1919|799;obszar wydruku;?
+ekran;HardCopyTop;*;0;0;obszar wydruku;?
+ekran;Height;*;250;250|512|252|400|768|260|256|50;wysokosc [px];ok
+ekran;Hidden;*;0;0|1;ekran ukryty;?
+ekran;HideSubScreenMinimizedBtn;*;0;0;ukryj przycisk minimalizacji;?
+ekran;ID;*;1;1|2|3|65500|10|20|30|4;numer ekranu (w akcji: numer akcji);ok
+ekran;IsConfirmScreen;*;0;0|1;ekran potwierdzenia (Confirmation screen), 1 = tak;ok
+ekran;IsExternalScreen;*;0;0;ekran zewnetrzny;?
+ekran;IsKeypadScreen;*;0;0;ekran klawiatury;?
+ekran;IsPrintScreen;*;0;0;drukowanie ekranu;?
+ekran;IsPrintTypeScreen;*;0;0;ekran wydruku;?
+ekran;IsScreenRotate;*;0;0;obrot ekranu;?
+ekran;IsSubScreen;*;0;0|1;podekran (okno);?
+ekran;IsTemplateScreen;*;0;0;ekran szablonu;?
+ekran;IsUseFrame;*;1;1|0;ramka okna;?
+ekran;IsUseTitleBar;*;1;1|0;pasek tytulu okna;?
+ekran;OpenMacroLen;*;0;0|71;makro otwarcia (binarne);?
+ekran;PanelSizeX;*;1024;1024|1920|800;rozdzielczosc panelu X;ok
+ekran;PanelSizeY;*;768;768|1080|600;rozdzielczosc panelu Y;ok
+ekran;RefreshRate;*;2;2;czestotliwosc odswiezania;?
+ekran;ScreenAction;*;0;0|100|13|7143533|7274612|33686018|671958541|589834;akcja ekranu;?
+ekran;ScreenLockVar;*;None;None|1;bit blokady ekranu;?
+ekran;ScreenPassword;*;;;haslo ekranu;?
+ekran;ScreenProtect;*;0;0;ochrona ekranu;?
+ekran;ScreenType;*;0;0|1|6;typ ekranu: 0 = zwykly, 6 = Confirmation screen (z IsConfirmScreen=1);?
+ekran;SubScreenX;*;0;0;pozycja podekranu X;?
+ekran;SubScreenY;*;0;0;pozycja podekranu Y;?
+ekran;TitleTextFontColor;*;16777215;16777215;kolor tytulu;?
+ekran;TitleTextFontName#;*;Arial;Arial;czcionka tytulu;?
+ekran;TitleTextFontSize#;*;12;12|18|16|20;rozmiar tytulu;?
+ekran;VER;*;16;16;wersja zapisu ekranu (16);?
+ekran;Width;*;350;350|600|612|460|512|1024|430|448;szerokosc [px];ok
+ekran;wScreenDESCTextLen#;*;<tekst>;<tekst>|65001;opis ekranu;ok
+ekran;wTextLen;*;<tekst>;<tekst>|65001;nazwa ekranu;ok
+ekran;wTitleTextLen#;*;;|<tekst>;tytul okna;?
+element;AccessType;10/2 12/8 12/9;2;2|3;rodzaj dostepu / nosnik;?
+element;AccountOrder;19/9;0;0;kolejnosc kont;?
+element;ActionID;12/1 12/8 12/9 12/12;0;0;numer akcji;?
+element;Active;6/1 6/2;0;0;aktywny;?
+element;AfterExecMacroLen;1/1 1/2 1/3 1/4 1/5 1/6 1/7 1/8 1/9 1/10 1/11 1/14 6/1 6/2 12/1 12/8 12/9 12/12 19/2 19/9;0;0|88|86|291|408|404|155|70;makro po wykonaniu (binarne @@hex);?
+element;antialiasing;*;1;1|0;wygladzanie krawedzi;?
+element;ASCIIValue#;15/4;13;13|27;kod znaku klawisza: 13 = Enter (OK), 27 = Esc (Cancel);?
+element;AutoResizeByText;*;0;0|1;automatyczny rozmiar wg tekstu;ok
+element;AutoResizeMargin;*;0;0;margines automatycznego rozmiaru;ok
+element;BackupUnitDisplay;5/1 6/1;0;0;kopia jednostki;?
+element;BackupUnitSrc;5/1 6/1;0;0;kopia jednostki;?
+element;BarStyle;3/2;0;0;styl paska;?
+element;BdrDashType;10/2;0;0;ramka przerywana;?
+element;BDREndColor;10/2;0;0;kolor ramki gradient;?
+element;BDRMidColor;10/2;0;0;kolor ramki gradient;?
+element;BDRStartColor;10/2;0;0;kolor ramki gradient;?
+element;BdrTwinkleSpd;10/2;0;0;miganie ramki;?
+element;BeforeExecMacroLen;1/1 1/2 1/3 1/4 1/5 1/6 1/7 1/8 1/9 1/10 1/11 1/14 6/1 6/2 12/1 12/8 12/9 12/12 19/2 19/9;0;0|546|194|129|151|149|806|406;makro przed wykonaniem (binarne);?
+element;bFreeze;*;0;0|1;zablokowanie pozycji w edytorze;?
+element;BorderColor;*;11842740;11842740|16777215|255|33023|16711680|0|14408667|13158600;kolor ramki (COLORREF R+G*256+B*65536);ok
+element;BorderType;10/2;0;0;rodzaj ramki;?
+element;ButtonOffMacroLen;1/2 1/3 1/4 15/4;0;0|156|154;makro przy OFF (binarne);?
+element;ButtonOnMacroLen;1/1 1/3 1/4 15/4;0;0;makro przy ON (binarne);?
+element;ByteSwap;5/2 6/2;0;0;zamiana bajtow;?
+element;CancelActBit;1/10;None;None;bit anulowania;?
+element;CloseScreen;1/10;1;1;zamknij biezacy (pod)ekran;?
+element;ColNum#;19/10;-1;-1|1|2|3|4|5|6|7;numer kolumny;?
+element;ColorVary;10/1 10/2;0;0|1;zmiana koloru z adresu;?
+element;ColumnName#;19/10;;|<tekst>;nazwa kolumny #;?
+element;ColWidth#;11/1 11/2 19/10;60;60|120|50|180|250|160|90;szerokosc kolumny #;?
+element;ColWidthOfName;19/10;200;200;szerokosc kolumny nazwy;?
+element;ColWidthOfNo;19/10;100;100;szerokosc kolumny numeru;?
+element;CombineType;*;0;0;laczenie elementow;?
+element;ConfirmScreenID;1/1 1/2 1/3 1/4 1/5 1/6 1/7 1/8 1/9 1/10 1/11 6/1 12/1 12/8 12/9 12/12 19/2 19/9;0;0|65500;ekran potwierdzenia (typu Confirmation screen) przy ConFirmWindow=3;ok
+element;ConfirmScreenName;1/1 1/2 1/3 1/4 1/5 1/6 1/7 1/8 1/9 1/10 1/11 6/1 12/1 12/8 12/9 12/12 19/2 19/9;;|<tekst>;nazwa ekranu potwierdzenia (zwykla linia ASCII);ok
+element;ConFirmWindow;1/1 1/2 1/3 1/4 1/5 1/6 1/7 1/8 1/9 1/10 1/11 6/1 12/1 12/8 12/9 12/12 19/2 19/9;0;0|1|2|3;potwierdzenie: 0 = brak, 1 = systemowe Yes/No, 2 = systemowe + ponowne logowanie, 3 = wlasny ekran (ConfirmScreenID);ok
+element;ConvertConstByUnit;5/1 6/1;0;0;przeliczanie stalych jednostka;?
+element;DataFmt;5/3 5/4;0;0|4;format daty;?
+element;DataSourceType;19/9;0;0;zrodlo danych listy;?
+element;DateFmt;11/1 11/2;1;1;format daty;?
+element;DefaultSortColID;11/1 11/2;1;1|-1;domyslne sortowanie;?
+element;DispAsterisk;1/1 1/2 1/3 1/4 1/5 1/6 1/7 1/8 1/9 1/10 1/11 1/14 5/1 5/2 6/1 6/2;0;0;wyswietlanie gwiazdek (haslo);?
+element;DisplayDataFormat;19/9;0;0;format wyswietlania;?
+element;DisplayDotVar;5/1 6/1;None;None;adres liczby miejsc po przecinku (None = stala);ok
+element;DisplayDotVariation;5/1 6/1;0;0|1;miejsca po przecinku ze stalej/adresu;?
+element;DisplayOrder#;11/1 11/2;0;0|59|1|2|3|7;kolejnosc kolumny #;?
+element;DisplayTargetID;19/9;-1;-1;element docelowy;?
+element;DotNum;1/6 5/1 6/1;2;2|0|1|4|3;liczba miejsc po przecinku;ok
+element;EnableBorderMem;10/2;0;0;ramka z adresu;?
+element;EnableCol#;11/1 11/2;0;0|1;kolumna # widoczna;?
+element;EnableCustomRadius;10/2;0;0;wlasny promien;?
+element;EnableGroupID;11/1 11/2;0;0;filtr grupy;?
+element;EnableGroupIDFilter;11/1 11/2;0;0;filtr grupy;?
+element;EnableShadowEffect;5/1 5/2 10/6;0;0;cien elementu wl/wyl;ok
+element;EventID;1/1 1/2 1/3 1/4 1/6 1/7 1/8 1/9 1/10 6/1 6/2 19/2 19/9;0;0;zdarzenie powiazane;?
+element;EventName;1/3 1/7 1/8 1/9 19/2 19/9;;;nazwa zdarzenia;?
+element;ExpandDirection;19/9;0;0;kierunek rozwijania;?
+element;ExtendedAscii;5/2 6/2;0;0;rozszerzone ASCII;?
+element;FieldFontSize;11/1;12;12;rozmiar czcionki pol;?
+element;FillPatternStyle;10/2;0;0;wzor wypelnienia;?
+element;FillStyle;10/2;0;0|1;styl wypelnienia;?
+element;FunctionKeyH;11/1 11/2 19/10;40;40;wysokosc klawisza funkcyjnego;?
+element;FunctionKeyPartID#;11/1 11/2 19/10;-1;-1;klawisz funkcyjny #;?
+element;FunctionKeyW;11/1 11/2 19/10;60;60;szerokosc klawisza funkcyjnego;?
+element;GainValue;5/1 6/1;1.0;1.0|100.0|0.2|0.1;wzmocnienie (Gain);ok
+element;GlobalWidth;19/10;60;60;szerokosc kolumn;?
+element;GoToScreenID;1/10;23;23|20|45|46|10|32|50|40;ekran docelowy (Goto Screen);?
+element;GoToScreenName;1/10;<tekst>;<tekst>;nazwa ekranu docelowego;?
+element;GradFillEndColor;10/2;16579836;16579836;kolor konca gradientu;?
+element;GradFillMode;10/2;0;0;tryb gradientu;?
+element;GradFillStartColor;10/2;16579836;16579836;kolor poczatku gradientu;?
+element;GridColor;11/1 11/2 19/10;16579836;16579836;kolor siatki;?
+element;GroupID;1/3 2/1;307549576;307549576|416608768;"grupa elementow (sekcja [Group] ekranu); 0/brak = bez grupy";?
+element;GroupIDValue;11/1 11/2;0;0;grupa;?
+element;GroupIDVar;11/1 11/2;None;None;adres grupy;?
+element;GroupIDVariation;11/1 11/2;0;0;grupa ze stalej/adresu;?
+element;Height;*;60;60|48|20|40|100|80|56|52;wysokosc [px];ok
+element;HiDwordFirst;5/1 6/1;0;0;kolejnosc slow DWord;?
+element;HiWordFirst;5/1 6/1;0;0;kolejnosc slow;?
+element;HLimitValue;3/2;1000;1000;gorna granica;?
+element;HotKey;1/1 1/2 1/3 1/4 1/5 1/6 1/7 1/8 1/9 1/10;0;0|16|29|35|27|13|31|18;skrot klawiszowy;?
+element;HRegionColor;3/2;108;108;kolor powyzej granicy;?
+element;IgnoreHistOP;1/1 1/2 1/3 1/4 1/5 1/6 1/7 1/8 1/9 1/10 1/11 1/14 6/1 6/2 12/1 12/8 12/9 12/12 19/2 19/9;0;0;pomijanie operacji historii;?
+element;ImageStretch;10/2;0;0;rozciaganie obrazu;?
+element;ImpulsiveTime;1/14;0;0;czas impulsu;?
+element;InstOrder;19/9;0;0;kolejnosc;?
+element;InterLockLevel;1/1 1/2 1/3 1/4 1/5 1/6 1/7 1/8 1/9 1/10 1/11 1/14 6/1 6/2 12/1 12/8 12/9 12/12 19/2 19/9;1;1|0;stan bitu blokady zezwalajacy;?
+element;InterLockLink;1/3 1/4 6/1 6/2 19/9;1;1;lacze bitu blokady;?
+element;InterLockVar;1/3 1/4 6/1 6/2 19/9;None;None|<adres>;bit blokady dzialania;?
+element;InterLockViewMode;1/1 1/2 1/3 1/4 1/5 1/6 1/7 1/8 1/9 1/10 1/11 1/14 6/1 6/2 12/1 12/8 12/9 12/12 19/2 19/9;0;0;wyglad zablokowanego elementu;?
+element;IntNum;1/6 5/1 6/1;10;10|4|3|5|8|2|6|19;liczba cyfr calkowitych;ok
+element;KeyPadBottom;1/6 6/1 6/2;0;0;klawiatura - pozycja;?
+element;KeyPadLeft;1/6 6/1 6/2;0;0;klawiatura - pozycja;?
+element;KeyPadRight;1/6 6/1 6/2;0;0;klawiatura - pozycja;?
+element;KeypadScreenID;1/6 6/1 6/2;0;0;ekran klawiatury;?
+element;KeyPadTop;1/6 6/1 6/2;0;0;klawiatura - pozycja;?
+element;KeypadType;15/4;3;3;rodzaj klawisza (Keypad Key): 3 = znak ASCII;?
+element;KPBkgndColor#;1/6 6/1 6/2;15790320;15790320|16304272;kolor tla klawisza klawiatury #;?
+element;KPFontColor#;1/6 6/1 6/2;255;255|16777215|8388608;kolor czcionki klawisza #;?
+element;KPFontName#-#;1/6 6/1 6/2;Arial;Arial;czcionka klawisza (klawisz-jezyk);?
+element;KPFontSize#-#;1/6 6/1 6/2;16;16|12;rozmiar czcionki klawisza;?
+element;LangValue;12/12;0;0|1;jezyk do ustawienia (Language Change);?
+element;LeadingZero;5/1 6/1;0;0;zera wiodace;?
+element;LeftLink;23/1;1;1;lacze;?
+element;LeftVar;23/1;None;None;adres pozycji X;?
+element;Level;*;0;0|4|2;poziom (warstwa);?
+element;LimitValue;1/8 1/9;0;0|-20|20|39;granica (Decrement: dolna, Increment: gorna);ok
+element;LineStyle;10/1;0;0|1;styl linii;?
+element;ListEnRcpGroupLink;19/10;1;1;lacze;?
+element;ListEnRcpGroupVar;19/10;1;1;grupa receptur;?
+element;ListEnRcpNoWriteVar;19/10;ENRCPNO;ENRCPNO;adres numeru receptury (ENRCPNO);?
+element;ListEnRcpTypeVar;19/10;3;3;typ listy receptur;?
+element;LLimitValue;3/2;0;0;dolna granica;?
+element;LnrGradAngle;10/2;0;0;kat gradientu;?
+element;LRegionColor;3/2;-1090337022;-1090337022;kolor ponizej granicy;?
+element;LuaParam#;6/1;0;0;parametr Lua;?
+element;MainScale;3/2;5;5;skala glowna;?
+element;MaxDisplayDaysOfData;19/9;1;1;dni danych;?
+element;MaxItemCount;11/1 11/2;1000;1000;maks. liczba pozycji;?
+element;MaxValue;1/6 3/2 6/1;9999999999.00;9999999999.00|100.00|100.0|65535|500.00|<adres>|5.00|999.00;maksymalna wartosc wpisu;?
+element;MemFmt;*;2;2|5|1|3;format danych: 1 = Signed Decimal, 2 = Unsigned Decimal (inne: hex, BCD, float - nieustalone);ok
+element;MemLen;*;1;1|0|6|2;typ danych: 0 = Bit (adres $N.b), 1 = Word ($N), 2 = DWord, 6 = QWord - musi pasowac do adresu;ok
+element;MinMaxVariation;3/2;0;0;zakres ze stalych/adresu;?
+element;MinValue;1/6 3/2 6/1;0.00;0.00|0|0.0|<adres>|-100.00|1|-999999.0|-90.00;minimalna wartosc wpisu;?
+element;ModifierKey;1/1 1/2 1/3 1/4 1/5 1/6 1/7 1/8 1/9 1/10;0;0;modyfikator skrotu;?
+element;nAngle;10/6;270;270|90;kat obrotu;?
+element;NoMessage;1/1 1/2 1/3 1/4 1/5 1/6 1/7 1/8 1/9 1/10 1/11 1/14 6/1;0;0;bez komunikatow;?
+element;NotShowAlmUnlock;11/1;0;0;bez odblokowania alarmow;?
+element;nPartsID;*;1;1|2|3|4|6|7|5|8;numer elementu na ekranie (unikalny, kolejny);ok
+element;OffsetLength;1/6 5/1 6/1;0;0;Offset length: 0 = Same value unit;ok
+element;OffsetValue;5/1 6/1;0.000000;0.000000|-100.000000;przesuniecie (Offset);ok
+element;OffVoice;1/3;0;0;bez dzwieku;?
+element;opacity;1/10 3/2 10/6;94;94|50|64;przezroczystosc;?
+element;OptionsBKColor;19/9;15987699;15987699;tlo opcji;?
+element;OptionsDisplayItem;19/9;5;5;liczba widocznych opcji;?
+element;OptionsFillStyle;19/9;0;0;wypelnienie opcji;?
+element;OptionsHeight;19/9;40;40;wysokosc opcji;?
+element;OptionsSelectColor;19/9;15969638;15969638;kolor wybranej opcji;?
+element;OptionsSetWidth;19/9;0;0;wlasna szerokosc opcji;?
+element;OptionsWidth;19/9;180;180;szerokosc opcji;?
+element;Order;1/5 1/6 1/7 1/8 1/9 1/10 1/11 6/1 6/2 19/2 19/9;0;0|1;kolejnosc wprowadzania;?
+element;PageLines;19/9;5;5;liczba wierszy na strone;?
+element;Penetrate;10/2;0;0;przepuszczanie klikniec;?
+element;PosVary;10/1 10/2 10/6;0;0|1;zmiana pozycji z adresu;?
+element;Print;11/1 11/2;1;1;drukowanie;?
+element;PushTime;1/1 1/2 1/3 1/4;0;0;czas przytrzymania;?
+element;RadOring;10/2;0;0;zaokraglenie;?
+element;RangeFontColor;1/6 6/1;255;255|8404992;kolor podpowiedzi zakresu;?
+element;RangeFontSize;1/6 6/1;12;12;rozmiar podpowiedzi zakresu;?
+element;ReadLink;1/3 1/10 2/1 3/2 5/1 5/2 6/1 6/2 10/1 10/2 10/6;1;1;lacze adresu odczytu (1 przy adresie);?
+element;ReadMemType;1/3 1/10 2/1 3/2 5/1 5/2 6/1 6/2 10/1 10/2 10/6;0;0|1|3;typ pamieci adresu odczytu;?
+element;ReadOnly;6/2 19/10;0;0;tylko odczyt;?
+element;ReadVar;1/3 1/10 2/1 3/2 5/1 5/2 6/1 6/2 10/1 10/2 10/6;<adres>;<adres>|ENRCPNONAME;adres odczytu: None, $N, $N.b, LACZE@Application.Zmienna, {LACZE}st@...;ok
+element;RelatedFileBrowserPartID;*;-1;-1;powiazana przegladarka plikow (-1 = brak);?
+element;Roundoff;5/1 6/1;0;0|1;zaokraglanie;ok
+element;RoundRadius;10/2;0;0;promien zaokraglenia;?
+element;RowAckColor;11/1 11/2;14286809;14286809;kolor alarmu potwierdzonego;?
+element;RowActiveColor;11/1 11/2;14540287;14540287;kolor alarmu aktywnego;?
+element;RowAlternateColor;11/1 11/2 19/10;16756576;16756576|14671871|16773599|12566527;kolor co drugiego wiersza;?
+element;RowColor;11/1 11/2 19/10;16708846;16708846|15724542;kolor wiersza;?
+element;RowColorMode;11/1 11/2;0;0;tryb kolorow wierszy;?
+element;RowHoverColor;11/1 11/2;15844517;15844517;kolor po najechaniu;?
+element;RowNormalColor;11/1 11/2;16708846;16708846;kolor wiersza normalnego;?
+element;RowSelectColor;11/1 11/2 19/10;15570276;15570276|6645229;kolor zaznaczenia;?
+element;ScaleColor;3/2;0;0;kolor skali;?
+element;ScaleDock;3/2;0;0;polozenie skali;?
+element;ScaleFontColor;3/2;16515072;16515072;kolor opisu skali;?
+element;ScaleFontSize;3/2;16;16;rozmiar opisu skali;?
+element;ScaleStyle;3/2;15;15;styl skali;?
+element;ScaleWidth;3/2;0;0;szerokosc skali;?
+element;ScrollCtrlVarType;11/1 11/2;0;0;przewijanie z adresu;?
+element;SearchMatchTextColor;11/1;255;255;kolor wyniku wyszukiwania;?
+element;SelectColTriggerVar;19/10;None;None;bit zaznaczenia kolumny;?
+element;SelectColVar;19/10;None;None;adres zaznaczonej kolumny;?
+element;SelectRowTriggerVar;19/10;None;None;bit zaznaczenia wiersza;?
+element;SelectRowVar;19/10;None;None;adres zaznaczonego wiersza;?
+element;SelectScreen;1/10 1/11;0;0|1;wybor ekranu;?
+element;SetLowSecurity;1/1 1/2 1/3 1/4 1/5 1/6 1/7 1/8 1/9 1/10 1/11 1/14 6/1 6/2 19/2 19/9;0;0;niski poziom zabezpieczenia;?
+element;SetValue;1/7;1;1|7|18|34|0|2|3|4;wartosc zapisywana (Set Constant / akcja);?
+element;ShadowBlurRadius;5/1 5/2 10/6;0;0|4;rozmycie cienia;ok
+element;ShadowColor;5/1 5/2 10/6;11842740;11842740;kolor cienia;ok
+element;ShadowOffsetX;5/1 5/2 10/6;0;0|3;przesuniecie cienia X;ok
+element;ShadowOffsetY;5/1 5/2 10/6;0;0|3;przesuniecie cienia Y;ok
+element;ShowAlarmNumber;11/1 11/2;1;1|0;numer alarmu;?
+element;ShowAll;19/10;0;0;pokaz wszystko;?
+element;ShowBorder;10/2;1;1;pokaz ramke;?
+element;ShowDate;11/1 11/2;1;1;kolumna daty;?
+element;ShowFrame;19/2;0;0;ramka;?
+element;ShowGrid;11/1 11/2;0;0;siatka;?
+element;ShowGridLine;11/1 11/2 19/10;1;1;linie siatki;?
+element;ShowGridRow;11/1 11/2;0;0;linie wierszy;?
+element;ShowInstName;19/9;0;0;pokaz nazwe;?
+element;ShowOverRange;6/1;1;1|0;sygnalizacja przekroczenia;?
+element;ShowRange;3/2;1;1;pokaz zakres przy wpisie;?
+element;ShowTarget;3/2;0;0;pokaz wartosc zadana;?
+element;ShowTempDraw;2/1;0;0;podglad w edytorze;?
+element;ShowTime;11/1 11/2;1;1;kolumna czasu;?
+element;ShowUnit;5/1 6/1;0;0|1;pokaz jednostke;?
+element;ShowUserLevel;19/9;0;0;poziom uzytkownika;?
+element;SizeVary;10/2;0;0;zmiana rozmiaru z adresu;?
+element;SmoothFont;10/6;1;1;wygladzanie czcionki;ok
+element;SortUsingHeader;11/1 11/2;0;0;sortowanie naglowkiem;?
+element;StateColor;11/1 11/2;0;0;kolor stanu;?
+element;StepValue;1/8 1/9;1;1|5;krok (Increment/Decrement);ok
+element;StringLeadingZero;5/2 6/2;0;0;zera wiodace tekstu;?
+element;StringLen;5/2 6/2 10/2;16;16|20|40|100;dlugosc tekstu w znakach;?
+element;Style;*;0;0|3|32768|32770|32771|2|259|256;"styl: Numeric Display 2 = Sunken; Multistate 0 = zwykly, 3 = Invisible (bez tla, widac tekst/obraz); Text 0 = z tlem (FgColor), 32768 = przezroczysty";ok
+element;SubScale;3/2;1;1;skala pomocnicza;?
+element;SubScreenLink;23/1;1;1;lacze;?
+element;SubScreenVar;23/1;<adres>;<adres>;adres numeru podekranu (Embedded Subscreen);?
+element;SubType;*;1;1|6|3|10|2|4|7|14;podrodzaj elementu, patrz elementy.csv;ok
+element;TargetColor;3/2;16515072;16515072;kolor wartosci zadanej;?
+element;TargetStyle;3/2;0;0;styl wartosci zadanej;?
+element;TargetValue;3/2;0;0;wartosc zadana;?
+element;TimeFmt;11/1 11/2;0;0;format czasu;?
+element;TitleAlignment;11/1 11/2;1;1;wyrownanie naglowka;?
+element;TitleBkgColor;11/1 11/2;12500670;12500670;tlo naglowka;?
+element;TitleFontColor;11/1 11/2;0;0;kolor naglowka;?
+element;TitleHeight;1/6 6/1 6/2;0;0;wysokosc naglowka;?
+element;TitleTextLen#-#;11/1 11/2;No;No|Trigger|Message|Ack|Recovery|Frequency|Group|Operator;naglowek kolumny (kolumna-jezyk);?
+element;TopLink;23/1;1;1;lacze;?
+element;TopVar;23/1;None;None;adres pozycji Y;?
+element;TotalColumn;19/10;8;8;liczba kolumn;?
+element;TriggerLink;6/1 6/2 19/9;1;1;lacze bitu Trigger;?
+element;TriggerVar;6/1 6/2 19/9;None;None|<adres>;bit ustawiany po wpisaniu/wykonaniu;?
+element;Type;*;10;10|1|6|5|2|12|11|19;rodzaj elementu (grupa), patrz elementy.csv;ok
+element;UnitBold;5/1 6/1;0;0|1;jednostka pogrubiona;?
+element;UnitCustom#Var_#;5/1 6/1;1.0;1.0|0.0;wspolczynniki wlasnego przeliczenia;?
+element;UnitDirection;5/1 6/1;0;0|3;polozenie jednostki;?
+element;UnitDisplay;5/1 6/1;0;0;jednostka wyswietlana;?
+element;UnitDisplayVar;5/1 6/1;None;None;adres jednostki wyswietlanej;?
+element;UnitFontColor;5/1 6/1;0;0;kolor jednostki;?
+element;UnitFontName#;5/1 6/1;Arial;Arial;czcionka jednostki;?
+element;UnitFontSize#;5/1 6/1;16;16;rozmiar czcionki jednostki;?
+element;UnitItalic;5/1 6/1;0;0;jednostka kursywa;?
+element;UnitPercent;5/1 6/1;0;0;przeliczenie procentowe;?
+element;UnitPercent#Var;5/1 6/1;0.0;0.0|100.0;granice przeliczenia %;?
+element;UnitSrc;5/1 6/1;0;0;jednostka zrodlowa;?
+element;UnitSrcVar;5/1 6/1;None;None;adres jednostki zrodlowej;?
+element;UnitTextLen#;5/1 6/1;;|<tekst>;tekst jednostki, # = jezyk;?
+element;UnitType;5/1 6/1;0;0;rodzaj przeliczenia jednostek;?
+element;UnitUnderline;5/1 6/1;0;0;jednostka podkreslona;?
+element;UseCustKeypad;1/6 6/1 6/2;0;0;wlasna klawiatura;?
+element;VariableFieldWidth;11/1 11/2;0;0;zmienna szerokosc pola;?
+element;Variation;1/6 1/10 1/11 3/2 6/1;0;0;zrodlo wartosci (stala/adres);?
+element;Version;11/1 11/2;16;16;wersja zapisu elementu;?
+element;VisibleCondition;1/1 1/2 1/3 1/4 1/5 1/6 1/7 1/8 1/9 1/10 1/11 1/14 2/1 3/2 5/1 5/2 6/1 6/2 10/1 10/2 10/6 12/1 12/8 12/9 12/12 19/2 19/9 23/1 23/5;1;1|0;warunek widocznosci: 1 = widoczny przy ON, 0 = przy OFF;?
+element;VisibleLink;1/1 1/2 1/3 1/4 1/5 1/7 1/10 2/1 5/1 5/2 6/1 6/2 10/2 10/6 19/9 23/1 23/5;1;1;lacze bitu widocznosci;?
+element;VisibleVar;1/1 1/2 1/3 1/4 1/5 1/7 1/10 2/1 5/1 5/2 6/1 6/2 10/2 10/6 19/9 23/1 23/5;None;None|<adres>;bit widocznosci elementu (None = zawsze widoczny);?
+element;WaitEventFinish;1/1 1/2 1/4 1/6 1/7 1/8 1/9 1/10 6/1 6/2 19/9;0;0;czekaj na zakonczenie;?
+element;wDescTextLen#;*;<tekst>;<tekst>;opis elementu (Element Description), # = jezyk;ok
+element;Width;*;156;156|100|80|48|88|50|56|292;szerokosc [px];ok
+element;wKPFStringLen#-#;1/6 6/1 6/2;;|CLR|DEL|Numeric Keypad|Enter|ASCII-KEY|ALT|ENT;napis klawisza (klawisz-jezyk);?
+element;WordSwap;5/2 6/2;0;0;zamiana slow;?
+element;WriteLink;1/1 1/2 1/3 1/4 1/5 1/7 1/8 1/9 1/14 6/1 6/2 19/2 19/9;1;1;lacze adresu zapisu;?
+element;WriteMemType;1/1 1/2 1/3 1/4 1/5 1/7 1/8 1/9 1/14 6/1 6/2 19/2 19/9;1;1|0;typ pamieci adresu zapisu;?
+element;WriteReadImmediately;1/3 1/4;0;0;odczyt zaraz po zapisie;?
+element;WriteVar;1/1 1/2 1/3 1/4 1/5 1/7 1/8 1/9 1/14 6/1 6/2 19/2 19/9;<adres>;<adres>;adres zapisu (skladnia jak ReadVar);?
+element;X;*;4;4|356|0|60|56|516|8|12;pozycja X lewego gornego rogu [px];ok
+element;Y;*;4;4|0|120|116|128|64|708|596;pozycja Y [px];ok
+stan;Base#TextLen#;10/6;2692;2692|2372|1732;"kopia dlugiego tekstu w base64 (UTF-16); po zmianie tekstu niezgodna";?
+stan;BgColor;*;11842740;11842740|11189674|16579836|15987699|8388608|6553710|1935231088|8421631;"w ekranie: kolor tla ekranu; w stanie: kolor tla";ok
+stan;BgFillAngleArg;5/1 5/2 5/3 5/4 6/1 6/2;None;None;kat gradientu;?
+stan;BgFillColor;5/1 5/2 5/3 5/4 6/1 6/2;16777215;16777215|11189674|11842740;kolor gradientu tla;ok
+stan;BgFillEndColor;5/1 5/2 5/3 5/4 6/1 6/2;8421504;8421504;koniec gradientu tla;?
+stan;BgFillStopColor#;5/1 5/2 5/3 5/4 6/1 6/2;16777215;16777215|11189674|11842740;kolor punktu #;?
+stan;BgFillStopPos#;5/1 5/2 5/3 5/4 6/1 6/2;-1;-1|0|100;punkt gradientu # [%], -1 = nieuzywany;?
+stan;BgFillStyle;5/1 5/2 5/3 5/4 6/1 6/2;1;1;styl gradientu: 1 = Mono;?
+stan;BgFillType;5/1 5/2 5/3 5/4 6/1 6/2;0;0|6;wypelnienie tla: 6 = gradient;?
+stan;BgFillXArg;5/1 5/2 5/3 5/4 6/1 6/2;None;None;srodek gradientu X;?
+stan;BgFillYArg;5/1 5/2 5/3 5/4 6/1 6/2;None;None;srodek gradientu Y;?
+stan;BorderFillAngleArg;10/6;None;None;kat;?
+stan;BorderFillColor;10/6;16777215;16777215;kolor;?
+stan;BorderFillEndColor;10/6;8421504;8421504;koniec gradientu;?
+stan;BorderFillStopColor#;10/6;16777215;16777215;kolor punktu #;?
+stan;BorderFillStopPos#;10/6;-1;-1|0|100;punkt #;?
+stan;BorderFillStyle;10/6;1;1;styl;?
+stan;BorderFillType;10/6;0;0;wypelnienie ramki;?
+stan;BorderFillXArg;10/6;None;None;srodek X;?
+stan;BorderFillYArg;10/6;None;None;srodek Y;?
+stan;BorderStyle;*;0;0;styl ramki stanu;?
+stan;FgColor;*;11842740;11842740|16579836|8454143|8454111|16711680|255|65535|10132173;kolor wypelnienia elementu (Foreground color);ok
+stan;FgFillAngleArg;1/1 1/2 1/3 1/4 1/6 1/7 1/9 1/10 2/1 10/2 10/6 12/8;None;None|0;kat gradientu;?
+stan;FgFillColor;1/1 1/2 1/3 1/4 1/6 1/7 1/9 1/10 2/1 10/2 10/6 12/8;11842740;11842740|16777215|10132173|10145178|16579836|255|12632256|8421504;kolor wypelnienia (jak FgColor);ok
+stan;FgFillEndColor;1/1 1/2 1/3 1/4 1/6 1/7 1/9 1/10 2/1 10/2 10/6 12/8;8421504;8421504;koniec gradientu;?
+stan;FgFillStopColor#;1/1 1/2 1/3 1/4 1/6 1/7 1/9 1/10 2/1 10/2 10/6 12/8;16777215;16777215|11842740|16579836|10132173|12632256|9361806|8421504|10145178;kolor punktu #;?
+stan;FgFillStopPos#;1/1 1/2 1/3 1/4 1/6 1/7 1/9 1/10 2/1 10/2 10/6 12/8;-1;-1|0|100;punkt gradientu #;?
+stan;FgFillStyle;1/1 1/2 1/3 1/4 1/6 1/7 1/9 1/10 2/1 10/2 10/6 12/8;1;1;styl gradientu;?
+stan;FgFillType;1/1 1/2 1/3 1/4 1/6 1/7 1/9 1/10 2/1 10/2 10/6 12/8;6;6|0|1;wypelnienie: 1 = Solid color, 6 = Mono gradient;ok
+stan;FgFillXArg;1/1 1/2 1/3 1/4 1/6 1/7 1/9 1/10 2/1 10/2 10/6 12/8;None;None|100|80|252|160|978|182|142;srodek X;?
+stan;FgFillYArg;1/1 1/2 1/3 1/4 1/6 1/7 1/9 1/10 2/1 10/2 10/6 12/8;None;None|20|24|30|94|64|28|37;srodek Y;?
+stan;FillStyle;*;0;0|1;styl wypelnienia;?
+stan;FontAlign;*;34;34|65|18|33|36|17|68;wyrownanie tekstu, suma: poziomo 1 lewo/2 srodek/4 prawo + pionowo 16 gora/32 srodek/64 dol (34 = srodek, 17 = lewy gorny, 68 = prawy dolny);ok
+stan;FontBold;*;0;0|1;pogrubienie;ok
+stan;FontColor;*;0;0|16777215|65535|65280|33023|255|16711680|11842740;kolor czcionki (COLORREF, 255 = czerwony);ok
+stan;FontItalic;*;0;0|1;kursywa;ok
+stan;FontName#;*;Arial;Arial|<tekst>;czcionka, # = jezyk;ok
+stan;FontRatio#;*;100;100;proporcja czcionki [%];?
+stan;FontSize#;*;16;16|24|28|20|14|40|8|12;rozmiar czcionki, # = jezyk;ok
+stan;FontUnderline;*;0;0|1;podkreslenie;ok
+stan;PIB Name;1/1 1/3 1/4 1/7 1/10 2/1 10/2;<adres>;<adres>|<tekst>;biblioteka obrazow, np. $100_Action Button;ok
+stan;Picture Name;1/1 1/3 1/4 1/7 1/10 2/1 10/2;<tekst>;<tekst>|12|9|50|45|16|182|193;numer obrazu w bibliotece projektu;?
+stan;PictureAlign;*;34;34|36|17|68;wyrownanie obrazu, kodowanie jak FontAlign;ok
+stan;PictureCoordX;1/1 1/3 1/4 1/7 1/10 2/1 10/2;312;312|745|510|4|648|556|836|464;pozycja obrazu X;?
+stan;PictureCoordY;1/1 1/3 1/4 1/7 1/10 2/1 10/2;480;480|596|276|168|184|555|4|535;pozycja obrazu Y;?
+stan;PictureHeight;1/1 1/3 1/4 1/7 1/10 2/1 10/2;80;80|100|50|40|48|56|60|46;wysokosc obrazu;?
+stan;PictureOffset;1/1 1/3 1/4 1/7 1/10 2/1 10/2;9941847;9941847|9951891|9580247|9594371|115587|15|195675|3117179;przesuniecie obrazu;?
+stan;PictureStretch;*;0;0|1;rozciaganie obrazu;?
+stan;PictureWidth;1/1 1/3 1/4 1/7 1/10 2/1 10/2;100;100|80|50|88|56|48|60|40;szerokosc obrazu;?
+stan;StateIndex;2/1 19/2 19/9;0;0|1|2|3|4|6|5|7;numer stanu;?
+stan;StretchMode;*;0;0|2|1;tryb dopasowania obrazu (0/1);?
+stan;TransColor;*;0;0|16579836|8454143|11579568|15527148;kolor przezroczysty;?
+stan;TransEffect;*;0;0|1;przezroczysty kolor obrazu wl (kolor w TransColor);?
+stan;Twinkles;*;0;0|1;miganie w tym stanie: 1 = Blink ON;ok
+stan;UsePictureCoord;*;0;0;wlasna pozycja obrazu;?
+stan;Value;*;0;0|1|2|3|4|5|6|7;wartosc stanu (stan 0 nie ma klucza);ok
+stan;wTextLen#;*;;|<tekst>|2|1|3|4|None|5;tekst w stanie, # = jezyk (w ekranie: nazwa ekranu);ok
+akcja;ID;1/14;0;0;numer ekranu (w akcji: numer akcji);ok
+akcja;MemFmt;1/14;1;1;format danych: 1 = Signed Decimal, 2 = Unsigned Decimal (inne: hex, BCD, float - nieustalone);ok
+akcja;MemLen;1/14;1;1;typ danych: 0 = Bit (adres $N.b), 1 = Word ($N), 2 = DWord, 6 = QWord - musi pasowac do adresu;ok
+akcja;OffsetMemFmt;1/14;2;2;format danych przesuniecia;?
+akcja;OffsetMemLen;1/14;1;1;dlugosc danych przesuniecia;?
+akcja;OffsetWriteMemType;1/14;0;0;typ pamieci przesuniecia;?
+akcja;OffsetWriteVar;1/14;None;None;adres przesuniecia zapisu (akcja);?
+akcja;SetValue;1/14;4;4|3|2;wartosc zapisywana (Set Constant / akcja);?
+akcja;Type;1/14;6;6;rodzaj elementu (grupa), patrz elementy.csv;ok
+akcja;WriteLink;1/14;1;1;lacze adresu zapisu;?
+akcja;WriteMemType;1/14;0;0;typ pamieci adresu zapisu;?
+akcja;WriteVar;1/14;<adres>;<adres>;adres zapisu (skladnia jak ReadVar);?
+akcja;ID;1/14;0;0|1;numer ekranu (w akcji: numer akcji);ok
+akcja;MemFmt;1/14;1;1;format danych: 1 = Signed Decimal, 2 = Unsigned Decimal (inne: hex, BCD, float - nieustalone);ok
+akcja;MemLen;1/14;1;1;typ danych: 0 = Bit (adres $N.b), 1 = Word ($N), 2 = DWord, 6 = QWord - musi pasowac do adresu;ok
+akcja;OffsetMemFmt;1/14;2;2;format danych przesuniecia;?
+akcja;OffsetMemLen;1/14;1;1;dlugosc danych przesuniecia;?
+akcja;OffsetWriteMemType;1/14;0;0;typ pamieci przesuniecia;?
+akcja;OffsetWriteVar;1/14;None;None;adres przesuniecia zapisu (akcja);?
+akcja;SetValue;1/14;1;1;wartosc zapisywana (Set Constant / akcja);?
+akcja;Type;1/14;6;6|19|10;rodzaj elementu (grupa), patrz elementy.csv;ok
+akcja;Variation;1/14;0;0;zrodlo wartosci (stala/adres);?
+akcja;WaitTime;1/14;100;100;czas oczekiwania akcji;?
+akcja;WriteLink;1/14;1;1;lacze adresu zapisu;?
+akcja;WriteMemType;1/14;0;0;typ pamieci adresu zapisu;?
+akcja;WriteVar;1/14;<adres>;<adres>;adres zapisu (skladnia jak ReadVar);?

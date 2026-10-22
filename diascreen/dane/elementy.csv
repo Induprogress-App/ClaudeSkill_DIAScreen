@@ -1,0 +1,36 @@
+type;subtype;nazwa;wystapien;wymagane;opcjonalne;wzorzec;max_stanow
+1;1;Set On;13;WriteVar;X Y Width Height VisibleVar AutoResizeByText ConFirmWindow ConfirmScreenID ConfirmScreenName HotKey Style VisibleCondition WriteMemType;1_1.txt;2
+1;2;Set Off;7;WriteVar;X Y Width Height VisibleVar AutoResizeByText VisibleCondition;1_2.txt;2
+1;3;Momentary;190;WriteVar;X Y Width Height VisibleVar AutoResizeByText HotKey InterLockVar ReadVar Style VisibleCondition WriteMemType;1_3.txt;2
+1;4;Maintained;84;WriteVar;X Y Width Height VisibleVar AutoResizeByText HotKey InterLockLevel Style VisibleCondition WriteMemType;1_4.txt;2
+1;5;Multistate Button;2;WriteVar;X Y Width Height VisibleVar MemFmt MemLen VisibleCondition;1_5.txt;3
+1;6;Set Value;1;;X Y Width Height VisibleVar KPBkgndColor# KPFontColor# wKPFStringLen#-#;1_6.txt;1
+1;7;Set Constant;37;WriteVar SetValue;X Y Width Height VisibleVar ConFirmWindow Style VisibleCondition WriteMemType;1_7.txt;1
+1;8;Increment;1;WriteVar;X Y Width Height VisibleVar;1_8.txt;1
+1;9;Decrement;5;WriteVar;X Y Width Height VisibleVar AutoResizeByText LimitValue MemFmt MemLen StepValue;1_9.txt;1
+1;10;Goto Screen;160;GoToScreenID;X Y Width Height VisibleVar AutoResizeByText GoToScreenName HotKey MemLen ReadVar Style VisibleCondition;1_10.txt;1
+1;11;Goto Screen 2?;9;GoToScreenID;X Y Width Height VisibleVar;1_11.txt;1
+1;14;Multiple Actions;13;;X Y Width Height VisibleVar WriteVar;1_14.txt;1
+2;1;Multistate Indicator;254;ReadVar;X Y Width Height VisibleVar MemFmt MemLen ReadMemType Style VisibleCondition;2_1.txt;50
+3;2;Differential;1;;X Y Width Height VisibleVar;3_2.txt;1
+5;1;Numeric Display;279;ReadVar;X Y Width Height VisibleVar BorderColor DisplayDotVariation DotNum GainValue IntNum MemFmt MemLen OffsetValue ReadMemType Roundoff ShowUnit Style UnitBold UnitCustom#Var_# UnitDirection UnitPercent#Var UnitTextLen# VisibleCondition;5_1.txt;1
+5;2;Character Display;24;ReadVar;X Y Width Height VisibleVar BorderColor ReadMemType StringLen Style VisibleCondition;5_2.txt;1
+5;3;Date Display;2;;X Y Width Height VisibleVar AutoResizeByText DataFmt Style;5_3.txt;1
+5;4;Time Display;2;;X Y Width Height VisibleVar Style;5_4.txt;1
+6;1;Numeric Entry;344;WriteVar;X Y Width Height VisibleVar BorderColor DisplayDotVariation DotNum GainValue IntNum InterLockVar KPBkgndColor# KPFontColor# MaxValue MemFmt MemLen MinValue OffsetValue RangeFontColor ReadMemType ReadVar ShowOverRange Style TriggerVar UnitCustom#Var_# UnitPercent#Var VisibleCondition WriteMemType wKPFStringLen#-#;6_1.txt;1
+6;2;Character Entry;1;WriteVar;X Y Width Height VisibleVar KPBkgndColor# KPFontColor# wKPFStringLen#-#;6_2.txt;1
+10;1;Line;11;;X Y Width Height VisibleVar LineStyle PosVary ReadVar Style;10_1.txt;1
+10;2;Rectangle;72;;X Y Width Height VisibleVar AutoResizeByText ColorVary FillStyle PosVary ReadVar Style VisibleCondition;10_2.txt;1
+10;6;Text;838;wTextLen0;X Y Width Height VisibleVar PosVary ReadVar ShadowBlurRadius ShadowOffsetX ShadowOffsetY Style VisibleCondition nAngle;10_6.txt;1
+11;1;Alarm History Table;2;;X Y Width Height VisibleVar ColWidth# DisplayOrder# EnableCol# RowAlternateColor TitleTextLen#-#;11_1.txt;1
+11;2;Active Alarm List;2;;X Y Width Height VisibleVar ColWidth# DisplayOrder# EnableCol# RowAlternateColor RowSelectColor TitleTextLen#-#;11_2.txt;1
+12;1;System Date and Time;1;;X Y Width Height VisibleVar;12_1.txt;1
+12;8;Screen Capture;6;;X Y Width Height VisibleVar AccessType;12_8.txt;1
+12;9;Remove Storage;1;;X Y Width Height VisibleVar;;1
+12;12;Language Change;2;;X Y Width Height VisibleVar LangValue;;1
+15;4;Keypad Key;2;;X Y Width Height VisibleVar ASCIIValue#;15_4.txt;1
+19;2;ListBox;1;;X Y Width Height VisibleVar;19_2.txt;3
+19;9;Drop-down Menu;2;;X Y Width Height VisibleVar InterLockLevel InterLockVar VisibleCondition WriteVar;19_9.txt;7
+19;10;Recipe Viewer;1;;X Y Width Height VisibleVar ColNum# ColWidth# ColumnName#;;1
+23;1;Embedded Subscreen;2;;X Y Width Height VisibleVar SubScreenVar;23_1.txt;1
+23;5;Invisible Frame;1;;X Y Width Height VisibleVar;23_5.txt;1

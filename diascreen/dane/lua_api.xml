@@ -1,0 +1,4221 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- internal memory group -->
+<function name="mem.inter.Read" >
+	<content>Value = mem.inter.Read(index, [value_format])</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~199999</content>
+	<content>  value_format: string, signed format: "signed"</content>
+	<content>Returns</content>
+	<content>  Value: 0x0000~0xFFFF. Fail: 0</content>
+</function>
+<function name="mem.inter.ReadDW" >
+	<content>Value = mem.inter.ReadDW(index, [value_format])</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~199998</content>
+	<content>  value_format: string, signed format: "signed"</content>
+	<content>Returns</content>
+	<content>  Value: 0x0000000 ~ 0xFFFFFFFF. Fail: 0</content>
+</function>
+<function name="mem.inter.ReadFloat" >
+	<content>Value = mem.inter.ReadFloat(index)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~199998</content>
+	<content>Returns</content>
+	<content>  Value: Float, float (32 bits) </content>
+</function>
+<function name="mem.inter.ReadBit" >
+	<content>Value = mem.inter.ReadBit(index, bit)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~199999</content>
+	<content>  index: Integer, BIT: 0~15</content>
+	<content>Returns</content>
+	<content>  Value: 0 or 1. Fail: 0</content>
+</function>
+<function name="mem.inter.ReadDouble" >
+	<content>Value = mem.inter.ReadDouble(index)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~199996</content>
+	<content>Returns</content>
+	<content>  Value: Double, double (64 bits) </content>
+</function>
+<function name="mem.inter.Write" >
+	<content>Result = mem.inter.Write(index, value)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~199999</content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0</content>
+</function>
+<function name="mem.inter.WriteDW" >
+	<content>Result = mem.inter.WriteDW(index, value)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~199998</content>
+	<content>Returns</content> 
+	<content>  Result: Success: 1, Fail: 0</content>
+</function>
+<function name="mem.inter.WriteFloat" >
+	<content>Result: mem.inter.WriteFloat(index, float_value)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~199998</content>
+	<content>  float_value: Float, float (32 bits) </content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0 ornegtive value</content>
+</function>
+<function name="mem.inter.WriteBit" >
+	<content>Result = mem.inter.WriteBit(index, bit, logic)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~199999</content>
+	<content>  index: Integer, BIT: 0~15</content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0</content>
+</function>
+<function name="mem.inter.WriteDouble" >
+	<content>Result: mem.inter.WriteDouble(index, Double_value)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~199996</content>
+	<content>  Double_value: Double, double (64 bits) </content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0 ornegtive value</content>
+</function>
+<function name="mem.inter.ReadAscii" >
+	<content>ascii_string = mem.inter.ReadAscii(start_index, string_len)</content>
+	<content>Parameters</content>
+	<content>  start_index: Integer, Index: 0~199999</content>
+	<content>  string_len: Integer, ascii(bytes)</content>
+	<content>Returns</content>
+	<content>ascii_string: ascii string</content>
+</function>
+<function name="mem.inter.WriteAscii" >
+	<content>Result = mem.inter.WriteAscii(start_index, ascii_string, string_len)</content>
+	<content>Parameters</content>
+	<content>  start_index: Integer, Index: 0~199999</content>
+	<content>  ascii_string: ascii string</content>
+	<content>  string_len: Integer, ascii(bytes)</content>
+	<content>Returns</content>
+	<content>  Result: Integer, wrote ascii(bytes)</content>
+</function>
+
+<!-- internal indirect memory group -->
+<function name="mem.indirect.Read" >
+	<content>Value = mem.indirect.Read(index, [value_format])</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~65535</content>
+	<content>  value_format: string, signed format: "signed"</content>
+	<content>Returns</content>
+	<content>  Value: 0x0000~0xFFFF. Fail: 0</content>
+</function>
+<function name="mem.indirect.ReadDW" >
+	<content>Value = mem.indirect.ReadDW(index, [value_format])</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~65534</content>
+	<content>  value_format: string, signed format: "signed"</content>
+	<content>Returns</content>
+	<content>  Value: 0x0000000 ~ 0xFFFFFFFF. Fail: 0</content>
+</function>
+<function name="mem.indirect.ReadFloat" >
+	<content>Value = mem.indirect.ReadFloat(index)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~65534</content>
+	<content>Returns</content>
+	<content>  Value: Float, float (32 bits) </content>
+</function>
+<function name="mem.indirect.ReadBit" >
+	<content>Value = mem.indirect.ReadBit(index, bit)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~65535</content>
+	<content>  index: Integer, BIT: 0~15</content>
+	<content>Returns</content>
+	<content>  Value: 0 or 1. Fail: 0</content>
+</function>
+<function name="mem.indirect.ReadDouble" >
+	<content>Value = mem.indirect.ReadDouble(index)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~65532</content>
+	<content>Returns</content>
+	<content>  Value: Double, double (64 bits) </content>
+</function>
+<function name="mem.indirect.Write" >
+	<content>Result = mem.indirect.Write(index, value)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~65535</content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0</content>
+</function>
+<function name="mem.indirect.WriteDW" >
+	<content>Result = mem.indirect.WriteDW(index, value)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~65534</content>
+	<content>Returns</content> 
+	<content>  Result: Success: 1, Fail: 0</content>
+</function>
+<function name="mem.indirect.WriteFloat" >
+	<content>Result: mem.indirect.WriteFloat(index, float_value)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~65534</content>
+	<content>  float_value: Float, float (32 bits) </content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0 ornegtive value</content>
+</function>
+<function name="mem.indirect.WriteBit" >
+	<content>Result = mem.indirect.WriteBit(index, bit, logic)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~65535</content>
+	<content>  index: Integer, BIT: 0~15</content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0</content>
+</function>
+<function name="mem.indirect.WriteDouble" >
+	<content>Result: mem.indirect.WriteDouble(index, Double_value)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~65532</content>
+	<content>  Double_value: Double, double (64 bits) </content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0 ornegtive value</content>
+</function>
+<function name="mem.indirect.ReadAscii" >
+	<content>ascii_string = mem.indirect.ReadAscii(start_index, string_len)</content>
+	<content>Parameters</content>
+	<content>  start_index: Integer, Index: 0~65535</content>
+	<content>  string_len: Integer, ascii(bytes)</content>
+	<content>Returns</content>
+	<content>ascii_string: ascii string</content>
+</function>
+<function name="mem.indirect.WriteAscii" >
+	<content>Result = mem.indirect.WriteAscii(start_index, ascii_string, string_len)</content>
+	<content>Parameters</content>
+	<content>  start_index: Integer, Index: 0~65535</content>
+	<content>  ascii_string: ascii string</content>
+	<content>  string_len: Integer, ascii(bytes)</content>
+	<content>Returns</content>
+	<content>  Result: Integer, wrote ascii(bytes)</content>
+</function>
+
+<!-- internal indirectDW memory group -->
+<function name="mem.indirectDW.Read" >
+	<content>Value = mem.indirectDW.Read(index, [value_format])</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~199999</content>
+	<content>  value_format: string, signed format: "signed"</content>
+	<content>Returns</content>
+	<content>  Value: 0x0000~0xFFFF. Fail: 0</content>
+</function>
+<function name="mem.indirectDW.ReadDW" >
+	<content>Value = mem.indirectDW.ReadDW(index, [value_format])</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~199998</content>
+	<content>  value_format: string, signed format: "signed"</content>
+	<content>Returns</content>
+	<content>  Value: 0x0000000 ~ 0xFFFFFFFF. Fail: 0</content>
+</function>
+<function name="mem.indirectDW.ReadFloat" >
+	<content>Value = mem.indirectDW.ReadFloat(index)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~199998</content>
+	<content>Returns</content>
+	<content>  Value: Float, float (32 bits) </content>
+</function>
+<function name="mem.indirectDW.ReadBit" >
+	<content>Value = mem.indirectDW.ReadBit(index, bit)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~199999</content>
+	<content>  index: Integer, BIT: 0~15</content>
+	<content>Returns</content>
+	<content>  Value: 0 or 1. Fail: 0</content>
+</function>
+<function name="mem.indirectDW.ReadDouble" >
+	<content>Value = mem.indirectDW.ReadDouble(index)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~199996</content>
+	<content>Returns</content>
+	<content>  Value: Double, double (64 bits) </content>
+</function>
+<function name="mem.indirectDW.Write" >
+	<content>Result = mem.indirectDW.Write(index, value)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~199999</content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0</content>
+</function>
+<function name="mem.indirectDW.WriteDW" >
+	<content>Result = mem.indirectDW.WriteDW(index, value)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~199998</content>
+	<content>Returns</content> 
+	<content>  Result: Success: 1, Fail: 0</content>
+</function>
+<function name="mem.indirectDW.WriteFloat" >
+	<content>Result: mem.indirectDW.WriteFloat(index, float_value)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~199998</content>
+	<content>  float_value: Float, float (32 bits) </content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0 ornegtive value</content>
+</function>
+<function name="mem.indirectDW.WriteBit" >
+	<content>Result = mem.indirectDW.WriteBit(index, bit, logic)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~199999</content>
+	<content>  index: Integer, BIT: 0~15</content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0</content>
+</function>
+<function name="mem.indirectDW.WriteDouble" >
+	<content>Result: mem.indirectDW.WriteDouble(index, Double_value)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~199996</content>
+	<content>  Double_value: Double, double (64 bits) </content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0 ornegtive value</content>
+</function>
+<function name="mem.indirectDW.ReadAscii" >
+	<content>ascii_string = mem.indirectDW.ReadAscii(start_index, string_len)</content>
+	<content>Parameters</content>
+	<content>  start_index: Integer, Index: 0~199999</content>
+	<content>  string_len: Integer, ascii(bytes)</content>
+	<content>Returns</content>
+	<content>ascii_string: ascii string</content>
+</function>
+<function name="mem.indirectDW.WriteAscii" >
+	<content>Result = mem.indirectDW.WriteAscii(start_index, ascii_string, string_len)</content>
+	<content>Parameters</content>
+	<content>  start_index: Integer, Index: 0~199999</content>
+	<content>  ascii_string: ascii string</content>
+	<content>  string_len: Integer, ascii(bytes)</content>
+	<content>Returns</content>
+	<content>  Result: Integer, wrote ascii(bytes)</content>
+</function>
+
+<!-- external memory group -->
+<function name="mem.static.Read" >
+	<content>Value = mem.static.Read(index, [value_format])</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~4999</content>
+	<content>  value_format: string, signed format: "signed"</content>
+	<content>Returns</content>
+	<content>  Value: 0x0000~0xFFFF. Fail: 0</content>
+</function>
+<function name="mem.static.ReadDW" >
+	<content>Value = mem.static.ReadDW(index, [value_format])</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~4998</content>
+	<content>  value_format: string, signed format: "signed"</content>
+	<content>Returns</content>
+	<content>  Value: 0x0000000 ~ 0xFFFFFFFF. Fail: 0</content>
+</function>
+<function name="mem.static.ReadFloat" >
+	<content>Value = mem.static.ReadFloat(index)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~4998</content>
+	<content>Returns</content>
+	<content>  Value: Float, float (32 bits) </content>
+</function>
+<function name="mem.static.ReadBit" >
+	<content>Value = mem.static.ReadBit(index, bit)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~4999</content>
+	<content>  index: Integer, BIT: 0~15</content>
+	<content>Returns</content>
+	<content>  Value: 0 or 1. Fail: 0</content>
+</function>
+<function name="mem.static.ReadDouble" >
+	<content>Value = mem.static.ReadDouble(index)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~4996</content>
+	<content>Returns</content>
+	<content>  Value: Double, double (64 bits) </content>
+</function>
+<function name="mem.static.Write" >
+	<content>Result = mem.static.Write(index, value)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~4999</content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0</content>
+</function>
+<function name="mem.static.WriteDW" >
+	<content>Result = mem.static.WriteDW(index, value)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~4998</content>
+	<content>Returns</content> 
+	<content>  Result: Success: 1, Fail: 0</content>
+</function>
+<function name="mem.static.WriteFloat" >
+	<content>Result: mem.static.WriteFloat(index, float_value)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~4998</content>
+	<content>  float_value: Float, float (32 bits) </content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0 ornegtive value</content>
+</function>
+<function name="mem.static.WriteBit" >
+	<content>Result = mem.static.WriteBit(index, bit, logic)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~4999</content>
+	<content>  index: Integer, BIT: 0~15</content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0</content>
+</function>
+<function name="mem.static.WriteDouble" >
+	<content>Result: mem.static.WriteDouble(index, double_value)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~4996</content>
+	<content>  double_value: Double, double (64 bits) </content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0 ornegtive value</content>
+</function>
+<function name="mem.static.ReadAscii" >
+	<content>ascii_string = mem.static.ReadAscii(start_index, string_len)</content>
+	<content>Parameters</content>
+	<content>  start_index: Integer, Index: 0~4999</content>
+	<content>  string_len: Integer, ascii(bytes)</content>
+	<content>ascii_string: ascii string</content>
+</function>
+<function name="mem.static.WriteAscii" >
+	<content>Result = mem.static.WriteAscii(start_index, ascii_string, string_len)</content>
+	<content>Parameters</content>
+	<content>  start_index: Integer, Index: 0~4999</content>
+	<content>  ascii_string: ascii string</content>
+	<content>  string_len: Integer, ascii(bytes)</content>
+	<content>Returns</content>
+	<content>  Result: Integer, wrote ascii(bytes)</content>
+</function>
+
+<!-- EML  group -->
+<function name="mem.eml.Read" >
+	<content>Value = mem.eml.Read(index, [value_format])</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~4999</content>
+	<content>  value_format: string, signed format: "signed"</content>
+	<content>Returns</content>
+	<content>  Value: 0x0000~0xFFFF. Fail: 0</content>
+</function>
+<function name="mem.eml.ReadDW" >
+	<content>Value = mem.eml.ReadDW(index, [value_format])</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~4998</content>
+	<content>  value_format: string, signed format: "signed"</content>
+	<content>Returns</content>
+	<content>  Value: 0x0000000 ~ 0xFFFFFFFF. Fail: 0</content>
+</function>
+<function name="mem.eml.ReadFloat" >
+	<content>Value = mem.eml.ReadFloat(index)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~4998</content>
+	<content>Returns</content>
+	<content>  Value: Float, float (32 bits) </content>
+</function>
+<function name="mem.eml.ReadBit" >
+	<content>Value = mem.eml.ReadBit(index, bit)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~4999</content>
+	<content>  index: Integer, BIT: 0~15</content>
+	<content>Returns</content>
+	<content>  Value: 0 or 1. Fail: 0</content>
+</function>
+<function name="mem.eml.ReadDouble" >
+	<content>Value = mem.eml.ReadDouble(index)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~4996</content>
+	<content>Returns</content>
+	<content>  Value: Double, double (64 bits) </content>
+</function>
+<function name="mem.eml.Write" >
+	<content>Result = mem.eml.Write(index, value)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~4999</content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0</content>
+</function>
+<function name="mem.eml.WriteDW" >
+	<content>Result = mem.eml.WriteDW(index, value)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~4998</content>
+	<content>Returns</content> 
+	<content>  Result: Success: 1, Fail: 0</content>
+</function>
+<function name="mem.eml.WriteFloat" >
+	<content>Result: mem.eml.WriteFloat(index, float_value)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~4998</content>
+	<content>  float_value: Float, float (32 bits) </content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0 ornegtive value</content>
+</function>
+<function name="mem.eml.WriteBit" >
+	<content>Result = mem.eml.WriteBit(index, bit, logic)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~4999</content>
+	<content>  index: Integer, BIT: 0~15</content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0</content>
+</function>
+<function name="mem.eml.WriteDouble" >
+	<content>Result: mem.eml.WriteDouble(index, double_value)</content>
+	<content>Parameters</content>
+	<content>  index: Integer, Index: 0~4996</content>
+	<content>  double_value: Double, double (64 bits) </content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0 ornegtive value</content>
+</function>
+<function name="mem.eml.ReadAscii" >
+	<content>ascii_string = mem.eml.ReadAscii(start_index, string_len)</content>
+	<content>Parameters</content>
+	<content>  start_index: Integer, Index: 0~4999</content>
+	<content>  string_len: Integer, ascii(bytes)</content>
+	<content>ascii_string: ascii string</content>
+</function>
+<function name="mem.eml.WriteAscii" >
+	<content>Result = mem.eml.WriteAscii(start_index, ascii_string, string_len)</content>
+	<content>Parameters</content>
+	<content>  start_index: Integer, Index: 0~4999</content>
+	<content>  ascii_string: ascii string</content>
+	<content>  string_len: Integer, ascii(bytes)</content>
+	<content>Returns</content>
+	<content>  Result: Integer, wrote ascii(bytes)</content>
+</function>
+
+<!-- extended memory group -->
+<function name="mem.em.Read" >
+	<content>ret, err = mem.em.Read(id, index, [value_format])</content>
+	<content>Parameters</content>
+	<content>            id: integer, EM ID, 0~15</content>
+	<content>         index: integer, EM index, 0~268435455</content>
+	<content>  value_format: string, signed format: "signed"</content>
+	<content>Returns</content>
+	<content>  ret: 0x0 ~ 0xFFFF. fail: 0</content>
+	<content>  err: integer, error number</content>
+	<content>      1: success</content>
+	<content>     -1: invalid argument</content>
+</function>
+<function name="mem.em.ReadDW" >
+	<content>ret, err = mem.em.ReadDW(id, index, [value_format])</content>
+	<content>Parameters</content>
+	<content>            id: integer, EM ID, 0~15</content>
+	<content>         index: integer, EM index, 0~268435455</content>
+	<content>  value_format: string, signed format: "signed"</content>
+	<content>Returns</content>
+	<content>  ret: 0x0 ~ 0xFFFFFFFF. fail: 0</content>
+	<content>  err: integer, error number</content>
+	<content>      1: success</content>
+	<content>     -1: invalid argument</content>
+</function>
+<function name="mem.em.ReadQW" >
+	<content>ret, err = mem.em.ReadQW(id, index, [value_format])</content>
+	<content>Parameters</content>
+	<content>            id: integer, EM ID, 0~15</content>
+	<content>         index: integer, EM index, 0~268435455</content>
+	<content>  value_format: string, signed format: "signed"</content>
+	<content>Returns</content>
+	<content>  ret: 0x0 ~ 0xFFFFFFFFFFFFFFFF. fail: 0</content>
+	<content>  err: integer, error number</content>
+	<content>      1: success</content>
+	<content>     -1: invalid argument</content>
+</function>
+<function name="mem.em.ReadFloat" >
+	<content>ret, err = mem.em.ReadFloat(id, index)</content>
+	<content>Parameters</content>
+	<content>     id: integer, EM ID, 0~15</content>
+	<content>  index: integer, EM index, 0~268435455</content>
+	<content>Returns</content>
+	<content>  ret: Float, float (32 bits). fail: 0</content>
+	<content>  err: integer, error number</content>
+	<content>      1: success</content>
+	<content>     -1: invalid argument</content>
+</function>
+<function name="mem.em.ReadBit" >
+	<content>ret, err = mem.em.ReadBit(id, index, bit)</content>
+	<content>Parameters</content>
+	<content>     id: integer, EM ID, 0~15</content>
+	<content>  index: integer, EM index, 0~268435455</content>
+	<content>    bit: integer, bit index, 0~15</content>
+	<content>Returns</content>
+	<content>  ret: 0 or 1. Fail: 0</content>
+	<content>  err: integer, error number</content>
+	<content>      1: success</content>
+	<content>     -1: invalid argument</content>
+</function>
+<function name="mem.em.ReadDouble" >
+	<content>ret, err = mem.em.ReadDouble(id, index)</content>
+	<content>Parameters</content>
+	<content>     id: integer, EM ID, 0~15</content>
+	<content>  index: integer, EM index, 0~268435455</content>
+	<content>Returns</content>
+	<content>  ret: Double, double (64 bits). fail: 0</content>
+	<content>  err: integer, error number</content>
+	<content>      1: success</content>
+	<content>     -1: invalid argument</content>
+</function>
+<function name="mem.em.ReadAscii" >
+	<content>ret, err = mem.em.ReadAscii(id, index, len)</content>
+	<content>Parameters</content>
+	<content>     id: integer, EM ID, 0~15</content>
+	<content>  index: integer, EM index, 0~268435455</content>
+	<content>    len: integer, length to read</content>
+	<content>Returns</content>
+	<content>  ret: ascii string</content>
+	<content>  err: integer, error number</content>
+	<content>      1: success</content>
+	<content>     -1: invalid argument</content>
+</function>
+<function name="mem.em.Write" >
+	<content>ret, err = mem.em.Write(id, index, value)</content>
+	<content>Parameters</content>
+	<content>     id: integer, EM ID, 0~15</content>
+	<content>  index: integer, EM index, 0~268435455</content>
+	<content>  value: integer, value to write</content>
+	<content>Returns</content>
+	<content>   ret: success: 1. fail: 0</content>
+	<content>   err: integer, error number</content>
+	<content>     nil: success</content>
+	<content>      -1: invalid argument</content>
+	<content>    -103: fail to write data</content>
+</function>
+<function name="mem.em.WriteDW" >
+	<content>ret, err = mem.em.WriteDW(id, index, value)</content>
+	<content>Parameters</content>
+	<content>     id: integer, EM ID, 0~15</content>
+	<content>  index: integer, EM index, 0~268435454</content>
+	<content>  value: integer, value to write</content>
+	<content>Returns</content>
+	<content>   ret: success: 1. fail: 0</content>
+	<content>   err: integer, error number</content>
+	<content>     nil: success</content>
+	<content>      -1: invalid argument</content>
+	<content>    -103: fail to write data</content>
+</function>
+<function name="mem.em.WriteQW" >
+	<content>ret, err = mem.em.WriteQW(id, index, value)</content>
+	<content>Parameters</content>
+	<content>     id: integer, EM ID, 0~15</content>
+	<content>  index: integer, EM index, 0~268435452</content>
+	<content>  value: integer, value to write</content>
+	<content>Returns</content>
+	<content>   ret: success: 1. fail: 0</content>
+	<content>   err: integer, error number</content>
+	<content>     nil: success</content>
+	<content>      -1: invalid argument</content>
+	<content>    -103: fail to write data</content>
+</function>
+<function name="mem.em.WriteFloat" >
+	<content>ret, err = mem.em.WriteFloat(id, index, value)</content>
+	<content>Parameters</content>
+	<content>     id: integer, EM ID, 0~15</content>
+	<content>  index: integer, EM index, 0~268435454</content>
+	<content>  value: float (32 bits) value to write</content>
+	<content>Returns</content>
+	<content>   ret: success: 1. fail: 0</content>
+	<content>   err: integer, error number</content>
+	<content>     nil: success</content>
+	<content>      -1: invalid argument</content>
+	<content>    -103: fail to write data</content>
+</function>
+<function name="mem.em.WriteBit" >
+	<content>ret, err = mem.em.WriteBit(id, index, bit, value)</content>
+	<content>Parameters</content>
+	<content>     id: integer, EM ID, 0~15</content>
+	<content>  index: integer, EM index, 0~268435455</content>
+	<content>    bit: integer, bit index, 0~15</content>
+	<content>  value: integer, value to write, 0~1</content>
+	<content>Returns</content>
+	<content>   ret: success: 1. fail: 0</content>
+	<content>   err: integer, error number</content>
+	<content>     nil: success</content>
+	<content>      -1: invalid argument</content>
+	<content>    -103: fail to write data</content>
+</function>
+<function name="mem.em.WriteDouble" >
+	<content>ret, err = mem.em.WriteDouble(id, index, value)</content>
+	<content>Parameters</content>
+	<content>     id: integer, EM ID, 0~15</content>
+	<content>  index: integer, EM index, 0~268435452</content>
+	<content>  value: double (64 bits) value to write</content>
+	<content>Returns</content>
+	<content>   ret: success: 1. fail: 0</content>
+	<content>   err: integer, error number</content>
+	<content>     nil: success</content>
+	<content>      -1: invalid argument</content>
+	<content>    -103: fail to write data</content>
+</function>
+<function name="mem.em.WriteAscii" >
+	<content>ret, err = mem.em.WriteAscii(id, index, str, len)</content>
+	<content>Parameters</content>
+	<content>     id: integer, EM ID, 0~15</content>
+	<content>  index: integer, EM index, 0~268435455</content>
+	<content>    str: string, the string to write</content>
+	<content>    len: integer, length to write</content>
+	<content>Returns</content>
+	<content>   ret: success: length of successful write. fail: 0</content>
+	<content>   err: integer, error number</content>
+	<content>      -1: invalid argument</content>
+	<content>    -103: fail to write data</content>
+</function>
+
+<!-- link group -->
+<function name="link.Read" >
+	<content>Result = link.Read(addr, [value_format])</content>
+	<content>Parameters</content>
+	<content>  addr: string, Memory address, Ex: "{Link2}1@D1"</content>
+	<content>  value_format: string, signed format: "SIGNED" </content>
+	<content>Returns</content>
+	<content>  Result: Integer</content>
+</function>
+<function name="link.ReadBit" >
+	<content>Result = link.ReadBit(addr)</content>
+	<content>Parameters</content>
+	<content>  addr: string, Memory address, Ex: "{Link2}1@M100"</content>
+	<content>Returns</content>
+	<content>  Result: Integer; 1或0</content>
+</function>
+<function name="link.ReadDW" >
+	<content>Result = link.ReadDW(addr, [value_format])</content>
+	<content>Parameters</content>
+	<content>  addr: string, Memory address, Ex: "{Link2}1@D1"</content>
+	<content>  value_format: string, signed format: "SIGNED" </content>
+	<content>Returns</content>
+	<content>  Result: Integer</content>
+</function>
+<function name="link.ReadFloat" >
+	<content>Result = link.ReadFloat(addr)</content>
+	<content>Parameters</content>
+	<content>  addr: string, Memory address, Ex: "{Link2}1@D1"</content>
+	<content>Returns</content>
+	<content>  Result: Float</content>
+</function>
+<function name="link.ReadBit" >
+	<content>Result = link.ReadBit(addr)</content>
+	<content>Parameters</content>
+	<content>  addr: string, Memory address, Ex: "{Link2}1@M100"</content>
+	<content>Returns</content>
+	<content>  Result: Integer; 1 or 0</content>
+</function>
+<function name="link.ReadAscii" >
+	<content>asciiString, result, errMsg = link.ReadAscii(addr, string_len)</content>
+	<content>Parameters</content>
+	<content>  addr: string, PLC memory address, Ex: "{Link2}1@D1"</content>
+	<content>  string_len: integer, ascii chars(bytes)</content>
+	<content>Returns</content>
+	<content>  asciiString: ascii string</content>
+	<content>  result: 1: success, 0: fail</content>
+	<content>  errMsg: string, error message</content>
+</function>
+<function name="link.ReadDouble" >
+	<content>Result = link.ReadDouble(addr)</content>
+	<content>Parameters</content>
+	<content>  addr: string, Memory address, Ex: "{Link2}1@D1"</content>
+	<content>Returns</content>
+	<content>  Result: Double</content>
+</function>
+<function name="link.Write" >
+	<content>Result = link.Write(addr, value_word)</content>
+	<content>Parameters</content>
+	<content>  addr: string, Memory address, Ex: "{Link2}1@D0"</content>
+	<content>  value_word: Integer</content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0</content>
+</function>
+<function name="link.WriteDW" >
+	<content>Result = link.WriteDW(addr, value_dword)</content>
+	<content>Parameters</content>
+	<content>  addr: string, Memory address, Ex: "{Link2}1@D0"</content>
+	<content>  value_dword: Integer</content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0</content>
+</function>
+<function name="link.WriteFloat" >
+	<content>Result = link.WriteFloat(addr, value_float)</content>
+	<content>Parameters</content>
+	<content>  addr: string, Memory address, Ex: "{Link2}1@D0"</content>
+	<content>  value_float: Float</content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0</content>
+</function>
+
+<function name="link.WriteBit" >
+	<content>Result = link.WriteBit(addr, value_bit)</content>
+	<content>Parameters</content>
+	<content>  addr: string, Memory address, Ex: "{Link2}1@M100"</content>
+	<content>  value_bit: Integer, 1 or 0</content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0</content>
+</function>
+<function name="link.WriteAscii" >
+	<content>result = link.WriteAscii(addr, ascii, ascii_len)</content>
+	<content>Parameters</content>
+	<content>  addr: string, memory address, Ex: "{Link2}1@D1"</content>
+	<content>  ascii: string, UTF-8 encoded string (bytes)</content>
+	<content>  ascii_len: integer, ascii chars(bytes)</content>
+	<content>Returns</content>
+	<content>  result: Success: 1, Fail: 0</content>
+</function>
+<function name="link.WriteDouble" >
+	<content>Result = link.WriteDouble(addr, value_double)</content>
+	<content>Parameters</content>
+	<content>  addr: string, Memory address, Ex: "{Link2}1@D0"</content>
+	<content>  value_double: Double</content>
+	<content>Returns</content>
+	<content>  Result: Success: 1, Fail: 0</content>
+</function>
+<function name="link.CopyToInter" >
+	<content>result = link.CopyToInter(addr, interMemIndex, wordLen)</content>
+	<content>Usage</content>
+	<content>  read PLC data and write to HMI $ memory</content>
+	<content>Parameters</content>
+	<content>  addr: string, memory address, Ex: "{Link2}1@D1"</content>
+	<content>  interMemIndex: integer, start offset of $ memory address</content>
+	<content>  wordLen: integer, number by WORD</content>
+	<content>Returns</content>
+	<content>  result: Success: 1, Fail: 0</content>
+</function>
+<function name="link.CopyFromInter" >
+	<content>result = link.CopyFromInter(addr, interMemIndex, wordLen)</content>
+	<content>Usage</content>
+	<content>  read HMI $ memory and write to PLC data</content>
+	<content>Parameters</content>
+	<content>  addr: string, memory address, Ex: "{Link2}1@D1"</content>
+	<content>  interMemIndex: integer, start offset of $ memory address</content>
+	<content>  wordLen: integer, number by WORD</content>
+	<content>Returns</content>
+	<content>  result: Success: 1, Fail: 0</content>
+</function>
+<function name="link.CopyArray" >
+	<content>result = link.CopyArray(dst_addr, dst_offset, src_addr. src_offset, wordLen)</content>
+	<content>Usage</content>
+	<content>  HMI $ or PLC memory data exchange</content>
+	<content>Parameters</content>
+	<content>  dst_addr: string or unsigned int</content>
+	<content>  dst_offset: unsigned int</content>
+	<content>  src_addr: string or unsigned int</content>
+	<content>  src_offset: unsigned int</content>
+	<content>  wordLen: unsigned int, number by WORD</content>
+	<content>Returns</content>
+	<content>  result: Success: 1, Fail: 0, Invalid Arg: -1</content>
+</function>
+<function name="link.DownloadPLC" >
+	<content>result, errDesc = link.DownloadPLC(com_num, stationNo, diskID, fileName, projectPwd, plcSytemSecurityPwd)</content>
+	<content>Usage</content>
+	<content>  Download PLC program to PLC via COM</content>
+	<content>Parameters</content>
+	<content>  com_num: Integer, COM Port number, COM1: 1, COM2: 2, ...</content>
+	<content>  stationNo: integer, station No: 1~255</content>
+	<content>  diskID: integer, Disk ID, 2: USB, 3: SD, 6: USB2</content>
+	<content>  fileName: string, file name, Ex: ss.dvp, ss.isp, dir/ss.dvp</content>
+	<content>  projectPwd: string, project password</content>
+	<content>  plcSytemSecurityPwd: string, PLC system security password</content>
+	<content>Returns</content>
+	<content>  result: Success: 1, Fail: 0</content>
+	<content>  errMsg: string, error message</content>
+</function>
+<function name="link.DownloadEthPLC" >
+	<content>result, errDesc = link.DownloadEthPLC(ip, port, stationNo, diskID, fileName, projectPwd, plcSytemSecurityPwd)</content>
+	<content>Usage</content>
+	<content>  Download PLC program to PLC via Ethernet</content>
+	<content>Parameters</content>
+	<content>  ip: string, "192.168.0.1", ...</content>
+	<content>  port: Integer</content>
+	<content>  stationNo: integer, Station NO</content>
+	<content>  diskID: integer, Disk ID, 2: USB, 3: SD, 6: USB2</content>
+	<content>  fileName: string, file name, Ex: ss.dvp, ss.isp, dir/ss.dvp</content>
+	<content>  projectPwd: string, project password</content>
+	<content>  plcSytemSecurityPwd: string, PLC system security password</content>
+	<content>Returns</content>
+	<content>  result: Success: 1, Fail: 0</content>
+	<content>  errMsg: string, error message</content>
+</function>
+<function name="link.WritePasswordPLC" >
+	<content>result = link.WritePasswordPLC(com_num, stationNo, oldPlcSytemPwd, newPlcSytemPwd)</content>
+	<content>Usage</content>
+	<content>  Write PLC system security password to PLC via COM</content>
+	<content>Parameters</content>
+	<content>  com_num: Integer, COM Port number, COM1: 1, COM2: 2, ...</content>
+	<content>  stationNo: integer, station No: 1~255</content>
+	<content>  oldPlcSytemPwd: string, old PLC system security password</content>
+	<content>  newPlcSytemPwd: string, new PLC system security password</content>
+	<content>Returns</content>
+	<content>  result: Success: 1, Fail: 0</content>
+	<content>  errMsg: string, error message</content>
+</function>
+<function name="link.SetDefaultStationNo" >
+	<content>result = link.SetDefaultStationNo(link_number, station_number)</content>
+	<content>Usage</content>
+	<content>  Set PLC Station Num</content>
+	<content>Parameters</content>
+	<content>  link_number: Integer, COM Port number, COM1: 0, COM2: 1, ...</content>
+	<content>  station_number: integer, station No: 0~255</content>
+	<content>Returns</content>
+	<content>  result: Success: 1, Invalid Arg: -1</content>
+</function>
+<function name="link.SetEthDefaultStationNo" >
+	<content>result = link.SetEthDefaultStationNo(link_number, station_number)</content>
+	<content>Usage</content>
+	<content>  Set PLC Station Num</content>
+	<content>Parameters</content>
+	<content>  link_number: Integer, Ethernet link number, 00: 0, 01: 1, ...</content>
+	<content>  station_number: integer, station No: 0~255</content>
+	<content>Returns</content>
+	<content>  result: Success: 1, failure: 0, Invalid Arg: -1</content>
+</function>
+<function name="link.SetHMIStationNo" >
+	<content>result = link.SetHMIStationNo(link_number, station_number)</content>
+	<content>Usage</content>
+	<content>  Set HMI Station Num</content>
+	<content>Parameters</content>
+	<content>  link_number: Integer, COM Port number, COM1: 0, COM2: 1, ...</content>
+	<content>  station_number: integer, station No: 1~255</content>
+	<content>Returns</content>
+	<content>  result: Success: 1, Not Supported: 0, Invalid Arg: -1</content>
+</function>
+<function name="link.CODESYSAppDownload" >
+	<content>result, errDesc = link.CODESYSAppDownload(connMethodID, address, diskID, appFile, showMsgBox)</content>
+	<content>Usage</content>
+	<content>  CODESYS PLC program download</content>
+	<content>Parameters</content>
+	<content>  connMethodID: integer, connection method ID, 0: PLC IP address, 1: PLC logical address</content>
+	<content>  address: string, PLC IP address: "192.168.1.10", PLC logical address: "002D"</content>
+	<content>  diskID: integer, 2: USB, 6: USB2, 16: AX8</content>
+	<content>  appFile: string, application file name, ex. "Application.app"</content>
+	<content>  showMsgBox: integer, 1: enable, 0: disable</content>
+	<content>  username: string, Authentication username: "Admin", fill in the blank string "" means no authentication</content>
+	<content>  password: string, Authentication password: "12345", fill in the blank string "" means no authentication</content>
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Failure: 0, Invalid Arg: -1</content>
+	<content>  errDesc: string, error message</content>
+</function>
+<function name="link.CODESYSAppUpload" >
+	<content>result, errDesc = link.CODESYSAppUpload(connMethodID, address, diskID, appFile, showMsgBox)</content>
+	<content>Usage</content>
+	<content>  CODESYS PLC program upload</content>
+	<content>Parameters</content>
+	<content>  connMethodID: integer, connection method ID, 0: PLC IP address, 1: PLC logical address</content>
+	<content>  address: string, PLC IP address: "192.168.1.10", PLC logical address: "002D"</content>
+	<content>  diskID: integer, 2: USB, 6: USB2, 16: AX8</content>
+	<content>  appFile: string, application file name(optional argument), ex. "Application.app" or ""</content>
+	<content>  showMsgBox: integer, 1: enable, 0: disable</content>
+	<content>  username: string, Authentication username: "Admin", fill in the blank string "" means no authentication</content>
+	<content>  password: string, Authentication password: "12345", fill in the blank string "" means no authentication</content>	
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Failure: 0, Invalid Arg: -1</content>
+	<content>  errDesc: string, error message</content>
+</function>
+<function name="link.GetCODESYSRuntimeStatus" >
+	<content>ret, statusID, description = link.GetCODESYSRuntimeStatus(connMethodID, address, username, password)</content>
+	<content>Usage</content>
+	<content>  CODESYS PLC status</content>
+	<content>Parameters</content>
+	<content>  connMethodID: integer, connection method ID, 0: PLC IP address, 1: PLC hostname or PLC logical address</content>
+	<content>  address: string, PLC IP address: "192.168.1.10", PLC hostname: "X88PCE1T2031018", PLC logical address: "002D"</content>
+	<content>  username: string, Authentication username: "Admin", fill in the blank string "" means no authentication</content>
+	<content>  password: string, Authentication password: "12345", fill in the blank string "" means no authentication</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Failure: 0, Invalid Arg: -1</content>
+	<content>  statusID: integer, Run: 0, Stop: 1, Stop on a break point: 2, Unknown: 255, Connection failed: -1, Login Failed: -2</content>	
+	<content>  description: string, description</content>
+</function>
+
+<!-- recipe group -->
+<function name="recipe.GetCurRcpNoIndex" >
+	<content>ret, noIdx = recipe.GetCurRcpNoIndex()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+	<content>  noIdx: integer, recipe no index</content>
+</function>
+<function name="recipe.GetCurRcpGIndex" >
+	<content>ret, gIdx = recipe.GetCurRcpGIndex()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+	<content>  gIdx: integer, recipe group index</content>
+</function>
+<function name="recipe.GetRcpWord" >
+	<content>ret, value = recipe.GetRcpWord(index)</content>
+	<content>Parameters</content>
+	<content>  index: integer, recipe index</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+	<content>  value: integer, recipe unsigned word</content>
+</function>
+<function name="recipe.GetRcpDWord" >
+	<content>ret, value = recipe.GetRcpDWord(index, [value_format])</content>
+	<content>Parameters</content>
+	<content>  index: integer, recipe index</content>
+    <content>  value_format: string, signed format: "signed"</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+	<content>  value: integer, recipe double word</content>
+</function>
+<function name="recipe.GetRcpFloat" >
+	<content>ret, value = recipe.GetRcpFloat(index)</content>
+	<content>Parameters</content>
+	<content>  index: integer, recipe index</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+	<content>  value: float, recipe float (32 bits)</content>
+</function>
+<function name="recipe.GetCurEnRcpNoName" >
+	<content>ret, noName = recipe.GetCurEnRcpNoName()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+	<content>  noName: string, current enrcp no name</content>
+</function>
+<function name="recipe.GetCurEnRcpGName" >
+	<content>ret, gName = recipe.GetCurEnRcpGName()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+	<content>  gName: string, current enrcp group name</content>
+</function>
+<function name="recipe.GetCurEnRcpNoIndex" >
+	<content>ret, noIdx = recipe.GetCurEnRcpNoIndex()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+	<content>  noIdx: integer, current enrcp no index</content>
+</function>
+<function name="recipe.GetCurEnRcpGIndex" >
+	<content>ret, gIdx = recipe.GetCurEnRcpGIndex()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+	<content>  gIdx: integer, current enrcp group index</content>
+</function>
+<function name="recipe.GetEnRcpWord" >
+	<content>ret, value = recipe.GetEnRcpWord(index, [value_format])</content>
+	<content>Parameters</content>
+	<content>  index: integer, enrcp index</content>
+	<content>  value_format: string, signed format: "signed"</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+	<content>  value: integer, enrcp word</content>
+</function>
+<function name="recipe.GetEnRcpDWord" >
+	<content>ret, value = recipe.GetEnRcpDWord(index, [value_format])</content>
+	<content>Parameters</content>
+	<content>  index: integer, enrcp index</content>
+	<content>  value_format: string, signed format: "signed"</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+	<content>  value: integer, enrcp double word</content>
+</function>
+<function name="recipe.GetEnRcpFloat" >
+	<content>ret, value = recipe.GetEnRcpFloat(index)</content>
+	<content>Parameters</content>
+	<content>  index: integer, enrcp index</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+	<content>  value: float, enrcp float (32 bits)</content>
+</function>
+<function name="recipe.GetEnRcpDouble" >
+	<content>ret, value = recipe.GetEnRcpDouble(index)</content>
+	<content>Parameters</content>
+	<content>  index: integer, enrcp index</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+	<content>  value: double, enrcp double (64 bits)</content>
+</function>
+<function name="recipe.GetEnRcpAscii" >
+	<content>ret, str = recipe.GetEnRcpAscii(index)</content>
+	<content>Parameters</content>
+	<content>  index: integer, enrcp index</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+	<content>  str: string, enrcp string</content>
+</function>
+<function name="recipe.GetEnRcpNoName" >
+	<content>ret, str = recipe.GetEnRcpNoName(groupindex, noindex)</content>
+	<content>Parameters</content>
+	<content>  groupindex: integer，enrcp index</content>
+	<content>  noindex: integer，enrcp index</content>
+	<content>Returns</content>
+	<content>  ret: integer，1: Success;0:Fail</content>
+	<content>  str: string, enrcp string</content>
+</function>
+<function name="recipe.GetEnRcpNoMax" >
+	<content>ret, noIdxMax = recipe.GetEnRcpNoMax()</content>
+	<content>Returns</content>
+	<content>  ret: integer，1: Success;0:Fail</content>
+	<content>  noIdxMax: integer, current enrcp no index max</content>
+</function>
+<function name="recipe.GetEnRcpGMax" >
+	<content>ret, gIdxMax = recipe.GetEnRcpGMax()</content>
+	<content>Returns</content>
+	<content>  ret: integer，1: Success;0:Fail</content>
+	<content>  gIdxMax: integer, enrcp group index max</content>
+</function>
+<function name="recipe.SetRcpWord" >
+	<content>ret = recipe.SetRcpWord(index, word1,word2,word3,word4)</content>
+	<content>Parameters</content>
+	<content>  index: integer, recipe index</content>
+	<content>  word: integer, unsigned word</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="recipe.SetRcpDWord" >
+	<content>ret = recipe.SetRcpDWord(index, dword1,dword2,dword3,dword4)</content>
+	<content>Parameters</content>
+	<content>  index: integer, recipe index</content>
+	<content>  dword: integer, double word</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="recipe.SetRcpFloat" >
+	<content>ret = recipe.SetRcpFloat(index, floatValue1,floatValue2,floatValue3,floatValue4)</content>
+	<content>Parameters</content>
+	<content>  index: integer, recipe index</content>
+	<content>  floatValue: float, float(32 bits)</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="recipe.SetCurEnRcpNoName" >
+	<content>ret = recipe.SetCurEnRcpNoName(newName)</content>
+	<content>Parameters</content>
+	<content>  newName: string, new enrcp no name</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="recipe.SetCurEnRcpGName" >
+	<content>ret = recipe.SetCurEnRcpGName(newName)</content>
+	<content>Parameters</content>
+	<content>  newName: string, new enrcp group name</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="recipe.SetEnRcpWord" >
+	<content>ret = recipe.SetEnRcpWord(index, word)</content>
+	<content>Parameters</content>
+	<content>  index: integer, enrcp index</content>
+	<content>  word: integer, word</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="recipe.SetEnRcpDWord" >
+	<content>ret = recipe.SetEnRcpDWord(index, dword)</content>
+	<content>Parameters</content>
+	<content>  index: integer, enrcp index</content>
+	<content>  dword: integer, double word</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="recipe.SetEnRcpFloat" >
+	<content>ret = recipe.SetEnRcpFloat(index, floatValue)</content>
+	<content>Parameters</content>
+	<content>  index: integer, enrcp index</content>
+	<content>  floatValue: float, float(32 bits)</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="recipe.SetEnRcpDouble" >
+	<content>ret = recipe.SetEnRcpDouble(index, doubleValue)</content>
+	<content>Parameters</content>
+	<content>  index: integer, enrcp index</content>
+	<content>  doubleValue: double, double(64 bits)</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="recipe.SetEnRcpAscii" >
+	<content>ret = recipe.SetEnRcpAscii(index, str, len)</content>
+	<content>Parameters</content>
+	<content>  index: integer, enrcp index</content>
+	<content>  str: string</content>
+	<content>  len: integer, string length</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="recipe.SetEnRcp" >
+	<content>ret = recipe.SetEnRcp(index,word1,format1,word2,format2,word3,format3....)</content>
+	<content>Parameters</content>
+	<content>  index: integer，enrcp index</content>
+	<content>  word1: Fill in the corresponding value according to the format in the recipe table</content>
+	<content>  format1:Fill in the corresponding format according to the content of Word1</content>
+	<content>  word2: Fill in the corresponding value according to the format in the recipe table</content>
+	<content>  format2: Fill in the corresponding format according to the content of Word1</content>
+    <content>  word3: Fill in the corresponding value according to the format in the recipe table</content>
+	<content>  format3: Fill in the corresponding format according to the content of Word1</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="recipe.SetRcp" >
+	<content>ret = recipe.SetRcp(index,word1,word2,word3....)</content>
+	<content>Parameters</content>
+	<content>  index: integer，enrcp index</content>
+	<content>  word1: integer, unsigned word，</content>
+	<content>  word2: integer, unsigned word</content>
+    <content>  word3: integer, unsigned word</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="recipe.ChangeRcpNoIndex" >
+	<content>ret = recipe.ChangeRcpNoIndex(noIdx)</content>
+	<content>Parameters</content>
+	<content>  noIdx: integer, recipe no index</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="recipe.ChangeRcpGIndex" >
+	<content>ret = recipe.ChangeRcpGIndex(gIdx)</content>
+	<content>Parameters</content>
+	<content>  gIdx: integer, recipe group index</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="recipe.ChangeEnRcpNoIndex" >
+	<content>ret = recipe.ChangeEnRcpNoIndex(noIdx)</content>
+	<content>Parameters</content>
+	<content>  noIdx: integer, enrcp no index</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="recipe.ChangeEnRcpGIndex" >
+	<content>ret = recipe.ChangeEnRcpGIndex(gIdx)</content>
+	<content>Parameters</content>
+	<content>  gIdx: integer, enrcp group index</content>
+	<content>Returns</content>
+	<content>  ret: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="recipe.ImportRcp16" >
+	<content>Result = recipe.ImportRcp16(name, diskID)</content>
+	<content>Parameters</content>
+	<content>  name: string, recipe name. Must be end with '.csv'</content>
+	<content>  diskID: integer, Disk ID, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>Returns</content>
+	<content>  Result: integer, Success: 1, Fail: 0, Invalid argument: -1, Disk is not ready: -106</content>
+</function>
+<function name="recipe.ExportRcp16" >
+	<content>Result = recipe.ExportRcp16(name, diskID)</content>
+	<content>Parameters</content>
+	<content>  name: string, recipe name. Must be end with '.csv'</content>
+	<content>  diskID: integer, Disk ID, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>Returns</content>
+	<content>  Result: integer, Success: 1, Fail: 0, Invalid argument: -1, Disk is not ready: -106</content>
+</function>
+<function name="recipe.ImportRcp32" >
+	<content>Result = recipe.ImportRcp32(name, diskID)</content>
+	<content>Parameters</content>
+	<content>  name: string, recipe name. Must be end with '.csv'</content>
+	<content>  diskID: integer, Disk ID, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>Returns</content>
+	<content>  Result: integer, Success: 1, Fail: 0, Invalid argument: -1, Disk is not ready: -106</content>
+</function>
+<function name="recipe.ExportRcp32" >
+	<content>Result = recipe.ExportRcp32(name, diskID)</content>
+	<content>Parameters</content>
+	<content>  name: string, recipe name. Must be end with '.csv'</content>
+	<content>  diskID: integer, Disk ID, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>Returns</content>
+	<content>  Result: integer, Success: 1, Fail: 0, Invalid argument: -1, Disk is not ready: -106</content>
+</function>
+<function name="recipe.ImportEnRcp" >
+	<content>Result = recipe.ImportEnRcp(name, diskID)</content>
+	<content>Parameters</content>
+	<content>  name: string, recipe name. Must be end with '.csv'</content>
+	<content>  diskID: integer, Disk ID, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>Returns</content>
+	<content>  Result: integer, Success: 1, Fail: 0, Invalid argument: -1, Disk is not ready: -106</content>
+</function>
+<function name="recipe.ExportEnRcp" >
+	<content>Result = recipe.ExportEnRcp(name, diskID)</content>
+	<content>Parameters</content>
+	<content>  name: string, recipe name. Must be end with '.csv'</content>
+	<content>  diskID: integer, Disk ID, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>Returns</content>
+	<content>  Result: integer, Success: 1, Fail: 0, Invalid argument: -1, Disk is not ready: -106</content>
+</function>
+
+<!-- screen group -->
+<function name="screen.Open" >
+	<content>Result = screen.Open(screen_id)</content>
+	<content>Parameters</content>
+	<content>  screen_id: Integer, Screen ID, 0~65535</content>
+	<content>Returns</content>
+	<content>  Result: Integer, 1: Success: 1; Fail: 0</content>
+</function>
+<function name="screen.IsOpen" >
+	<content>Result = screen.IsOpen(screen_id)</content>
+	<content>Parameters</content>
+	<content>  screen_id: Integer, Screen ID, 0~65535</content>
+	<content>Returns</content>
+	<content>  Result: Integer, Success: 1; Fail: 0</content>
+</function>
+<function name="screen.CloseSub" >
+	<content>Result = screen.CloseSub(screen_id)</content>
+	<content>Parameters</content>
+	<content>  screen_id: Integer, Screen ID, 0~65535</content>
+	<content>Returns</content>
+	<content>  Result: Integer, Success: 1; Fail: 0</content>
+</function>
+<function name="screen.Capture" >
+	<content>ret = screen.Capture(diskID, fileName, filePath)</content>
+	<content>Parameters</content>
+	<content>    diskID : Integer, Disk ID, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>  fileName : String, file name</content>
+	<content>  filePath : String, file path</content>
+	<content>Returns</content>
+	<content>  ret: Integer, 1: Success, others: Fail</content>
+</function>
+
+<!-- com group -->
+<function name="com.Open" >
+	<content>Result = com.Open(com_num, interface, databits, parity, stopbits, baudrate, flowcontrol)</content>
+	<content>Parameters</content>
+	<content>  com_num: Integer, COM Port number, COM1: 1, COM2: 2, ...</content>
+	<content>  interface: string, "RS232", "RS422", "RS485"</content>
+	<content>  databits: Integer, 7, 8</content>
+	<content>  parity: string, "NONE", "ODD", "EVEN", "MARK", "SPACE"</content>
+	<content>  stopbits: Integer, 1, 2</content>
+	<content>  baudrate: Integer, 9600, ...</content>
+	<content>  flowcontrol: string, "OFF", "CTS_RTS"</content>
+	<content>Returns</content>
+	<content>  Result:</content>
+	<content>       1: success</content>
+	<content>      -1: invalid argument</content>
+	<content>    -101: fail to open COM</content>
+</function>
+<function name="com.Close" >
+	<content>Result = com.Close(com_num)</content>
+	<content>Parameters</content>
+	<content>  com_num: Integer, COM Port number, COM1: 1, COM2: 2, ...</content>
+	<content>Returns</content>
+	<content>  Result:</content>
+	<content>       1: success</content>
+	<content>      -1: invalid argument</content>
+</function>
+<function name="com.WriteChars" >
+	<content>Result = com.WriteChars(com_num, buffer, len, timeout)</content>
+	<content>Parameters</content>
+	<content>  com_num: Integer, COM Port number, COM1: 1, COM2: 2, ...</content>
+	<content>  buffer: ascii string</content>
+	<content>  len: Integer, ascii string length</content>
+	<content>  timeout: Integer, timeout(ms)</content>
+	<content>Returns</content>
+	<content>  Result:</content>
+	<content>     > 0: successfully written bytes</content>
+	<content>      -1: invalid argument</content>
+	<content>    -100: port not opened</content>
+	<content>    -103: fail to write data</content>
+</function>
+<function name="com.ReadChars" >
+	<content>bytes_read, buffer = com.ReadChars(com_num, len, timeout)</content>
+	<content>Parameters</content>
+	<content>  com_num: Integer, COM Port number, COM1: 1, COM2: 2, ...</content>
+	<content>  len: Integer, ascii string length</content>
+	<content>  timeout: Integer, timeout(ms)</content>
+	<content>Returns</content>
+	<content>  bytes_read:</content>
+	<content>         > 0: successfully read bytes</content>
+	<content>           0: read timeout</content>
+	<content>          -1: invalid argument</content>
+	<content>        -100: port not opened</content>
+	<content>        -102: fail to read data</content>
+	<content>  buffer: ascii string</content>
+</function>
+<function name="com.ClearBuffer" >
+	<content>Result = com.ClearBuffer(com_num, clear_read)</content>
+	<content>Parameters</content>
+	<content>  com_num: Integer, COM Port number, COM1: 1, COM2: 2, ...</content>
+	<content>  clear_read: Integer, clear read buffer: 1, clear write buffer: 0</content>
+	<content>Returns</content>
+	<content>  Result:</content>
+	<content>       1: success</content>
+	<content>      -1: invalid argument</content>
+	<content>    -100: port not opened</content>
+	<content>    -104: fail to clear buffer</content>
+</function>
+<function name="com.StationOn" >
+	<content>Result = com.StationOn(com_num, station)</content>
+	<content>Parameters</content>
+	<content>  com_num: Integer, COM Port number, COM1: 1, COM2: 2, ...</content>
+	<content>  station: Integer, station number</content>
+	<content>Returns</content>
+	<content>  Result:</content>
+	<content>       1: success</content>
+	<content>      -1: invalid argument</content>
+</function>
+<function name="com.StationOff" >
+	<content>Result = com.StationOff(com_num, station)</content>
+	<content>Parameters</content>
+	<content>  com_num: Integer, COM Port number, COM1: 1, COM2: 2, ...</content>
+	<content>  station: Integer, station number</content>
+	<content>Returns</content>
+	<content>  Result:</content>
+	<content>       1: success</content>
+	<content>      -1: invalid argument</content>
+</function>
+<function name="com.StationCheck" >
+	<content>Result = com.StationCheck(com_num, station)</content>
+	<content>Parameters</content>
+	<content>  com_num: Integer, COM Port number, COM1: 1, COM2: 2, ...</content>
+	<content>  station: Integer, station number</content>
+	<content>Returns</content>
+	<content>  Result:</content>
+	<content>       1: success</content>
+	<content>       0: failure</content>
+	<content>      -1: invalid argument</content>
+</function>
+<function name="com.CheckAlive" >
+	<content>Result = com.CheckAlive(modbus_mode, com_num, interface, databits, parity, stopbits, baudrate, flowcontrol, station, timeout)</content>
+	<content>Parameters</content>
+	<content>  modbus_mode: string, modbus mode,"MODBUS_ASCII", "MODBUS_RTU"</content>
+	<content>  com_num: Integer, COM Port number, COM1: 1, COM2: 2, ...</content>
+	<content>  interface: string, "RS232", "RS422", "RS485"</content>
+	<content>  databits: Integer, 7, 8</content>
+	<content>  parity: string, "NONE", "ODD", "EVEN", "MARK", "SPACE"</content>
+	<content>  stopbits: Integer, 1, 2</content>
+	<content>  baudrate: Integer, 9600, ...</content>
+	<content>  flowcontrol: string, "OFF", "CTS_RTS"</content>
+	<content>  station: Integer, station: 0~255</content>
+	<content>  timeout: Integer, timeout: 0~15000</content>
+	<content>Returns</content>
+	<content>  Result:</content>
+	<content>       1: success</content>
+	<content>       0: failure</content>
+	<content>      -1: invalid argument</content>
+	<content>    -101: fail to open COM</content>
+</function>
+<function name="com.GetStatus" >
+	<content>Result = com.GetStatus(com_num)</content>
+	<content>Parameters</content>
+	<content>  com_num: Integer, COM Port number, COM1: 1, COM2: 2, ...</content>
+	<content>Returns</content>
+	<content>  Result:</content>
+	<content>       1: success</content>
+	<content>      -1: invalid argument</content>
+	<content>    -100: port not opened</content>
+	<content>    -101: fail to open COM</content>
+</function>
+
+<!-- tcp group -->
+<function name="tcp.Open" >
+	<content>Socket = tcp.Open(ip, port)</content>
+	<content>Parameters</content>
+	<content>  ip: string, "192.168.0.1", ...</content>
+	<content>  port: Integer</content>
+	<content>Returns</content>
+	<content>  Socket: socket number</content>
+	<content>     > 0: success</content>
+	<content>      -1: invalid argument</content>
+	<content>    -101: fail to open socket</content>
+	<content>    -145: too many opened sockets</content>
+</function>
+<function name="tcp.Read" >
+	<content>Bytes_read, buffer = tcp.Read(socket, len, timeout)</content>
+	<content>Parameters</content>
+	<content>  socket: Integer, 1~8</content>
+	<content>  len: Integer,  string length</content>
+	<content>  timeout: Integer, timeout(ms)</content>
+	<content>Returns</content>
+	<content>  Bytes_read: read bytes</content>
+	<content>           1: success</content>
+	<content>          -1: invalid argument</content>
+	<content>        -100: socket not opened</content>
+	<content>        -102: fail to read data</content>
+	<content>  buffer: string</content>
+</function>
+<function name="tcp.Write" >
+	<content>Result = tcp.Write(socket, buffer, len, timeout)</content>
+	<content>Parameters</content>
+	<content>  socket: Integer, 1~8</content>
+	<content>  buffer: string</content>
+	<content>  len: Integer, string length</content>
+	<content>  timeout: Integer, timeout(ms)</content>
+	<content>Returns</content>
+	<content>  Result: integer</content>
+	<content>       1: success</content>
+	<content>      -1: invalid argument</content>
+	<content>    -100: socket not opened</content>
+	<content>    -103: fail to write data</content>
+</function>
+<function name="tcp.Close" >
+	<content>Result = tcp.Close(socket)</content>
+	<content>Parameters</content>
+	<content>  socket: Integer, 1~8</content>
+	<content>Returns</content>
+	<content>  Result: integer</content>
+	<content>       1: success</content>
+	<content>       0: fail</content>
+	<content>      -1: invalid argument</content>
+	<content>    -100: socket not opened</content>
+</function>
+<function name="tcp.GetMaxCount" >
+	<content>Count = tcp.GetMaxCount()</content>
+	<content>Returns</content>
+	<content>  Count: System Max Socket Count</content>
+</function>
+<function name="tcp.GetRunCount" >
+	<content>count = tcp.GetRunCount()</content>
+	<content>Returns</content>
+	<content>  count: Running Socket Count</content>
+</function>
+<function name="tcp.GetStatus" >
+	<content>Status = tcp.GetStatus(socket)</content>
+	<content>Parameters</content>
+	<content>  socket: Integer, 1~8</content>
+	<content>Returns</content>
+	<content>  Status: Open: 1; Close: 0</content>
+</function>
+
+<!-- udp group -->
+<function name="udp.Open" >
+	<content>Socket = udp.Open(ip, port, local_port)</content>
+	<content>Parameters</content>
+	<content>  ip: string, "192.168.0.1", ...</content>
+	<content>  port: Integer</content>
+	<content>  local_port: Integer</content>
+	<content>Returns</content>
+	<content>  Socket: socket number</content>
+	<content>     > 0: success</content>
+	<content>      -1: invalid argument</content>
+	<content>    -101: fail to open socket</content>
+	<content>    -145: too many opened sockets</content>
+</function>
+<function name="udp.Read" >
+	<content>Bytes_read, buffer = udp.Read(socket, len, timeout)</content>
+	<content>Parameters</content>
+	<content>  socket: Integer, 1~8</content>
+	<content>  len: Integer,  string length</content>
+	<content>  timeout: Integer, timeout(ms)</content>
+	<content>Returns</content>
+	<content>  Bytes_read: read bytes</content>
+	<content>           1: success</content>
+	<content>          -1: invalid argument</content>
+	<content>        -100: socket not opened</content>
+	<content>        -102: fail to read data</content>
+	<content>  buffer: string</content>
+</function>
+<function name="udp.Write" >
+	<content>Result = udp.Write(socket, buffer, len, timeout)</content>
+	<content>Parameters</content>
+	<content>  socket: Integer, 1~8</content>
+	<content>  buffer: string</content>
+	<content>  len: Integer, string length</content>
+	<content>  timeout: Integer, timeout(ms)</content>
+	<content>Returns</content>
+	<content>  Result:</content>
+	<content>       1: success</content>
+	<content>      -1: invalid argument</content>
+	<content>    -100: socket not opened</content>
+	<content>    -103: fail to write data</content>
+</function>
+<function name="udp.Close" >
+	<content>Result = udp.Close(socket)</content>
+	<content>Parameters</content>
+	<content>  socket: Integer, 1~8</content>
+	<content>Returns</content>
+	<content>  Result:</content>
+	<content>       1: success</content>
+	<content>       0: fail</content>
+	<content>      -1: invalid argument</content>
+	<content>    -100: socket not opened</content>
+</function>
+<function name="udp.GetMaxCount" >
+	<content>Count = udp.GetMaxCount()</content>
+	<content>Returns</content>
+	<content>  Count: System Max Socket Count</content>
+</function>
+<function name="udp.GetRunCount" >
+	<content>count = udp.GetRunCount()</content>
+	<content>Returns</content>
+	<content>  count: Running Socket Count</content>
+</function>
+<function name="udp.GetStatus" >
+	<content>Status = udp.GetStatus(socket)</content>
+	<content>Parameters</content>
+	<content>  socket: Integer, 1~8</content>
+	<content>Returns</content>
+	<content>  Status: Open: 1; Close: 0</content>
+</function>
+
+<!-- text group -->
+<function name="text.GbkToUtf8" >
+	<content>utf8_len, utf8_string = text.GbkToUtf8(ascii_string, ascii_len)</content>
+	<content>Parameters</content>
+	<content>  ascii_string: GBK string</content>
+	<content>  ascii_len: Integer, string length (Bytes) </content>
+	<content>Returns</content>
+	<content>  utf8_len: Integer, length of utf-8 string;Fail: 0 or negative value</content>
+	<content>  utf8_string: string, utf-8 string;Fail: nil</content>
+</function>
+<function name="text.Utf8ToIso8859" >
+	<content>len, str = text.Utf8ToIso8859(part, utf8_str)</content>
+	<content>Parameters</content>
+	<content>  part: Part number of ISO-8859. Currently we support ISO 8859-1 to 10, ISO 8859-13 to 16</content>
+	<content>  utf8_str: UTF-8 string</content>
+	<content>Returns</content>
+	<content>  len: Integer, length of ISO-8859 string</content>
+	<content>  	 > 0: Success</content>
+	<content>  	   0: Fail</content>
+	<content>  	  -1: Invalid argument</content>
+	<content>  	-105: Codec not supported</content>
+	<content>  str: string, ISO-8859 string; Will be nil when failure</content>
+</function>
+<function name="text.Iso8859ToUtf8" >
+	<content>len, str = text.Iso8859ToUtf8(part, iso8859_str, iso8859_len)</content>
+	<content>Parameters</content>
+	<content>  part: Part number of ISO-8859. Currently we support ISO 8859-1 to 10, ISO 8859-13 to 16</content>
+	<content>  iso8859_str: ISO-8859 string</content>
+	<content>  iso8859_len: Integer, string length (Bytes) </content>
+	<content>Returns</content>
+	<content>  len: Integer, length of UTF-8 string</content>
+	<content>  	 > 0: Success</content>
+	<content>  	   0: Fail</content>
+	<content>  	  -1: Invalid argument</content>
+	<content>  	-105: Codec not supported</content>
+	<content>  str: string, UTF-8 string; Will be nil when failure</content>
+</function>
+<function name="text.Big5ToUtf8" >
+	<content>utf8_len, utf8_string = text.Big5ToUtf8(ascii_string, ascii_len)</content>
+	<content>Parameters</content>
+	<content>  ascii_string: Big5 string</content>
+	<content>  ascii_len: Integer, string length (Bytes) </content>
+	<content>Returns</content>
+	<content>  utf8_len: Integer, length of utf-8 string;Fail: 0 or negative value</content>
+	<content>  utf8_string: string, utf-8 string;Fail: nil</content>
+</function>
+
+<!-- util group -->
+<function name="util.Crc16Modbus" >
+	<content>crc16 = util.Crc16Modbus(string, string_len, crc16_init_value)</content>
+	<content>Parameters</content>
+	<content>  string: ascii string</content>
+	<content>  string_len: Integer, string length (Bytes) </content>
+	<content>  crc16_init_value: Initual value, default: 0xFFFF</content>
+	<content>Returns</content>
+	<content>  crc16: Integer, CRC16 value</content>
+</function>
+
+<!-- sys group -->
+<function name="sys.Sleep" >
+	<content>sys.Sleep(ms)</content>
+	<content></content>
+</function>
+<function name="sys.GetTick" >
+	<content>Value = sys.GetTick()</content>
+	<content>Returns</content>
+	<content>  Value: system timetick</content>
+</function>
+<function name="sys.GetDate" >
+	<content>year, month, day, week = sys.GetDate()</content>
+</function>
+<function name="sys.GetTime" >
+	<content>hour, minute, second = sys.GetTime()</content>
+</function>
+<function name="sys.GetDateString" >
+	<content>DateString = sys.GetDateString()</content>
+</function>
+<function name="sys.GetTimeString" >
+	<content>TimeString = sys.GetTimeString()</content>
+</function>
+<function name="sys.GetDays" >
+	<content>Result = sys.GetDays(year,month,day)</content>
+	<content>Returns</content>
+	<content>  Result: days, Fail: nil</content>
+</function>
+<function name="sys.GetSecs" >
+	<content>Result = sys.GetSecs(hour,minute,second)</content>
+	<content>Returns</content>
+	<content>  Result: seconds, Fail: nil</content>
+</function>
+<function name="sys.ToDate" >
+	<content>year, month, second = sys.ToDate(days)</content>
+</function>
+<function name="sys.ToTime" >
+	<content>hour, minute, second = sys.ToTime(seconds)</content>
+</function>
+<function name="sys.GetInterParam" >
+	<content>value, ret = sys.GetInterParam(paramName)</content>
+	<content>Parameters</content>
+	<content>paramName</content>
+	<content>  string: internal system parameter name used in element address</content>
+	<content>Returns</content>
+	<content>  value: integer or string; by system parameter name</content>
+	<content>  ret: integer; success: 1, fail: 0</content>
+	<content>Example:</content>
+	<content>    x, ret = sys.GetInterParam("TP_X")</content>
+	<content>    => x: current touched position </content>
+	<content>    => ret: 1 </content>		
+</function>
+<function name="sys.BuzzerOn" >
+	<content>sys.BuzzerOn(buzzerType)</content>
+	<content>Parameters</content>
+	<content>  buzzerType: 0:buzzer off, 1:buzzer on, 2: buzzer hold on </content>	
+	<content>Returns</content>
+	<content>  N/A</content>
+</function>
+<function name="sys.GetDiskSpace" >
+	<content>ret, total, free = sys.GetDiskSpace(disk_id)</content>
+	<content>Parameters</content>
+	<content>  disk_id: integer, 2: USB, 3: SD, 6: USB2</content>
+	<content>Returns</content>
+	<content>    ret: integer, success: 1, fail: (list below)</content>
+	<content>          -1: invalid argument</content>
+	<content>        -106: disk is not ready</content>
+	<content>  total: integer, total disk space (MB)</content>
+	<content>   free: integer, free disk space (MB)</content>
+	<content>Example:</content>
+	<content>    -- Get total and free space of USB disk</content>
+	<content>    ret, total, free = sys.GetDiskSpace(2) -- USB</content>
+	<content>    if (ret >= 0) then</content>
+	<content>    	-- success</content>
+	<content>    end</content>
+</function>
+<function name="sys.GetTotalMemory" >
+	<content>totalmemory = sys.GetTotalMemory()</content>
+	<content>Parameters</content>
+	<content>  totalmemory: integer, get all memory space in device (MB)</content>
+	<content>Example:</content>
+	<content>    -- get all memory space in device</content>
+	<content>    totalmemory = sys.GetTotalMemory()</content>
+</function>
+<function name="sys.GetSysUsedMemory" >
+	<content>SysUsedMemory = sys.GetSysUsedMemory()</content>
+	<content>Parameters</content>
+	<content>  SysUsedMemory: integer, get all memory used by all application in device (MB)</content>
+	<content>Example:</content>
+	<content>    -- get all memory used by all application in device</content>
+	<content>    SysUsedMemory = sys.GetSysUsedMemory()</content>
+</function>
+<function name="sys.GetAppUsedMemory" >
+	<content>AppUsedMemory = sys.GetAppUsedMemory()</content>
+	<content>Parameters</content>
+	<content>  AppUsedMemory: integer, get all memory used by HMIApp (MB)</content>
+	<content>Example:</content>
+	<content>    -- get all memory used by HMIApp</content>
+	<content>    AppUsedMemory = sys.GetAppUsedMemory()</content>
+</function>
+<function name="sys.GetUptime" >
+	<content>minutes = sys.GetUptime()</content>
+	<content>Returns</content>
+	<content>  minutes: integer</content>
+	<content>Example:</content>
+	<content>    -- get HMIApp uptime</content>
+	<content>    minutes = sys.GetUptime()</content>
+</function>
+<function name="sys.GetNandHealth" >
+	<content>ret = sys.GetNandHealth()</content>
+	<content>Returns</content>
+	<content>  ret: integer, 1: healthy, 0: warning, -1: not supported</content>
+	<content>Example:</content>
+	<content>    -- get NAND Flash Health</content>
+	<content>    ret = sys.GetNandHealth()</content>
+</function>
+<function name="sys.GetLastDetailedError" >
+	<content>ret = sys.GetLastDetailedError()</content>
+	<content>Returns</content>
+	<content>  error_code: integer, error code</content>
+	<content>         msg: string, error information</content>
+	<content>Example:</content>
+	<content>    -- Get detailed information about the last error that occurred</content>
+	<content>    error_code, msg = sys.GetLastDetailedError()</content>
+</function>
+<!-- string group -->
+<function name="string.find" >
+	<content>found_index, end_index = string.find(string, pattern, [start_index])</content>
+	<content>Parameters</content>
+	<content>  string: ASCII string</content>
+	<content>  pattern: pattern string </content>
+	<content>  start_index: integer, start index, base on 1 </content>
+	<content>Returns</content>
+	<content>  found_index: integer; found start index, base on 1</content>
+	<content>  end_index: integer; found end index, base on 1</content>
+	<content>Example:</content>
+	<content>    v1 = string.find("ABCDE", "BC")</content>
+	<content>    => v1=2 </content>
+	<content>    v1, v2 = string.find("ABCDE", "BCD")</content>
+	<content>    => v1=2, V2=4 </content>
+</function>
+
+<function name="string.format" >
+	<content>string_ret = string.format(string_fmt, var1, var2, ...)</content>
+	<content>Parameters</content>
+	<content>  string_fmt: ASCII string; Variable: %d, %x, %X, %s, %c, %f</content>
+	<content>  var1: variable 1</content>
+	<content>  var2: variable 2</content>
+	<content>Returns</content>
+	<content>  string_ret: string; formatted string</content>
+	<content>Example:</content>
+	<content>    v1 = string.format("%d, %X, %s, %c, %3.3f", 10, 15, "AB", 0x30, 12.35)</content>
+	<content>    => v1=10, F, AB, 0, 12.350 </content>
+</function>
+
+<function name="string.len" >
+	<content>length = string.len(string_src)</content>
+	<content>Parameters</content>
+	<content>  string_src: ASCII string</content>
+	<content>Returns</content>
+	<content>  length: integer; string length </content>
+	<content>Example:</content>
+	<content>    v1 = string.len("ABCDE")</content>
+	<content>    => v1=5 </content>
+</function>
+
+<function name="string.split" >
+	<content>tName = string.split(string, sep)</content>
+	<content>Parameters</content>
+	<content>  string: ASCII string</content>
+	<content>  sep: Separator</content>
+	<content>Returns</content>
+	<content>  tName: a table containing each tokens of string </content>
+	<content>Example:</content>
+	<content>    src="John,Andy,Mike"</content>
+    <content>    tName = string.split(src, ",")</content>
+    <content>    tCount = table.count(tName)</content>
+	<content>    --output:</content>
+    <content>    -- tName[1]="John"</content>
+    <content>    -- tName[2]="Andy"</content>
+    <content>    -- tName[3]="Mike"</content>
+    <content>    -- tCount = 3</content>
+</function>
+
+<function name="string.sub" >
+	<content>string_ret = string.sub(string_src, start_index, [end_index])</content>
+	<content>Parameters</content>
+	<content>  string_src: ASCII string</content>
+	<content>  start_index: integer, start index, base on 1 </content>
+	<content>  end_index: integer, end index, base on 1 </content>
+	<content>Returns</content>
+	<content>  string_ret: string;  subset string</content>
+	<content>Example:</content>
+	<content>    v1 = string.sub("ABCDE", 2, 4)</content>
+	<content>    => v1=BCD </content>
+</function>
+
+<function name="string.trim" >
+	<content>trimStr = string.trim(string_src)</content>
+	<content>Parameters</content>
+	<content>  string_src: ASCII string</content>
+	<content>Returns</content>
+	<content>  trimStr: string; remove the space char of front & tail string </content>
+	<content>Example:</content>
+	<content>    v1 = string.trim("   ABCDE  ")</content>
+	<content>    => v1="ABCDE" </content>
+</function>
+
+<function name="string.byte" >
+	<content>num1, num2, ... = string.byte(string, [start_index, [end_index]]])</content>
+	<content>Parameters</content>
+	<content>  string: ASCII string</content>
+	<content>  start_index: integer, start index, base on 1 </content>
+	<content>  end_index: integer, end index, base on 1 </content>
+	<content>Returns</content>
+	<content>  num1: byte integer</content>
+	<content>  num2: byte integer</content>
+	<content>Example:</content>
+	<content>    v = string.byte("ABCDE")</content>
+	<content>    => v=65 </content>
+	<content>    v1, v2 = string.byte("ABCDE", 2, 3)</content>
+	<content>    => v1=66, v2=67 </content>
+</function>
+
+<function name="string.gsub" >
+	<content>destString = string.gsub(srcString, patternString, replacedString)</content>
+	<content>Parameters</content>
+	<content>  srcString: 字串</content>
+	<content>  patternString: pattern string for finding</content>
+	<content>  replacedString: replace string </content>
+	<content>Returns</content>
+	<content>  string: replaced string</content>
+	<content>Example:</content>
+	<content>    s = string.gsub("ABCDE", "C", "x")</content>
+	<content>    => s="ABxDE" </content>
+</function>
+
+<function name="string.char" >
+	<content>destString = string.char(i1, i2, ...)</content>
+	<content>Parameters</content>
+	<content>  i1: Integer, ASCII value</content>
+	<content>  i2: Integer, ASCII value</content>
+	<content>  ...: Integer, ASCII values</content>
+	<content>Returns</content>
+	<content>  destString: combined string</content>
+	<content>Example:</content>
+	<content>    s = string.char(65,66,67)</content>
+	<content>    => s="ABC" </content>
+</function>
+
+<function name="string.lower" >
+	<content>destString = string.lower(srcString)</content>
+	<content>Parameters</content>
+	<content>  srcString: string</content>
+	<content>Returns</content>
+	<content>  destString: string, lowercase letter of string</content>
+	<content>Example:</content>
+	<content>    s = string.lower("John")</content>
+	<content>    => s="john" </content>
+</function>
+
+<function name="string.upper" >
+	<content>destString = string.upper(srcString)</content>
+	<content>Parameters</content>
+	<content>  srcString: string</content>
+	<content>Returns</content>
+	<content>  destString: string, capital letter of string</content>
+	<content>Example:</content>
+	<content>    s = string.upper("John")</content>
+	<content>    => s="JOHN" </content>
+</function>
+
+<function name="string.reverse" >
+	<content>destString = string.reverse(srcString)</content>
+	<content>Parameters</content>
+	<content>  srcString: string</content>
+	<content>Returns</content>
+	<content>  destString: string, inversed string</content>
+	<content>Example:</content>
+	<content>    s = string.reverse("ABCDE")</content>
+	<content>    => s="EDCBA" </content>
+</function>
+
+<function name="string.rep" >
+	<content>destString = string.rep(srcString, repeatCount)</content>
+	<content>Parameters</content>
+	<content>  srcString: string</content>
+	<content>  repeatCount: Integer, repeat count</content>
+	<content>Returns</content>
+	<content>  destString: string, result</content>
+	<content>Example:</content>
+	<content>    s = string.rep("AB+",2)</content>
+	<content>    => s="AB+AB+" </content>
+</function>
+
+<function name="string.match" >
+	<content>destString = string.match(srcString, pattern)</content>
+	<content>Parameters</content>
+	<content>  srcString: string</content>
+	<content>  pattern: string, pattern string</content>
+	<content>Returns</content>
+	<content>  destString: string, result</content>
+	<content>Example:</content>
+	<content>    s1, s2, s3 = string.match("1/22/333","(%d)/(%d+)/(%d)")</content>
+	<content>    => s1=1, s2=22, s3=3 </content>
+</function>
+
+<function name="string.gmatch" >
+	<content>findingIterator = string.gmatch(srcString, pattern)</content>
+	<content>Parameters</content>
+	<content>  srcString: string</content>
+	<content>  pattern: string, pattern string</content>
+	<content>Returns</content>
+	<content>  findingIterator: Iterator, have to used with for statement </content>
+	<content>Example:</content>
+	<content>    for word in string.gmatch("Hello world", "%a+") do </content>
+	<content>        w = word										</content>
+	<content>    end												</content>
+	<content>    => for will run twice: w="Hello", w="world" </content>
+</function>
+
+<!-- math group -->
+<function name="math.abs" >
+	<content>value = math.abs(value_number)</content>
+	<content>Parameters</content>
+	<content>  value_number: signed value </content>
+	<content>Returns</content>
+	<content>  value: Positive value</content>
+	<content>Example:</content>
+	<content>    v = math.abs(-100)</content>
+	<content>    => v=100 </content>
+</function>
+<function name="math.exp" >
+	<content>value = math.exp(x)</content>
+	<content>Parameters</content>
+	<content>  x: exponential times</content>
+	<content>Returns</content>
+	<content>  value: power of exponential x</content>
+	<content>Example:</content>
+	<content>    v = math.exp(1)</content>
+	<content>    => v=2.718281828459 </content>
+</function>
+<function name="math.log" >
+	<content>value = math.log(x, base)</content>
+	<content>Parameters</content>
+	<content>  x: values</content>
+	<content>  base: optional, natural log if ignore base parameter </content>
+	<content>Returns</content>
+	<content>  value: the logarithm of x</content>
+	<content>Example:</content>
+	<content>    v = math.log(3)</content>
+	<content>    => v=1.0986122886681 </content>
+	<content>    v = math.log(1000, 10)</content>
+	<content>    => v=3 </content>
+</function>
+
+<function name="math.sin" >
+	<content>value = math.sin(radian)</content>
+	<content>Parameters</content>
+	<content>  radian: number, Radian </content>
+	<content>Returns</content>
+	<content>  value: number</content>
+	<content>Example: sin(30 deg)</content>
+	<content>    v = math.sin(math.rad(30))</content>
+	<content>    => v=0.499999 </content>
+</function>
+<function name="math.sinh" >
+	<content>value = math.sinh(tangenhValue)</content>
+	<content>Parameters</content>
+	<content>  tangenhValue: number, tangen hiperboliczny values </content>
+	<content>Returns</content>
+	<content>  value: sinh value</content>
+	<content>Example: sinh(2)</content>
+	<content>    v = math.sinh(2)</content>
+	<content>    => v=3.626860 </content>
+</function>
+<function name="math.cos" >
+	<content>value = math.cos(radian)</content>
+	<content>Parameters</content>
+	<content>  radian: number, Radian </content>
+	<content>Returns</content>
+	<content>  value: number</content>
+	<content>Example: cos(30 deg)</content>
+	<content>    v = math.cos(math.rad(30))</content>
+	<content>    => v=0.866025 </content>
+</function>
+<function name="math.cosh" >
+	<content>value = math.cosh(tangenhValue)</content>
+	<content>Parameters</content>
+	<content>  tangenhValue: number, tangen hiperboliczny values </content>
+	<content>Returns</content>
+	<content>  value: cosh value</content>
+	<content>Example: cosh(2)</content>
+	<content>    v = math.cosh(2)</content>
+	<content>    => v=3.7621956910 </content>
+</function>
+<function name="math.tan" >
+	<content>value = math.tan(radian)</content>
+	<content>Parameters</content>
+	<content>  radian: number, Radian </content>
+	<content>Returns</content>
+	<content>  value: number</content>
+	<content>Example: tan(30 deg)</content>
+	<content>    v = math.tan(math.rad(30))</content>
+	<content>    => v=0.577350 </content>
+</function>
+<function name="math.tanh" >
+	<content>value = math.tanh(tangenhValue)</content>
+	<content>Parameters</content>
+	<content>  tangenhValue: number, tangen hiperboliczny values </content>
+	<content>Returns</content>
+	<content>  value: tanh value</content>
+	<content>Example: tanh(2)</content>
+	<content>    v = math.tanh(2)</content>
+	<content>    => v=0.964027580 </content>
+</function>
+
+<function name="math.asin" >
+	<content>value = math.asin(radian)</content>
+	<content>Parameters</content>
+	<content>  radian: number, Radian </content>
+	<content>Returns</content>
+	<content>  value: number</content>
+	<content>Example: asin(30 deg)</content>
+	<content>    v = math.asin(math.rad(30))</content>
+	<content>    => v=0.551069 </content>
+</function>
+<function name="math.acos" >
+	<content>value = math.acos(radian)</content>
+	<content>Parameters</content>
+	<content>  radian: number, Radian </content>
+	<content>Returns</content>
+	<content>  value: number</content>
+	<content>Example: acos(30 deg)</content>
+	<content>    v = math.acos(math.rad(30))</content>
+	<content>    => v=1.019726 </content>
+</function>
+<function name="math.atan" >
+	<content>value = math.atan(radian)</content>
+	<content>Parameters</content>
+	<content>  radian: number, Radian </content>
+	<content>Returns</content>
+	<content>  value: number</content>
+	<content>Example: atan(30 deg)</content>
+	<content>    v = math.atan(math.rad(30))</content>
+	<content>    => v=0.482347 </content>
+</function>
+<function name="math.atan2" >
+	<content>value = math.atan2(yRadian, xRadian)</content>
+	<content>Parameters</content>
+	<content>  yRadian: number, yRadian </content>
+	<content>  xRadian: number, xRadian, can be 0 </content>
+	<content>Returns</content>
+	<content>  value: number</content>
+	<content>Example: atan2(30 deg, 60 deg)</content>
+	<content>    v = math.atan2(math.rad(30), math.rad(60))</content>
+	<content>    => v=0.463647609000806 </content>
+</function>
+<function name="math.deg" >
+	<content>angle = math.deg(radian)</content>
+	<content>Parameters</content>
+	<content>  radian: number, Radian </content>
+	<content>Returns</content>
+	<content>  angle: number, angle</content>
+	<content>Example: </content>
+	<content>    v = math.deg(math.pi)</content>
+	<content>    => v=180 </content>
+</function>
+<function name="math.rad" >
+	<content>radian = math.rad(angle)</content>
+	<content>Parameters</content>
+	<content>  angle: number, angle </content>
+	<content>Returns</content>
+	<content>  radian: number, Radian</content>
+	<content>Example: </content>
+	<content>    v = math.rad(180)</content>
+	<content>    => v=3.14159265 </content>
+</function>
+<function name="math.min" >
+	<content>min_value = math.min(v1, v2)</content>
+	<content>Parameters</content>
+	<content>  v1, v2: number, value </content>
+	<content>Returns</content>
+	<content>min_value: number, Minimum</content>
+	<content>Example: </content>
+	<content>    v = math.min(-2, 3.6)</content>
+	<content>    => v=-2 </content>
+</function>
+<function name="math.max" >
+	<content>max_value = math.max(v1, v2)</content>
+	<content>Parameters</content>
+	<content>  v1, v2: number, value </content>
+	<content>Returns</content>
+	<content>  max_value: number, Maxmum</content>
+	<content>Example: </content>
+	<content>    v = math.max(-2, 3.6)</content>
+	<content>    => v=3.6 </content>
+</function>
+<function name="math.modf" >
+	<content>integer, fraction = math.modf(v1)</content>
+	<content>Parameters</content>
+	<content>  v1: number </content>
+	<content>Returns</content>
+	<content>  integer: integer</content>
+	<content>  fraction: float</content>
+	<content>Example: </content>
+	<content>    v1, v2 = math.modf(3.6)</content>
+	<content>    => v1=3, v2=0.6 </content>
+</function>	
+
+<function name="math.pow" >
+	<content>value = math.pow(x, y)</content>
+	<content>Parameters</content>
+	<content>  x: base value </content>
+	<content>  y: multiplied times </content>
+	<content>Returns</content>
+	<content>  value: x to the power y </content>
+	<content>Example: </content>
+	<content>    v1 = math.pow(2, 3)</content>
+	<content>    => v1=8 </content>
+</function>		
+
+<function name="math.random" >
+	<content>value = math.random(lower, upper)</content>
+	<content>Parameters</content>
+	<content>  lower: lower limitation value </content>
+	<content>  upper: upper limitation value </content>
+	<content>Returns</content>
+	<content>  value: number </content>
+	<content>Example: </content>
+	<content>    v1 = math.random(3, 6)</content>
+	<content>    => v1=4, between(3, 6) </content>
+</function>		
+
+<function name="math.randomseed" >
+	<content>math.randomseed(seekValue)</content>
+	<content>Parameters</content>
+	<content>  seekValue: Initial randomized seed, can use time tick </content>
+	<content>Returns</content>
+	<content>  N/A </content>
+	<content>Example: </content>
+	<content>    math.randomseed(sys.GetTick())</content>
+	<content>    randValue = math.random(0, 100) </content>
+</function>
+
+<function name="math.sqrt" >
+	<content>sqrt = math.sqrt(nSquare)</content>
+	<content>Parameters</content>
+	<content>  nSquare: n*n </content>
+	<content>Returns</content>
+	<content>  sqrt: Square root </content>
+	<content>Example: </content>
+	<content>    n = math.sqrt(100)</content>
+	<content>    => n = 10 </content>
+</function>
+
+<function name="math.band" >
+	<content>value = math.band(v1, v2)</content>
+	<content>Parameters</content>
+	<content>  v1, v2: unsigned integer </content>
+	<content>Returns</content>
+	<content>  value: unsigned integer, logic and result</content>
+	<content>Example: </content>
+	<content>    v1 = math.band(0x01, 0x03)</content>
+	<content>    => v1=1 </content>
+</function>
+
+<function name="math.bor" >
+	<content>value = math.bor(v1, v2)</content>
+	<content>Parameters</content>
+	<content>  v1, v2: unsigned integer </content>
+	<content>Returns</content>
+	<content>  value: unsigned integer, logic or result</content>
+	<content>Example: </content>
+	<content>    v1 = math.bor(0x01, 0x03)</content>
+	<content>    => v1=3 </content>
+</function>
+
+<function name="math.bxor" >
+	<content>value = math.bxor(v1, v2)</content>
+	<content>Parameters</content>
+	<content>  v1, v2: unsigned integer </content>
+	<content>Returns</content>
+	<content>  value: unsigned integer, logic xor result</content>
+	<content>Example: </content>
+	<content>    v1 = math.bxor(0x01, 0x03)</content>
+	<content>    => v1=2 </content>
+</function>
+
+<function name="math.bnot" >
+	<content>value = math.bnot(v1)</content>
+	<content>Parameters</content>
+	<content>  v1: unsigned integer </content>
+	<content>Returns</content>
+	<content>  value: unsigned integer, logic not result</content>
+	<content>Example: </content>
+	<content>    v1 = math.bnot(0x01)</content>
+	<content>    => v1=0xFFFFFFFE </content>
+</function>
+
+<function name="math.lshift" >
+	<content>value = math.lshift(v1, bitOffset)</content>
+	<content>Parameters</content>
+	<content>  v1: unsigned integer </content>
+	<content>  bitOffset: bit offset </content>
+	<content>Returns</content>
+	<content>  value: unsigned integer, left shift result</content>
+	<content>Example: </content>
+	<content>    v1 = math.lshift(0x01, 2)</content>
+	<content>    => v1=0x04 </content>
+</function>
+
+<function name="math.rshift" >
+	<content>value = math.rshift(v1, bitOffset)</content>
+	<content>Parameters</content>
+	<content>  v1: unsigned integer </content>
+	<content>  bitOffset: bit offset </content>
+	<content>Returns</content>
+	<content>  value: unsigned integer, right shiftresult</content>
+	<content>Example: </content>
+	<content>    v1 = math.rshift(0x04, 2)</content>
+	<content>    => v1=0x01 </content>
+</function>
+
+<function name="math.ceil" >
+	<content>value = math.ceil(v1)</content>
+	<content>Description: Max integer that greater than v1</content>
+	<content>Parameters</content>
+	<content>  v1: Value </content>
+	<content>Returns</content>
+	<content>  value: Integer, Max integer that greater than v1</content>
+	<content>Example: </content>
+	<content>    r = math.ceil(5.39)</content>
+	<content>    => r=6 </content>
+</function>
+
+<function name="math.floor" >
+	<content>value = math.floor(v1)</content>
+	<content>Description: Min integer that less than v1</content>
+	<content>Parameters</content>
+	<content>  v1: Value </content>
+	<content>Returns</content>
+	<content>  value: Integer, Min integer that less than v1</content>
+	<content>Example: </content>
+	<content>    r = math.floor(5.39)</content>
+	<content>    => r=5 </content>
+</function>
+
+<function name="math.fmod" >
+	<content>value = math.floor(v1, divider)</content>
+	<content>Description: get remainer</content>
+	<content>Parameters</content>
+	<content>  v1: Value </content>
+	<content>  divider: Value </content>
+	<content>Returns</content>
+	<content>  value: Integer, remainer</content>
+	<content>Example: </content>
+	<content>    r = math.fmod(17, 3)</content>
+	<content>    => r=2 </content>
+</function>
+
+<function name="math.frexp" >
+	<content>digit, exp = math.frexp(v1)</content>
+	<content>Description: get tail and exponential value accroding to v1: v1 = digit * 2^exp</content>
+	<content>Parameters</content>
+	<content>  v1: Value </content>
+	<content>Returns</content>
+	<content>  digit: float, Tail value</content>
+	<content>  exp: float, Exponential value</content>
+	<content>Example: </content>
+	<content>    d, e = math.frexp(10.0)</content>
+	<content>    => d=0.625, e=4 </content>
+</function>
+
+<function name="math.ldexp" >
+	<content>v1 = math.ldexp(digit, exp)</content>
+	<content>Description: Get value according to tail and exponential value: v1 = digit * 2^exp</content>
+	<content>Parameters</content>
+	<content>  digit: float, Tail value</content>
+	<content>  exp: float, Exponential value</content>
+	<content>Returns</content>
+	<content>  v1: Value </content>
+	<content>Example: </content>
+	<content>    v = math.ldexp(0.625, 4)</content>
+	<content>    => v=10 </content>
+</function>
+
+<!-- file group -->
+<function name="file.Open" >
+	<content>ret, fileHandle = file.Open(disk_id, file_name, add_utf8_id)</content>
+	<content>(Only supports encoding format UTF8 files)</content>
+	<content>Parameters</content>
+	<content>  disk_id: integer, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>  file_name: string, file name</content>
+	<content>  add_utf8_id: 1: add utf-8 ID, others: not add utf-8 ID</content>
+	<content>Returns</content>
+	<content>  ret: integer, success: 1, fail: 0</content>
+	<content>  fileHandle: integer, file handle</content>
+	<content>          -1: invalid argument</content>
+	<content>        -106: disk is not ready</content>
+	<content>        -107: unable to open file</content>
+	<content>        -136: illegal file path</content>
+	<content>Example:</content>
+	<content>    SaveIn = 0  -- HMI</content>
+	<content>    ret, fileHandle = file.Open(SaveIn, "myFile001")</content>
+	<content>    </content>
+	<content>    SaveIn = 0  -- HMI</content>
+	<content>    -- show multi-language words in excel (csv)</content>
+	<content>    ret, fileHandle = file.Open(SaveIn, "myFile001", 1)</content>
+</function>
+	
+<function name="file.Read" >
+	<content>ret, data = file.Read(fileHandle, len)</content>
+	<content>Parameters</content>
+	<content>  fileHandle: integer, file handle</content>
+	<content>  len: integer, char length</content>
+	<content>Returns</content>
+	<content>  ret: integer, success: greater equal than 0, fail: less than 0</content>
+	<content>   -1: invalid argument</content>
+	<content> -108: fail to read file</content>
+	<content>  data: chars, success: string, fail: nil</content>
+	<content>Example:</content>
+	<content>    ret, data = file.Read(fileHandle, 10)</content>
+</function>
+
+<function name="file.ReadLine" >
+	<content>bytes_read, data = file.ReadLine(fileHandle)</content>
+	<content>Parameters</content>
+	<content>  fileHandle: integer, file handle</content>
+	<content>Returns</content>
+	<content>  bytes_read: integer, success: greater than 0, fail: less than 0</content>
+	<content>          -1: invalid argument</content>
+	<content>        -102: fail to read data</content>
+	<content>  data: chars, success: string, fail: nil</content>
+	<content>Example:</content>
+	<content>    bytes_read, data = file.ReadLine(fileHandle)</content>
+</function>
+
+<function name="file.Write" >
+	<content>ret = file.Write(fileHandle, buffer, len)</content>
+	<content>Parameters</content>
+	<content>  fileHandle: integer, file handle</content>
+	<content>  buffer: ASCII chars, string (UTF-8)</content>
+	<content>  len: integer, write char length</content>
+	<content>Returns</content>
+	<content>  ret: integer</content>
+	<content>  > 0: success</content>
+	<content>   -1: invalid argument</content>
+	<content> -109: fail to write file</content>
+	<content>Example:</content>
+	<content>    ret = file.Write(fileHandle, "abc123", 6)</content>
+</function>
+
+<function name="file.Close" >
+	<content>file.Close(fileHandle)</content>
+	<content>Parameters</content>
+	<content>  fileHandle: integer, file handle</content>
+	<content>Example:</content>
+	<content>    file.Close(fileHandle)</content>
+</function>
+
+<function name="file.Seek" >
+	<content>ret = file.Seek(fileHandle, offset, origin)</content>
+	<content>Parameters</content>
+	<content>  fileHandle: integer, file handle</content>
+	<content>  offset: integer, file offset</content>
+	<content>  origin: integer, seek position, start position in file: 0, current position:1, tail position in file: 2</content>
+	<content>Returns</content>
+	<content>  ret: success: 1, fail: 0, invalid argument: -1</content>
+	<content>Example:</content>
+	<content>    file.Seek(fileHandle, 10, 0)</content>
+</function>
+
+<function name="file.GetPos" >
+	<content>ret, filePos = file.GetPos(fileHandle)</content>
+	<content>Parameters</content>
+	<content>  fileHandle: integer, file handle</content>
+	<content>Returns</content>
+	<content>  ret: integer, success: 1, invalid argument: -1</content>
+	<content>  filePos: integer, file position</content>
+	<content>Example:</content>
+	<content>    ret, filePos = file.GetPos(fileHandle)</content>
+	<content>    </content>
+</function>
+
+<function name="file.GetError" >
+	<content>ret = file.GetError(fileHandle)</content>
+	<content>Parameters</content>
+	<content>  fileHandle: integer, file handle</content>
+	<content>Returns</content>
+	<content>  ret: integer, success: 1, fail: others</content>
+	<content>Example:</content>
+	<content>    ret = file.GetError(fileHandle)</content>
+	<content>    </content>
+</function>
+
+
+<function name="file.Length" >
+	<content>ret, len = file.Length(fileHandle)</content>
+	<content>Parameters</content>
+	<content>  fileHandle: integer, file handle</content>
+	<content>Returns</content>
+	<content>  ret:</content>
+	<content>    1: success</content>
+	<content>   -1: invalid argument</content>
+	<content> -100: file not opened</content>
+	<content>  len: file size by bytes</content>
+	<content>Example:</content>
+	<content>    ret, len = file.Length(fileHandle)</content>
+</function>
+
+<function name="file.GetLineCount" >
+	<content>ret, lineCount = file.GetLineCount(fileHandle)</content>
+	<content>Parameters</content>
+	<content>  fileHandle: integer, file handle</content>
+	<content>Returns</content>
+	<content>  ret:</content>
+	<content>    1: success</content>
+	<content>    0: fail</content>
+	<content>   -1: invalid argument</content>
+	<content> -100: file not opened</content>
+	<content>  lineCount: total lines</content>
+	<content>       >= 0: success</content>
+	<content>       -113: fail to allocate buffer</content>
+	<content>Example:</content>
+	<content>    ret, lineCount = file.GetLineCount(fileHandle)</content>
+</function>
+
+<function name="file.Export" >
+	<content>ret, errCode = file.Export(name, disk_id)</content>
+	<content>Parameters</content>
+	<content>  name: string, file name</content>
+	<content>  disk_id: integer, 2: USB, 3: SD, 6: USB2</content>
+	<content>Returns</content>
+	<content>  ret: success: 1, fail: 0</content>
+	<content>  errCode: integer, error code</content>
+	<content>       -1: invalid argument</content>
+	<content>     -106: disk is not ready</content>
+	<content>     -110: source file does not exist</content>
+	<content>     -111: fail to copy file</content>
+	<content>     -136: illegal path</content>
+	<content>     -161: The file already exists in the destination</content>
+	<content>Example:</content>
+	<content>    ret, errCode = file.Export("myFile.txt", 2)</content>
+</function>
+
+<function name="file.List" >
+	<content>ret, nameList = file.List()</content>
+	<content>Returns</content>
+	<content>  ret: success: 1, fail or no files: 0</content>
+	<content>  nameList: table, success: file name list, fail: nil</content>
+	<content>Example:</content>
+	<content>    ret, nameList = file.List()</content>
+</function>
+
+<function name="file.ListExternal" >
+	<content>ret, nameList = file.ListExternal(disk_id, sub_dir)</content>
+	<content>Parameters</content>
+	<content>  disk_id: integer, 2: USB, 3: SD, 6: USB2</content>
+	<content>  sub_dir: string, sub-directory. Can be nil</content>
+	<content>Returns</content>
+	<content>  ret: success: 1, fail or no files: 0</content>
+	<content>  nameList: table, success: file name list, fail: nil</content>
+	<content>Example:</content>
+	<content>    -- List files in USB disk</content>
+	<content>    ret, nameList = file.ListExternal(2)</content>
+</function>
+
+<function name="file.Delete" >
+	<content>ret, err, errText = file.Delete(disk_id, file_name)</content>
+	<content>Parameters</content>
+	<content>  disk_id: integer, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>  file_name: string, file name</content>
+	<content>Returns</content>
+	<content>  ret: integer, success: 1, fail: 0</content>
+	<content>  err: integer, error number</content>
+	<content>    0: success</content>
+	<content>   -1: invalid argument</content>
+	<content> -106: disk is not ready</content>
+	<content> -114: fail to delete file</content>
+	<content> -136: illegal path</content>
+	<content>  errText: string, error description</content>
+	<content>Example:</content>
+	<content>    DiskNo = 0  -- HMI</content>
+	<content>    ret = file.Delete(DiskNo, "myFile001")</content>
+	<content>    </content>
+</function>
+
+<function name="file.DeleteDir" >
+	<content>ret, err, errText = file.DeleteDir(disk_id, dir_name)</content>
+	<content>Parameters</content>
+	<content>  disk_id: integer, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>  dir_name: string, directory name</content>
+	<content>Returns</content>
+	<content>  ret: integer, success: 1, fail: 0</content>
+	<content>  err: integer, error number</content>
+	<content>    0: success</content>
+	<content>   -1: invalid argument</content>
+	<content> -106: disk is not ready</content>
+	<content> -114: fail to delete directory</content>
+	<content> -136: illegal path</content>
+	<content>  errText: string, error description</content>
+	<content>Example:</content>
+	<content>    DiskNo = 0  -- HMI</content>
+	<content>    ret = file.DeleteDir(DiskNo, "/dir1")</content>
+	<content>    </content>
+</function>
+
+<function name="file.ToPDF" >
+	<content>ret, errCode = file.ToPDF(disk_id, srcFileName, pdfFileName, paperSize, fontSize, landscape)</content>
+	<content>Parameters</content>
+	<content>  disk_id: integer, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>  srcFileName: string, source file name</content>
+	<content>  pdfFileName: string, pdf file name</content>
+	<content>  paperSize: string, "A3", "A4" </content>
+	<content>  fontSize: integer, 8, 10, 12, ... </content>
+	<content>  landscape: integer, 0: portrait, 1: landscape </content>
+	<content>Returns</content>
+	<content>  ret: integer, success: 1, fail: 0</content>
+	<content>  errCode: integer, error number</content>
+	<content>        0: success</content>
+	<content>       -1: invalid argument</content>
+	<content>     -106: disk is not ready</content>
+	<content>     -107: unable to open file</content>
+	<content>     -109: fail to write file</content>
+	<content>     -161: The file already exists in the destination</content>
+	<content>Example:</content>
+	<content>    diskID = 2  -- USB Disk </content>
+	<content>    fontSize = 10  </content>
+	<content>    ret, errCode = file.ToPDF(diskID, "file001.txt", "out001.pdf", "A4", fontSize, 0)</content>
+	<content>    </content>
+</function>
+
+<function name="file.ToPrinter" >
+	<content>ret, errCode = file.ToPrinter(disk_id, srcFileName, fontSize, outputPDF)</content>
+	<content>Parameters</content>
+	<content>  disk_id: integer, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>  srcFileName: string, source file name, must be txt or csv file (end with .txt or .csv)</content>
+	<content>  fontSize: integer, can be 8, 10, 12, ... </content>
+	<content>  outputPDF: integer, 0: don't output PDF, 1: output PDF file </content>
+	<content>Returns</content>
+	<content>  ret: integer, success: 1, fail: 0</content>
+	<content>  errCode: integer, error number</content>
+	<content>        0: success</content>
+	<content>       -1: invalid argument</content>
+	<content>     -106: disk is not ready</content>
+	<content>     -107: unable to open file</content>
+	<content>     -109: fail to write file</content>
+	<content>     -116: printer is not set</content>
+	<content>     -138: file type is not supported</content>
+	<content>     -161: The file already exists in the destination</content>
+	<content>     -171: printer is not ready</content>
+	<content>Example:</content>
+	<content>    diskID = 2  -- USB Disk </content>
+	<content>    ret, errCode = file.ToPrinter(diskID, "file001.txt", 10, 1)</content>
+	<content>    -- will also output file001.pdf while printed.         </content>
+	<content>    </content>
+</function>
+
+<function name="file.PDFToPrinter" >
+	<content>ret, errCode = file.PDFToPrinter(disk_id, srcFileName)</content>
+	<content>Parameters</content>
+	<content>  disk_id: integer, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>  srcFileName: string, source PDF file name</content>
+	<content>Returns</content>
+	<content>  ret: integer, success: 1, fail: 0</content>
+	<content>  errCode: integer, error number</content>
+	<content>        0: success</content>
+	<content>       -1: invalid argument</content>
+	<content>     -106: disk is not ready</content>
+	<content>     -107: unable to open file</content>
+	<content>     -116: printer is not set</content>
+	<content>     -138: file type is not supported</content>
+	<content>Example:</content>
+	<content>    diskID = 2  -- USB Disk </content>
+	<content>    ret, errCode = file.PDFToPrinter(diskID, "file001.pdf")</content>
+	<content>    </content>
+</function>
+
+<function name="file.Exist" >
+	<content>ret, err, errText = file.Exist(disk_id, file_name)</content>
+	<content>Parameters</content>
+	<content>  disk_id: integer, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>  file_name: string, file name</content>
+	<content>Returns</content>
+	<content>  ret: integer, success: 1, fail: 0</content>
+	<content>  err: integer, error number</content>
+	<content>    0: success</content>
+	<content>   -1: invalid argument</content>
+	<content> -106: disk is not ready</content>
+	<content> -110: file does not exist</content>
+	<content>  errText: string, error description</content>
+	<content>Example:</content>
+	<content>    DiskNo = 0  -- HMI</content>
+	<content>    ret = file.Exist(DiskNo, "myFile001")  -- Check myFile001.txt</content>
+	<content>    ret = file.Exist(DiskNo, "myFile002.doc")  -- Check myFile002.doc</content>
+	<content>    </content>
+</function>
+
+<function name="file.Copy" >
+	<content>ret, err = file.Copy(src_name, src_disk_id, dest_name, dest_disk_id)</content>
+	<content>Parameters</content>
+	<content>  src_name: string, source file name</content>
+	<content>  src_disk_id: integer, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>  dest_name: string, destination file name</content>
+	<content>  dest_disk_id: integer, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>Returns</content>
+	<content>  ret: integer, success: 1, fail: 0</content>
+	<content>  err: integer, error number</content>
+	<content>    0: no error</content>
+	<content>   -1: invalid argument</content>
+	<content> -106: disk is not ready</content>
+	<content> -110: file does not exist</content>
+	<content> -111: fail to copy file</content>
+	<content> -136: illegal file path</content>
+	<content> -161: The file already exists in the destination</content>
+	<content>Example:</content>
+	<content>    SrcDiskNo = 0  -- HMI</content>
+	<content>    DestDiskNo = 2  -- USB</content>
+	<content>    -- Copy from HMI to USB</content>
+	<content>    ret = file.Copy("myFile001.txt", SrcDiskNo, "myFile001Out.txt", DestDiskNo)</content>
+	<content>    </content>
+</function>
+
+<function name="file.Move" >
+	<content>ret, err = file.Move(src_name, src_disk_id, dest_name, dest_disk_id)</content>
+	<content>Parameters</content>
+	<content>  src_name: string, source file name</content>
+	<content>  src_disk_id: integer, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>  dest_name: string, destination file name</content>
+	<content>  dest_disk_id: integer, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>Returns</content>
+	<content>  ret: integer, success: 1, fail: 0</content>
+	<content>  err: integer, error number</content>
+	<content>    0: no error</content>
+	<content>   -1: invalid argument</content>
+	<content> -106: disk is not ready</content>
+	<content> -110: file does not exist</content>
+	<content> -111: fail to move file</content>
+	<content> -136: illegal file path</content>
+	<content> -161: The file already exists in the destination</content>
+	<content>Example:</content>
+	<content>    SrcDiskNo = 0  -- HMI</content>
+	<content>    DestDiskNo = 2  -- USB</content>
+	<content>    -- Move from HMI to USB</content>
+	<content>    ret = file.Move("myFile001.txt", SrcDiskNo, "myFile001Out.txt", DestDiskNo)</content>
+	<content>    </content>
+</function>
+
+<function name="file.CopyDir" >
+	<content>ret = file.CopyDir(src_folder, src_disk_id, dest_folder, dest_disk_id, [namefilter])</content>
+	<content>Parameters</content>
+	<content>  src_folder: string, source folder name</content>
+	<content>  src_disk_id: integer, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>  dest_folder: string, destination folder name</content>
+	<content>  dest_disk_id: integer, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>  namefilter: string, the list of filters </content>
+	<content>Returns</content>
+	<content>  ret: integer, 1: successed</content>
+	<content>   -1: invalid argument</content>
+	<content> -106: disk is not ready</content>
+	<content> -110: file does not exist</content>
+	<content> -111: fail to copy file</content>
+	<content> -136: illegal file path</content>
+	<content> -161: The file already exists in the destination</content>
+	<content>Example:</content>
+	<content>    SrcDiskNo = 3  -- SD</content>
+	<content>    DestDiskNo = 2  -- USB</content>
+	<content>    -- Copy Folder from SD to USB</content>
+	<content>    ret = file.CopyDir("HMI", SrcDiskNo, "HMI", DestDiskNo, "*.csv")</content>
+	<content>    </content>
+</function>
+
+<!-- FileSlot group -->
+<function name="fileslot.Read" >
+	<content>ret, err = fileslot.Read(FS_ID, FS_Pos, Device, MemIdx, length)</content>
+	<content>Parameters</content>
+	<content>  FS_ID : unsigned integer, FileSlot ID </content>
+	<content>  FS_Pos: unsigned integer, FileSlot read/write position </content>
+	<content>  Device: unsigned integer, device, 1: InterMem($), 2: StaticMem($M) </content>
+	<content>  MemIdx: unsigned integer, read/write address of device </content>
+	<content>  length: unsigned integer, data length (word unit) </content>
+	<content>Returns</content>
+	<content>  ret: integer, success: 1, fail: 0</content>
+	<content>  err: integer, Error Code </content>
+	<content>    </content>
+</function>
+
+<function name="fileslot.Write" >
+	<content>ret, err = fileslot.Write(FS_ID, FS_Pos, Device, MemIdx, length)</content>
+	<content>Parameters</content>
+	<content>  FS_ID : unsigned integer, FileSlot ID </content>
+	<content>  FS_Pos: unsigned integer, FileSlot read/write position </content>
+	<content>  Device: unsigned integer, device, 1: InterMem($), 2: StaticMem($M) </content>
+	<content>  MemIdx: unsigned integer, read/write address of device </content>
+	<content>  length: unsigned integer, data length (word unit) </content>
+	<content>Returns</content>
+	<content>  ret: integer, success: 1, fail: 0</content>
+	<content>  err: integer, Error Code </content>
+	<content>    </content>
+	<content>    </content>
+</function>
+
+<function name="fileslot.ReadValue" >
+	<content>ret, err = fileslot.ReadValue(FS_ID, FS_Pos, Format, [value_format])</content>
+	<content>Parameters</content>
+	<content>  FS_ID : unsigned integer, FileSlot ID </content>
+	<content>  FS_Pos: unsigned integer, FileSlot read/write position </content>
+	<content>  Format: unsigned integer, Read/Write format, 2: WORD, 3: DWORD </content>
+	<content>  value_format: string, "signed": signed format, others: unsigned format</content>
+	<content>Returns</content>
+	<content>  ret: integer, value read from fileslot, format depends on [value_format]</content>
+	<content>  err: integer, Error Code </content>
+	<content>    </content>
+</function>
+
+<function name="fileslot.WriteValue" >
+	<content>ret, err = fileslot.WriteValue(FS_ID, FS_Pos, Format, Value)</content>
+	<content>Parameters</content>
+	<content>  FS_ID : unsigned integer, FileSlot ID </content>
+	<content>  FS_Pos: unsigned integer, FileSlot read/write position </content>
+	<content>  Format: unsigned integer, Read/Write format, 2: WORD, 3: DWORD </content>
+	<content>  Value : integer, Value </content>
+	<content>Returns</content>
+	<content>  ret: integer, success: 1, fail: 0</content>
+	<content>  err: integer, Error Code </content>
+	<content>    </content>
+</function>
+
+<function name="fileslot.GetLength" >
+	<content>ret, err = fileslot.GetLength(FS_ID)</content>
+	<content>Parameters</content>
+	<content>  FS_ID : unsigned integer, FileSlot ID </content>
+	<content>Returns</content>
+	<content>  ret: integer, Data Length</content>
+	<content>  err: integer, Error Code </content>
+	<content>    </content>
+</function>
+
+<function name="fileslot.Remove" >
+	<content>ret, err = fileslot.Remove(FS_ID)</content>
+	<content>Parameters</content>
+	<content>  FS_ID : unsigned integer, FileSlot ID </content>
+	<content>Returns</content>
+	<content>  ret: integer, success: 1, fail: 0</content>
+	<content>  err: integer, Error Code </content>
+	<content>    </content>
+</function>
+
+<function name="fileslot.Import" >
+	<content>ret, err = fileslot.Import(FS_ID, DiskID, ExtFileName)</content>
+	<content>Parameters</content>
+	<content>  FS_ID : unsigned integer, FileSlot ID </content>
+	<content>  DiskID: unsigned integer, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>  ExtFileName: string, External FileName </content>
+	<content>Returns</content>
+	<content>  ret: integer, success: 1, fail: 0</content>
+	<content>  err: integer, Error Code </content>
+	<content>    </content>
+</function>
+
+<function name="fileslot.Export" >
+	<content>ret, err = fileslot.Export(FS_ID, DiskID, ExtFileName)</content>
+	<content>Parameters</content>
+	<content>  FS_ID : unsigned integer, FileSlot ID </content>
+	<content>  DiskID: unsigned integer, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>  ExtFileName: string, External FileName </content>
+	<content>Returns</content>
+	<content>  ret: integer, success: 1, fail: 0</content>
+	<content>  err: integer, Error Code </content>
+	<content>    </content>
+</function>
+
+<function name="fileslot.SetName" >
+	<content> ret, err = fileslot.SetName(FS_ID, FS_Name)</content>
+	<content>Parameters</content>
+	<content>  FS_ID : unsigned integer, FileSlot ID </content>
+	<content>  FS_Name: string, file name </content>
+	<content>Returns</content>
+	<content>  ret: integer, success: 1, fail: 0</content>
+	<content>  err: integer, Error Code </content>
+	<content>    </content>
+</function>
+
+<function name="fileslot.GetName" >
+	<content> ret, err = fileslot.GetName(FS_ID)</content>
+	<content>Parameters</content>
+	<content>  FS_ID : unsigned integer, FileSlot ID </content>
+	<content>Returns</content>
+	<content>  ret: success: string of name, fail: 0 (integer)</content>
+	<content>  err: integer, Error Code </content>
+	<content>    </content>
+</function>
+
+<function name="fileslot.GetID" >
+	<content> ret, err = fileslot.GetID(FS_Name)</content>
+	<content>Parameters</content>
+	<content>  FS_Name: string, file name </content>
+	<content>Returns</content>
+	<content>  ret: integer, 0: name not found or error, others: FS_ID of name found</content>
+	<content>  err: integer, Error Code </content>
+	<content>    </content>
+</function>
+
+<!-- FTPC group -->
+<function name="ftpc.Download" >
+	<content>ret, err = ftpc.Download(IPAddress, Port, UserName, Password, LocalFileName, RemoteFileName, OverWrite)</content>
+	<content>Parameters</content>
+	<content>  IPAddress : string, IP Address of FTP server </content>
+	<content>  Port : unsigned integer, Port number, 1 ~ 65535, normally ftp use port 21 </content>
+	<content>  UserName : string, UserName for login, set "" if login without username (anonymous login) </content>
+	<content>  Password : string, Password for login, set "" if login without password </content>
+	<content>  LocalFileName : string, Local file name, use "/HMI/filename" or "/FILESLOT/FS_ID" to select file in /HMI-000/File or in FileSlot </content>
+	<content>  RemoteFileName : string, Remote file name </content>
+	<content>  OverWrite : unsigned integer, set 0 to NOT overwrite file if selected file exist </content>
+	<content>Returns</content>
+	<content>  ret: integer, success: 1, fail: 0</content>
+	<content>  err: integer, Error Code </content>
+	<content>    </content>
+</function>
+
+<function name="ftpc.Upload" >
+	<content>ret, err = ftpc.Upload(IPAddress, Port, UserName, Password, LocalFileName, RemoteFileName, OverWrite)</content>
+	<content>Parameters</content>
+	<content>  IPAddress : string, IP Address of FTP server </content>
+	<content>  Port : unsigned integer, Port number, 1 ~ 65535, normally ftp use port 21 </content>
+	<content>  UserName : string, UserName for login, set "" if login without username (anonymous login) </content>
+	<content>  Password : string, Password for login, set "" if login without password </content>
+	<content>  LocalFileName : string, Local file name, use "/HMI/filename" or "/FILESLOT/FS_ID" to select file in /HMI-000/File or in FileSlot </content>
+	<content>  RemoteFileName : string, Remote file name </content>
+	<content>  OverWrite : unsigned integer, set 0 to NOT overwrite file if selected file exist </content>
+	<content>Returns</content>
+	<content>  ret: integer, success: 1, fail: 0</content>
+	<content>  err: integer, Error Code </content>
+	<content>    </content>
+</function>
+
+<!-- table group -->
+<function name="table.concat" >
+	<content>valueString = table.concat(myTable, sepChar)</content>
+	<content>Parameters</content>
+	<content>  myTable: table</content>
+	<content>  sepChar: string</content>
+	<content>Returns</content>
+	<content>  valueString: string; concatenated value string in table </content>
+	<content>Example:</content>
+	<content>    t = {1, 2, 3}</content>
+	<content>    str = table.concat(t, ",")</content>
+	<content>    => str=1,2,3 </content>
+</function>
+
+<function name="table.sort" >
+	<content>table.sort(myTable, compareFunc)</content>
+	<content>Parameters</content>
+	<content>  myTable: table</content>
+	<content>  compareFunc: function</content>
+	<content>Returns</content>
+	<content>  N/A</content>
+	<content>Example:</content>
+	<content>    t = {3,2,5,1,4}</content>
+	<content>    table.sort(t, function(a,b) return a&lt;b end)</content>
+	<content>    -- t = {1, 2, 3, 4, 5} </content>
+</function>
+
+<function name="table.insert" >
+	<content>table.insert(myTable, [pos, ]value)</content>
+	<content>Parameters</content>
+	<content>  myTable: table</content>
+	<content>  pos: index base on 1</content>
+	<content>  value: basic type</content>
+	<content>Returns</content>
+	<content>  N/A</content>
+	<content>Example:</content>
+	<content>    t = { 1,3,"four"}</content>
+	<content>    table.insert(t, 2, "two")</content>
+	<content>    -- t = {1, "two", 3, "four"} </content>
+	<content>    </content>
+	<content>    table.insert(t, "five")</content>
+	<content>    -- t = {1, "two", 3, "four", "five"} </content>
+</function>
+
+<function name="table.remove" >
+	<content>table.remove(myTable, [pos, ])</content>
+	<content>Parameters</content>
+	<content>  myTable: table</content>
+	<content>  pos: index base on 1</content>
+	<content>Returns</content>
+	<content>  result: nil for fail, others for success</content>
+	<content>Example:</content>
+	<content>    t = { 1,2,"three"}</content>
+	<content>    table.remove(t, 2)</content>
+	<content>    -- t = {1, "three"} </content>
+	<content>    </content>
+	<content>    table.remove(t)</content>
+	<content>    -- t = {1} </content>
+</function>
+
+<function name="table.count" >
+	<content>count = table.count(myTable)</content>
+	<content>Parameters</content>
+	<content>  myTable: table</content>
+	<content>Returns</content>
+	<content>  count: integer; items in table</content>
+	<content>Example:</content>
+	<content>    t = {1, 2, 3}</content>
+	<content>    t["key"] = 10</content>
+	<content>    count = table.count(t)</content>
+	<content>    => v1=4 </content>
+</function>
+
+<!-- convert group -->
+<function name="convert.IntToFloat" >	
+	<content>fVal, ret = convert.IntToFloat(iVal)  -- fval = 123.45</content>
+	<content>Usage: convert integer to float format</content>
+	<content>Parameters</content>
+	<content>  iVal: 32 bits integer</content>
+	<content>Returns</content>
+	<content>  fVal: single float value</content>
+	<content>  ret: integer, success: 1, fail: 0</content>
+</function>	
+
+<function name="convert.ToNum" >	
+	<content>dVal, ret = convert.ToNum(str)  -- dVal = 123.45</content>
+	<content>Usage: convert String to double format</content>
+	<content>Parameters</content>
+	<content>  str: String</content>
+	<content>Returns</content>
+	<content>  dVal: double value</content>
+	<content>  ret: integer, success: 1, fail: 0</content>
+</function>	
+
+<!-- account group -->
+<function name="account.Add" >
+	<content>ret = account.Add(name, password, level)</content>
+	<content>Parameters</content>
+	<content>  name: string; account name</content>
+	<content>  password: string; account password</content>
+	<content>  level: integer; account level</content>
+	<content>Returns</content>
+	<content>  ret: integer; success: 1, fail: 0, invalid argument: -1, invalid account length: -152, invalid password length: -153</content>
+	<content>       permission denied: -154, weak password policy: -155, duplicate account: -156, reached maximum capacity: -158</content>
+</function>	
+
+<function name="account.Delete" >
+	<content>ret = account.Delete(name)</content>
+	<content>Parameters</content>
+	<content>  name: string; account name</content>
+	<content>Returns</content>
+	<content>  ret: integer; success: 1, fail: 0, invalid argument: -1</content>
+	<content>       permission denied: -154, blocked account: -157, account is not found: -160</content>
+</function>	
+
+<function name="account.ResetLockStatus" >
+	<content>ret = account.ResetLockStatus(name)</content>
+	<content>Parameters</content>
+	<content>  name: string; account name</content>
+	<content>Returns</content>
+	<content>  ret: integer; success: 1, fail: 0, invalid argument: -1</content>
+	<content>       permission denied: -154, blocked account: -157, account is not found: -160</content>
+</function>	
+
+<function name="account.ChangeName" >
+	<content>ret = account.ChangeName(srcName, newName)</content>
+	<content>Parameters</content>
+	<content>  srcName: string; account name</content>
+	<content>  newName: string; new account name</content>
+	<content>Returns</content>
+	<content>  ret: integer; success: 1, fail: 0, invalid argument: -1, invalid account length: -152</content>
+	<content>       permission denied: -154, blocked account: -157, account is not found: -160</content>
+</function>	
+
+<function name="account.ChangePassword" >
+	<content>ret = account.ChangePassword(name, newPassword)</content>
+	<content>Parameters</content>
+	<content>  name: string; account name</content>
+	<content>  newPassword; new account password</content>
+	<content>Returns</content>
+	<content>  ret: integer; success: 1, fail: 0, invalid argument: -1, invalid password length: -153</content>
+	<content>       permission denied: -154, weak password policy: -155, blocked account: -157, account is not found: -160</content>
+</function>	
+
+<function name="account.ChangeLevel" >
+	<content>ret = account.ChangeLevel(name, newLevel)</content>
+	<content>Parameters</content>
+	<content>  name: string; account name</content>
+	<content>  newLevel: integer; new account level</content>
+	<content>Returns</content>
+	<content>  ret: integer; success: 1, fail: 0, invalid argument: -1</content>
+	<content>       permission denied: -154, blocked account: -157, reached maximum capacity: -158, account is not found: -160</content>
+</function>	
+
+<function name="account.ChangeUserExpiredDays" >
+	<content>ret = account.ChangeUserExpiredDays(name, expiredDays)</content>
+	<content>Parameters</content>
+	<content>  name: string; account name</content>
+	<content>  expiredDays: integer; 0~9999</content>
+	<content>Returns</content>
+	<content>  ret: integer; success: 1, fail: 0, invalid argument: -1</content>
+	<content>       permission denied: -154, blocked account: -157, account is not found: -160</content>
+</function>	
+
+<function name="account.ChangePwdExpiredDays" >
+	<content>ret = account.ChangePwdExpiredDays(name, expiredDays)</content>
+	<content>Parameters</content>
+	<content>  name: string; account name</content>
+	<content>  expiredDays: integer; 0~9999</content>
+	<content>Returns</content>
+	<content>  ret: integer; success: 1, fail: 0, invalid argument: -1</content>
+	<content>       permission denied: -154, blocked account: -157, account is not found: -160</content>
+</function>	
+
+<function name="account.GetPassword" >
+	<content>ret, password = account.GetPassword(name)</content>
+	<content>Parameters</content>
+	<content>  name: string; account name</content>
+	<content>Returns</content>
+	<content>  ret: integer; success: 1, fail: 0, invalid argument: -1</content>
+	<content>       permission denied: -154, account is not found: -160</content>
+	<content>  password: string; account password</content>
+</function>	
+
+<function name="account.GetLevel" >
+	<content>ret, level = account.GetLevel(name)</content>
+	<content>Parameters</content>
+	<content>  name: string; account name</content>
+	<content>Returns</content>
+	<content>  ret: integer; success: 1, fail: 0, invalid argument: -1</content>
+	<content>       permission denied: -154, account is not found: -160</content>
+	<content>  level: integer; account level</content>
+</function>	
+
+<function name="account.GetCurrentLogin" >
+	<content>ret, name, level = account.GetCurrentLogin()</content>
+	<content>Returns</content>
+	<content>  ret: integer; success: 1, fail: 0</content>
+	<content>  name: string; account name</content>
+	<content>  level: integer; account level</content>
+</function>	
+
+<function name="account.GetStatus" >
+	<content>ret = account.GetStatus(name)</content>
+	<content>Parameters</content>
+	<content>  name: string; account name</content>
+	<content>Returns</content>
+	<content>  ret: integer; locked: 1, unlocked: 0, invalid argument: -1</content>
+	<content>       permission denied: -154, account is not found: -160</content>
+</function>	
+
+<function name="account.GetLockedList" >
+	<content>ret, nameList = account.GetLockedList()</content>
+	<content>Returns</content>
+	<content>  ret: success: 1, fail or no account: 0</content>
+	<content>  nameList: table, success: file name list, fail: nil</content>
+	<content>Example:</content>
+	<content>    ret, nameList = account.GetLockedList()</content>
+</function>
+	
+<function name="account.IsExist" >
+	<content>ret = account.IsExist(name)</content>
+	<content>Parameters</content>
+	<content>  name: string; account name</content>
+	<content>Returns</content>
+	<content>  ret: integer; exist: 1, illegal use (Simple Password mode): 0, invalid argument: -1</content>
+	<content>       account is not found: -160</content>
+</function>	
+
+<function name="account.Login" >
+	<content>ret = account.Login(name, password)</content>
+	<content>Parameters</content>
+	<content>  name: string; account name</content>
+	<content>  password: string; account password</content>
+	<content>Returns</content>
+	<content>  ret: integer; success: 1, fail: 0, invalid argument: -1</content>
+	<content>       blocked account: -157, first login: -159, account is not found: -160</content>
+</function>
+
+<function name="account.RFIDLogin" >
+	<content>ret = account.RFIDLogin(rfid_sn)</content>
+	<content>Parameters</content>
+	<content>  rfid_sn: string; rfid serial number</content>
+	<content>Returns</content>
+	<content>  ret: integer; success: 1, fail: 0, invalid argument: -1</content>
+	<content>       blocked account: -157, first login: -159, account is not found: -160, rifd is not matched: -162</content>
+</function>
+
+<function name="mail.Status" >
+	<content>status = mail.Status()</content>
+	<content>Returns</content>
+	<content>  status: integer;</content>
+	<content>       0: initial value. no mail procedure or a mail procedure is just initialized </content>
+	<content>       1: mail is successfully delivered</content>
+	<content>    -100: unable to connect to host</content>
+	<content>    -101: disconnected</content>
+	<content>    -102: authentication is required</content>
+	<content>    -103: authentication fail</content>
+	<content>    -104: network cable is not connected</content>
+	<content>    -999: unknown error</content>
+</function>
+
+<function name="mail.Send" >
+	<content>result, error = mail.SendFile(receiver, subject, content)</content>
+	<content>Parameters</content>
+	<content>   receiver: string; mail receiver</content>
+	<content>    subject: string; mail subject. specify nil if no subject needed</content>
+	<content>    content: string; mail content. specify nil if no content needed</content>
+	<content>Returns</content>
+	<content>  result: integer;</content>
+	<content>       0: mail procedure is not started</content>
+	<content>       1: mail procedure started</content>
+	<content>  error: integer;</content>
+	<content>       0: no error</content>
+	<content>      -1: invalid argument</content>
+	<content>    -121: SMTP not configured</content>
+	<content>Example</content>
+	<content>    -- send message to test@test.com</content>
+	<content>    result, error = mail.SendFile("test@test.com", "test mail subject", "test mail content")</content>
+	<content>Notes</content>
+	<content>    To get result of mail procedure, use mail.Status()</content>
+</function>
+
+<function name="mail.SendFile" >
+	<content>result, error = mail.SendFile(receiver, subject, content, disk_id, file_path, password)</content>
+	<content>Parameters</content>
+	<content>   receiver: string; mail receiver</content>
+	<content>    subject: string; mail subject. specify nil if no subject needed</content>
+	<content>    content: string; mail content. specify nil if no content needed</content>
+	<content>    disk_id: integer; 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>  file_path: string; file path related to disk_id</content>
+	<content>   password: string; password for the file. specify nil if no password required</content>
+	<content>Returns</content>
+	<content>  result: integer;</content>
+	<content>       0: mail procedure is not started</content>
+	<content>       1: mail procedure started</content>
+	<content>  error: integer;</content>
+	<content>       0: no error</content>
+	<content>      -1: invalid argument</content>
+	<content>    -106: disk is not ready</content>
+	<content>    -107: unable to open file</content>
+	<content>    -110: file does not exist</content>
+	<content>    -121: SMTP not configured</content>
+	<content>    -122: fail to compress file</content>
+	<content>Example</content>
+	<content>    -- compress 'test/file.txt' with password '1234' in USB disk and send it to test@test.com</content>
+	<content>    result, error = mail.SendFile("test@test.com", "test mail subject", "test mail content", 2, "test/file.txt", "1234")</content>
+	<content>    -- compress 'test/file.txt' with NO password in SD card and send it to 'test@test.com'</content>
+	<content>    result, error = mail.SendFile("test@test.com", "test mail subject", "test mail content", 3, "test/file.txt", nil)</content>
+	<content>Notes</content>
+	<content>    To get result of mail procedure, use mail.Status()</content>
+</function>
+
+<function name="mail.SendAlarm" >
+	<content>result, error = mail.SendAlarm(receiver, subject, content, password)</content>
+	<content>Parameters</content>
+	<content>   receiver: string; mail receiver</content>
+	<content>    subject: string; mail subject. specify nil if no subject needed</content>
+	<content>    content: string; mail content. specify nil if no content needed</content>
+	<content>   password: string; password for the file. specify nil if no password required</content>
+	<content>Returns</content>
+	<content>  result: integer;</content>
+	<content>       0: mail procedure is not started</content>
+	<content>       1: mail procedure started</content>
+	<content>  error: integer;</content>
+	<content>       0: no error</content>
+	<content>      -1: invalid argument</content>
+	<content>    -107: unable to open file</content>
+	<content>    -121: SMTP not configured</content>
+	<content>    -122: fail to compress file</content>
+	<content>    -126: no alarm enabled</content>
+	<content>    -127: fail to output alarm CSV</content>
+	<content>Example</content>
+	<content>    -- compress alarm CSV with password '1234' and send it to test@test.com</content>
+	<content>    result, error = mail.SendAlarm("test@test.com", "test mail subject", "test mail content", "1234")</content>
+	<content>    -- compress alarm CSV with NO password and send it to 'test@test.com'</content>
+	<content>    result, error = mail.SendAlarm("test@test.com", "test mail subject", "test mail content", nil)</content>
+	<content>Notes</content>
+	<content>    To get result of mail procedure, use mail.Status()</content>
+</function>
+
+<function name="mail.SendHistory" >
+	<content>result, error = mail.SendHistory(bufferNo, dayRange, receiver, subject, content, password)</content>
+	<content>Parameters</content>
+	<content>   bufferNo: integer; history buffer No.</content>
+	<content>   dayRange: integer; day range of history buffer CSV. This parameter only valids from 1~7 and "Save As Multi" must be enabled.</content>
+	<content>   receiver: string; mail receiver</content>
+	<content>    subject: string; mail subject. specify nil if no subject needed</content>
+	<content>    content: string; mail content. specify nil if no content needed</content>
+	<content>   password: string; password for the file. specify nil if no password required</content>
+	<content>Returns</content>
+	<content>  result: integer;</content>
+	<content>       0: mail procedure is not started</content>
+	<content>       1: mail procedure started</content>
+	<content>  error: integer;</content>
+	<content>       0: no error</content>
+	<content>      -1: invalid argument</content>
+	<content>    -107: unable to open file</content>
+	<content>    -121: SMTP not configured</content>
+	<content>    -122: fail to compress file</content>
+	<content>    -128: no history enabled</content>
+	<content>    -129: invalid history buffer No.</content>
+	<content>    -130: invalid day range</content>
+	<content>    -131: fail to output history CSV</content>
+	<content>    -132: fail to copy history CSV</content>
+	<content>    -133: no file matched</content>
+	<content>Example</content>
+	<content>    -- compress history 1 CSV with password '1234' and send it to test@test.com</content>
+	<content>    result, error = mail.SendHistory(1, 0, "test@test.com", "test mail subject", "test mail content", "1234")</content>
+	<content>    -- compress history 2 CSV within 5 days with NO password and send it to 'test@test.com'</content>
+	<content>    result, error = mail.SendHistory(2, 5, "test@test.com", "test mail subject", "test mail content", nil)</content>
+	<content>Notes</content>
+	<content>    To get result of mail procedure, use mail.Status()</content>
+</function>
+<!-- draw group -->
+<function name="draw.Point" >
+	<content>result = draw.Point(x, y, color)</content>
+	<content>Parameters</content>
+	<content>  x: integer</content>
+	<content>  y: integer</content>
+	<content>  color: integer, RGB565, 0~65535</content>
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="draw.Line" >
+	<content>result = draw.Line(x1, y1, x2, y2, color, penWidth)</content>
+	<content>Parameters</content>
+	<content>  x1: integer</content>
+	<content>  y1: integer</content>
+	<content>  x2: integer</content>
+	<content>  y2: integer</content>
+	<content>  color: integer, RGB565, 0~65535</content>
+	<content>  penWidth: integer</content>
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="draw.Rect" >
+	<content>result = draw.Rect(x, y, w, h, color, [bdrColor])</content>
+	<content>Parameters</content>
+	<content>  x: integer</content>
+	<content>  y: integer</content>
+	<content>  w: integer</content>
+	<content>  h: integer</content>
+	<content>  color: integer, RGB565, 0~65535</content>
+	<content>  bdrColor: integer, RGB565, 0~65535</content>
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="draw.Ellipse" >
+	<content>result = draw.Ellipse(x, y, w, h, color)</content>
+	<content>Parameters</content>
+	<content>  x: integer</content>
+	<content>  y: integer</content>
+	<content>  w: integer</content>
+	<content>  h: integer</content>
+	<content>  color: integer, RGB565, 0~65535</content>
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="draw.Arc" >
+	<content>result = draw.Arc(x, y, w, h, startAngle, spanAngle, color, penWidth)</content>
+	<content>Parameters</content>
+	<content>  x: integer</content>
+	<content>  y: integer</content>
+	<content>  w: integer</content>
+	<content>  h: integer</content>
+	<content>  startAngle: integer (unit is 1/16 of degree)</content>
+	<content>  spanAngle: integer (unit is 1/16 of degree)</content>
+	<content>  color: integer, RGB565, 0~65535</content>
+	<content>  penWidth: integer</content>
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Invalid Arg: -1</content>
+</function>
+<function name="draw.Clear" >
+	<content>result = draw.Clear()</content>
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="draw.SetAntialiasing" >
+	<content>result = draw.SetAntialiasing(flag)</content>
+	<content>Parameters</content>
+	<content>  flag: integer, 1: enable antialiasing, 0: disable antialiasing</content>
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Fail: 0</content>
+</function>
+<function name="http.GetToFile" >
+	<content>result1, result2, result3 = http.GetToFile(url, filename)</content>
+	<content>Parameters</content>
+	<content>  url: http get url</content>	
+	<content>  filename: save file name</content>	
+	<content>Returns</content>
+	<content>  result1: integer, 1: Success, 0: Fail</content>
+	<content>  result2: when result1 is failed, return an error code</content>
+	<content>  result3: when result1 is failed, return an error code</content>
+</function>
+<!-- JSON -->
+<function name="json.Load" >
+ <content>result1,result2 = json.Load(FileName)</content>
+ <content>Parameters</content>
+ <content>  filename: json file name</content>
+ <content>Returns</content>
+ <content> result1: integer, 1: Success, 0: Fail</content>
+ <content> result2: when result1 is failed, return an error code</content>
+ <content>    1: Success</content>
+ <content>   -1: invalid arg</content>
+ <content> -107: unable to open file</content>
+ <content> -110: source file does not exist</content>
+ <content> -134: Folder not found</content>
+ <content> -146: Invalid json </content>
+
+ <content>Example</content>
+ <content>    FileName = "Delta"</content>
+ <content>    result1,result2 = json.Load(FileName)</content>
+
+</function>
+<function name="json.ToJson" >
+ <content>result1, result2 = json.ToJson(lua_table, SaveFileName)</content>
+ <content>Parameters</content>
+ <content>  lua_table: json format in the form of lua table</content>
+ <content>  filename: archived json file name</content>
+ <content>Returns</content>
+ <content>  result1: integer, 1: Success, 0: Fail</content>
+ <content> result2: when result1 is failed, return an error code</content>
+ <content>    1: Success</content>
+ <content>   -1: invalid arg</content>
+ <content> -100: File not opened</content>
+ <content> -134: Folder not found</content>
+</function>
+<function name="sql.Connect" >
+	<content>result, id = sql.Connect(dbType, host, port, db_name, user, pwd)</content>
+	<content>Parameters</content>
+	<content>  dbType: integer, 0 is MySQL, 1 is SQL Server</content>
+	<content>  host: string, connection IP address</content>
+	<content>  port: integer, connection port</content>
+	<content>  db_name: string, database name</content>
+	<content>  user: string, login name</content>
+	<content>  pwd: string, login password</content>
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Fail: 0</content>
+	<content>  id: integer, connection id</content>
+</function>
+<function name="sql.CloseConnect " >
+	<content>result, error = sql.CloseConnect(id)</content>
+	<content>Parameters</content>
+	<content>  id: integer, connection id</content>	
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Fail: 0</content>
+	<content>  error: integer, error code</content>
+</function>
+<function name="sql.ExecCommand " >
+	<content>result, error = sql.ExecCommand(id, sql_command)</content>
+	<content>Parameters</content>
+	<content>  id: integer, connection id</content>
+	<content>  sql_command: string, SQL command</content>	
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Fail: 0</content>
+	<content>  error: integer, error code</content>
+</function>
+<function name="sql.RecordCount " >
+	<content>result, record_count = sql.RecordCount(id)</content>
+	<content>Parameters</content>
+	<content>  id: integer, connection id</content>	
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Fail: 0</content>
+	<content>  record_count: </content>
+	<content>  		greater or equal to 0 : The number of record count returned from the last call to sql. ExecCommand</content>
+	<content>  		less than 0 : erro code</content>
+</function>
+<function name="sql.FieldCount  " >
+	<content>result, field_count = sql.FieldCount(id)</content>
+	<content>Parameters</content>
+	<content>  id: integer, connection id</content>	
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Fail: 0</content>
+	<content>  field_count: </content>
+	<content>  		greater or equal to  0 : The number of field count returned from the last call to sql. ExecCommand</content>
+	<content>  		less than 0 : error code</content>
+</function>
+<function name="sql.RecordData   " >
+	<content>result, recorddata  = sql.RecordData(id, recordIndex)</content>
+	<content>Parameters</content>
+	<content>  id: integer, connection id</content>	
+	<content>  recordIndex: integer, the index of requested data</content>	
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Fail: 0</content>
+	<content>  recorddata : </content>
+	<content>  		use recorddata[1], recorddata[2]…recorddata[FiledCount]</content>	
+</function>
+
+<!-- diacloud -->
+<function name="diacloud.GetStatus" >
+	<content>result = diacloud.GetStatus()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>      -1: Connection timeout</content>
+	<content>       0: Connection in progress or fail</content>
+	<content>       1: Connection succeed</content>
+	<content>       2: Quota exceeded</content>
+	<content>       3: Connection is establishing</content>
+</function>
+<function name="diacloud.GetError" >
+	<content>result = diacloud.GetError()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>  result: string, error description</content>
+</function>
+<function name="diacloud.GetVncStatus" >
+	<content>result = diacloud.GetVncStatus()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>      -1: Connection timeout</content>
+	<content>       0: Connection in progress or fail</content>
+	<content>       1: Connection succeed</content>
+	<content>       4: Not join domain</content>
+	<content>       5: Cannot get unique ID</content>
+	<content>       6: Wrong conf ini</content>
+	<content>       7: Dongle does not plug in</content>
+	<content>       8: Wrong dongle SN</content>
+	<content>      99: Connection is establishing</content>
+</function>
+<function name="diacloud.GetVncError" >
+	<content>result = diacloud.GetVncError()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>  result: string, error description</content>
+</function>
+<function name="diacloud.GetIP" >
+	<content>result = diacloud.GetIP()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>  result: string, DIACloud IP</content>
+</function>
+<function name="diacloud.GetGateway" >
+	<content>result = diacloud.GetGateway()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>  result: string, DIACloud gateway</content>
+</function>
+<function name="diacloud.GetMAC" >
+	<content>result = diacloud.GetMAC()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>  result: string, DIACloud MAC</content>
+</function>
+<function name="diacloud.GetMode" >
+	<content>result = diacloud.GetMode()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>       1: Dongle mode</content>
+	<content>       2: License mode</content>
+</function>
+<function name="diacloud.GetLicense" >
+	<content>result = diacloud.GetLicense()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>  result: string, DIACloud license</content>
+</function>
+<function name="diacloud.GetDeviceHWID" >
+	<content>result = diacloud.GetDeviceHWID()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>  result: string, HMI hardware ID</content>
+</function>
+<function name="diacloud.GetServer" >
+	<content>result = diacloud.GetServer()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>  result: string, DIACloud server address</content>
+</function>
+<function name="diacloud.GetLatency" >
+	<content>result = diacloud.GetLatency()</content>
+	<content>Returns</content>
+	<content>  result: integer, DIACloud latency</content>
+	<content>    -999: DIACloud not enabled</content>
+</function>
+<!--
+<function name="diacloud.GetDataUsage" >
+	<content>result = diacloud.GetDataUsage()</content>
+	<content>Returns</content>
+	<content>  result: integer, DIACloud data usage</content>
+	<content>    -999: DIACloud not enabled</content>
+</function>
+-->
+<function name="diacloud.GetDomainJoinStatus" >
+	<content>result = diacloud.GetDomainJoinStatus()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>       0: Success</content>
+	<content>       1: General error</content>
+	<content>       2: User/password error</content>
+	<content>       3: Bind device error</content>
+	<content>       4: Fail to get configuration</content>
+	<content>       5: Password error</content>
+	<content>       6: Parameter error</content>
+	<content>       7: Fail to get unique ID</content>
+	<content>       8: Illegal license</content>
+	<content>       9: License used in another machine</content>
+	<content>      10: No dongle detected</content>
+	<content>      11: Invalid dongle SN</content>
+	<content>      12: Check license server_db error</content>
+	<content>      13: Create tunnel server_db error</content>
+	<content>     107: Check license/create tunnel server access denied</content>
+	<content>     203: Invalid user name</content>
+	<content>     251: Fail to write user ini</content>
+	<content>     253: Authentication failed (return by server)</content>
+	<content>     254: Network error</content>
+</function>
+<function name="diacloud.GetDomainJoinError" >
+	<content>result = diacloud.GetDomainJoinError()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>  result: string, error description of domain join</content>
+</function>
+<function name="diacloud.GetTunnel" >
+	<content>result = diacloud.GetTunnel()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>  result: string, current tunnel name</content>
+</function>
+<function name="diacloud.GetTunnelID" >
+	<content>result = diacloud.GetTunnelID()</content>
+	<content>Returns</content>
+	<content>  result: 32 bits integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>       0: invalid ID</content>
+	<content>     > 0: current tunnel ID</content>
+</function>
+<function name="diacloud.GetStage" >
+	<content>result = diacloud.GetStage()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>  result: string, description of current stage</content>
+	<content>              INIT: Initialization</content>
+	<content>   DONGLE_STARTING: Starting dongle device</content>
+	<content>        PROXY_CONF: Configurating HTTP proxy</content>
+	<content>          TUNL_GET: Getting tunnel information</content>
+	<content> TUNL_GET_FINISHED: Finshed to get tunnel information</content>
+	<content>                JD: Starting domain joining</content>
+	<content>       JD_FINISHED: Domain joining was finished</content>
+	<content>      VLN_STARTING: Starting VLN</content>
+	<content>       VLN_STARTED: VLN started</content>
+	<content>       VLN_STOPPED: VLN stopped</content>
+</function>
+<function name="diacloud.GetAccount" >
+	<content>result = diacloud.GetAccount()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>  result: string, DIACloud account name</content>
+</function>
+<function name="diacloud.GetCloudID" >
+	<content>result = diacloud.GetCloudID()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>  result: string, DIACloud cloud ID</content>
+</function>
+
+<!-- dongle -->
+<function name="dongle.GetSN" >
+	<content>result = dongle.GetSN()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>  result: string, dongle SN</content>
+</function>
+<function name="dongle.GetICCID" >
+	<content>result = dongle.GetICCID()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>  result: string, dongle ICCID</content>
+</function>
+<function name="dongle.GetRSSI" >
+	<content>result = dongle.GetRSSI()</content>
+	<content>Returns</content>
+	<content>  result: integer, RSSI</content>
+	<content>    -999: DIACloud not enabled</content>
+</function>
+<function name="dongle.GetIMEI" >
+	<content>result = dongle.GetIMEI()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>  result: string, dongle IMEI</content>
+</function>
+<function name="dongle.GetStatus" >
+	<content>result = dongle.GetStatus()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>       1: Ready</content>
+	<content>       0: Not ready</content>
+</function>
+<function name="dongle.GetTopUp" >
+	<content>result = dongle.GetTopUp()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>  result: string, dongle topup data</content>
+</function>
+<!--
+<function name="dongle.GetDataUsage" >
+	<content>result = dongle.GetDataUsage()</content>
+	<content>Returns</content>
+	<content>  result: integer, dongle data usage</content>
+	<content>    -999: DIACloud not enabled</content>
+</function>
+-->
+<function name="dongle.GetError" >
+	<content>result = dongle.GetError()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>  result: string, dongle error description</content>
+	<content>                      SUCCESS: Success</content>
+	<content>              OPEN_TTY_FAILED: Fail to open tty</content>
+	<content>                  TTY_TIMEOUT: Read from tty timeout</content>
+	<content>                   SIM_ABSENT: No SIM card</content>
+	<content>                   PIN_LOCKED: Pin locked</content>
+	<content>                   PUK_LOCKED: Puk locked</content>
+	<content>          SERVICE_BIND_FAILED: Socket bind error</content>
+	<content>           CEREG_NOT_REGISTER: Not register</content>
+	<content>                 DIAL_UP_FAIL: Not online</content>
+	<content>                GENERAL_ERROR: General error</content>
+	<content>      SWITCH_AUTO_MODE_FAILED: auto - chagne mode error</content>
+	<content>             SET_CEREG_FAILED: auto - active network error</content>
+	<content>    SWITCH_MANUAL_MODE_FAILED: manual - change mode error</content>
+	<content>               SET_APN_FAILED: manual - set APN error</content>
+	<content>          SET_USER_PSW_FAILED: manual - set user/password error</content>
+	<content>            ACTIVE_NET_FAILED: manual - active network error</content>
+</function>
+<function name="dongle.IsDeviceAdded" >
+	<content>result = dongle.IsDeviceAdded()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: DIACloud not enabled</content>
+	<content>       1: Dongle device attached</content>
+	<content>       0: Dongle device not attached</content>
+</function>
+
+<!-- pass thru -->
+<function name="passthru.IsEnabled" >
+	<content>result = passthru.IsEnabled()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: Function not enabled</content>
+	<content>       0: Function OFF</content>
+	<content>       1: Function ON</content>
+</function>
+<function name="passthru.GetLastErrorCode" >
+	<content>result = passthru.GetLastErrorCode()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: Function not enabled</content>
+	<content>       0: Error or unknown</content>
+	<content>       1: Success</content>
+	<content>     100: No peer address set</content>
+	<content>     101: Invalid PLC subnet</content>
+	<content>     102: Invalid PLC or bridge interface name</content>
+	<content>     103: Invalid PLC or bridge interface</content>
+	<content>     104: Invalid interface for peer</content>
+	<content>     105: Invalid proxy ARP path</content>
+</function>
+<function name="passthru.GetBridgeIface" >
+	<content>result, iface = passthru.GetBridgeIface()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: Function not enabled</content>
+	<content>       0: Fail to get interface name</content>
+	<content>     > 0: Length of interface name</content>
+	<content>  iface: string; Interface name</content>
+</function>
+<function name="passthru.GetTargetIface" >
+	<content>result, iface = passthru.GetTargetIface()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: Function not enabled</content>
+	<content>       0: Fail to get interface name</content>
+	<content>     > 0: Length of interface name</content>
+	<content>  iface: string; Interface name</content>
+</function>
+<function name="passthru.Enable" >
+	<content>result = passthru.Enable(bridgeSubnet, targetSubnet)</content>
+	<content>Parameters</content>
+	<content>  bridgeSubnet: string; Subnet address of bridge interface</content>
+	<content>  targetSubnet: string; Subnet address of target interface</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: Function not enabled</content>
+	<content>      -1: Invalid argument</content>
+	<content>    -146: Invalid subnet address</content>
+	<content>       0: Fail</content>
+	<content>       1: Success</content>
+</function>
+<function name="passthru.Disable" >
+	<content>result = passthru.Disable()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: Function not enabled</content>
+	<content>       1: Success</content>
+</function>
+
+<!-- ini -->
+<function name="ini.Open" >
+	<content>result = ini.Open(disk_id, file_name, codec_name)</content>
+	<content>Parameters</content>
+	<content>  disk_id: integer, 0: HMI, 2: USB, 3: SD, 6: USB2</content>
+	<content>  file_name: string</content>
+	<content>  codec_name: string, if set empty, it will use default value "UTF-8"</content>
+	<content>Returns</content>
+	<content>  result: integer, 1: successed</content>
+	<content>                   0: failed</content>
+	<content>                  -1: invalid arg</content>
+	<content>                -106: disk not ready</content>
+	<content>                -136: invalid file name</content>
+</function>
+<function name="ini.Close" >
+	<content>result = ini.Close()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  result: integer, 1: successed</content>
+</function>
+<function name="ini.ListGroups" >
+	<content>result, lua_table = ini.ListGroups()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  result: integer, 1: successed, 0: failed, -1: invalid arg</content>
+	<content>  lua_table: table, success: group name list, fail: nil</content>
+</function>
+<function name="ini.ListKeys" >
+	<content>result, lua_table = ini.ListKeys(group_name)</content>
+	<content>Parameters</content>
+	<content>  group_name: string</content>
+	<content>Returns</content>
+	<content>  result: integer, 1: successed, 0: failed, -1: invalid arg</content>
+	<content>  lua_table: table, success: key name list, fail: nil</content>
+</function>
+<function name="ini.SetValue" >
+	<content>result = ini.SetValue(group_name, key_name, write_value)</content>
+	<content>Parameters</content>
+	<content>  group_name: string</content>
+	<content>  key_name: string</content>
+	<content>  write_value: string</content>
+	<content>Returns</content>
+	<content>  result: integer, 1: successed, -1: invalid arg</content>
+</function>
+<function name="ini.GetValue" >
+	<content>result = ini.GetValue(group_name, key_name)</content>
+	<content>Parameters</content>
+	<content>  group_name: string</content>
+	<content>  key_name: string</content>
+	<content>Returns</content>
+	<content>  value: string</content>
+	<content>  result: integer, 1: successed, -1: invalid arg</content>
+</function>
+
+<!-- wifi -->
+<function name="wifi.GetDongleStatus" >
+	<content>result = wifi.GetDongleStatus()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  result: integer, 0: unplugged, 1: plugged</content>
+</function>
+<function name="wifi.Connect" >
+	<content>result = wifi.Connect()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  result: integer, 1: successed, 0: failed</content>
+</function>
+<function name="wifi.Disconnect" >
+	<content>wifi.Disconnect()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  N/A</content>
+</function>
+<function name="wifi.GetErrorMessage" >
+	<content>result = wifi.GetErrorMessage()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  result: string, last message</content>
+</function>
+<function name="wifi.GetConnectStatus" >
+	<content>result = wifi.GetConnectStatus()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  result: integer, 0: disconnected, 1: connecting, 2: connected</content>
+</function>
+<function name="wifi.GetSignalLevel" >
+	<content>result = wifi.GetSignalLevel()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  result: integer, 4: best, 3: good, 2: low, 1: very weak, 0: too low</content>
+</function>
+<function name="wifi.GetSignalStrength" >
+	<content>result = wifi.GetSignalStrength()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  result: integer, dBm</content>
+</function>
+<function name="wifi.GetIPSetting" >
+	<content>result = wifi.GetIPSetting()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  result: integer, 0: static, 1: dhcp</content>
+</function>
+<function name="wifi.GetIP" >
+	<content>ip1, ip2, ip3, ip4 = wifi.GetIP()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  ip1: integer, 0~255</content>
+	<content>  ip2: integer, 0~255</content>
+	<content>  ip3: integer, 0~255</content>
+	<content>  ip4: integer, 0~255</content>
+</function>
+<function name="wifi.GetMask" >
+	<content>mask1, mask2, mask3, mask4 = wifi.GetMask()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  mask1: integer, 0~255</content>
+	<content>  mask2: integer, 0~255</content>
+	<content>  mask3: integer, 0~255</content>
+	<content>  mask4: integer, 0~255</content>
+</function>
+<function name="wifi.GetGateway" >
+	<content>gw1, gw2, gw3, gw4 = wifi.GetGateway()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  gw1: integer, 0~255</content>
+	<content>  gw2: integer, 0~255</content>
+	<content>  gw3: integer, 0~255</content>
+	<content>  gw4: integer, 0~255</content>
+</function>
+<function name="wifi.GetDNS" >
+	<content>dns1, dns2, dns3, dns4 = wifi.GetDNS()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  dns1: integer, 0~255</content>
+	<content>  dns2: integer, 0~255</content>
+	<content>  dns3: integer, 0~255</content>
+	<content>  dns4: integer, 0~255</content>
+</function>
+<function name="wifi.SetIPSetting" >
+	<content>result = wifi.SetIPSetting(mode)</content>
+	<content>Parameters</content>
+	<content>  mode: integer, 0: static, 1: dhcp</content>
+	<content>Returns</content>
+	<content>  result: integer, 1: successed, -1: invalid arg</content>
+</function>
+<function name="wifi.SetIP" >
+	<content>result = wifi.SetIP(ip1, ip2, ip3, ip4)</content>
+	<content>Parameters</content>
+	<content>  ip1: integer, 0~255</content>
+	<content>  ip2: integer, 0~255</content>
+	<content>  ip3: integer, 0~255</content>
+	<content>  ip4: integer, 0~255</content>
+	<content>Returns</content>
+	<content>  result: integer, 1: successed, -1: invalid arg</content>
+</function>
+<function name="wifi.SetMask" >
+	<content>result = wifi.SetMask(mask1, mask2, mask3, mask4)</content>
+	<content>Parameters</content>
+	<content>  mask1: integer, 0~255</content>
+	<content>  mask2: integer, 0~255</content>
+	<content>  mask3: integer, 0~255</content>
+	<content>  mask4: integer, 0~255</content>
+	<content>Returns</content>
+	<content>  result: integer, 1: successed, -1: invalid arg</content>
+</function>
+<function name="wifi.SetGateway" >
+	<content>result = wifi.SetGateway(gw1, gw2, gw3, gw4)</content>
+	<content>Parameters</content>
+	<content>  gw1: integer, 0~255</content>
+	<content>  gw2: integer, 0~255</content>
+	<content>  gw3: integer, 0~255</content>
+	<content>  gw4: integer, 0~255</content>
+	<content>Returns</content>
+	<content>  result: integer, 1: successed, -1: invalid arg</content>
+</function>
+<function name="wifi.SetDNS" >
+	<content>result = wifi.SetDNS(dns1, dns2, dns3, dns4)</content>
+	<content>Parameters</content>
+	<content>  dns1: integer, 0~255</content>
+	<content>  dns2: integer, 0~255</content>
+	<content>  dns3: integer, 0~255</content>
+	<content>  dns4: integer, 0~255</content>
+	<content>Returns</content>
+	<content>  result: integer, 1: successed, -1: invalid arg</content>
+</function>
+<function name="wifi.GetMAC" >
+	<content>mac1, mac2, mac3, mac4, mac5, mac6 = wifi.GetMAC()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  mac1: integer, 0~255</content>
+	<content>  mac2: integer, 0~255</content>
+	<content>  mac3: integer, 0~255</content>
+	<content>  mac4: integer, 0~255</content>
+	<content>  mac5: integer, 0~255</content>
+	<content>  mac6: integer, 0~255</content>
+</function>
+<function name="wifi.GetNetworkName" >
+	<content>result = wifi.GetNetworkName()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  result: string, network name</content>
+</function>
+<function name="wifi.SetNetworkName" >
+	<content>result = wifi.SetNetworkName(ssid)</content>
+	<content>Parameters</content>
+	<content>  ssid: string, network name</content>
+	<content>Returns</content>
+	<content>  result: integer, 1: successed, -1: invalid arg</content>
+</function>
+<function name="wifi.GetAccount" >
+	<content>result = wifi.GetAccount()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  result: string, WPA-EAP user account</content>
+</function>
+<function name="wifi.SetAccount" >
+	<content>result = wifi.SetAccount(account)</content>
+	<content>Parameters</content>
+	<content>  account: string, WPA-EAP user account</content>
+	<content>Returns</content>
+	<content>  result: integer, 1: successed, -1: invalid arg</content>
+</function>
+<function name="wifi.GetPassword" >
+	<content>result = wifi.GetPassword()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  result: string, password</content>
+</function>
+<function name="wifi.SetPassword" >
+	<content>result = wifi.SetPassword(password)</content>
+	<content>Parameters</content>
+	<content>  password: string</content>
+	<content>Returns</content>
+	<content>  result: integer, 1: successed, -1: invalid arg</content>
+</function>
+<function name="wifi.GetSecurity" >
+	<content>result = wifi.GetSecurity()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  result: integer, 0: NONE, 1: WPA2-PSK, 2: WPA/WPA2-PSK, 3: WPA-EAP</content>
+</function>
+<function name="wifi.SetSecurity" >
+	<content>result = wifi.SetSecurity(mode)</content>
+	<content>Parameters</content>
+	<content>  mode: integer, 0: NONE, 1: WPA2-PSK, 2: WPA/WPA2-PSK, 3: WPA-EAP</content>
+	<content>Returns</content>
+	<content>  result: integer, 1: successed, 0: failed, -1: invalid arg</content>
+</function>
+<function name="wifi.GetAutoConnect" >
+	<content>result = wifi.GetAutoConnect()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  result: integer, 0: Manual, 1: Auto Connect</content>
+</function>
+<function name="wifi.SetAutoConnect" >
+	<content>result = wifi.SetAutoConnect(mode)</content>
+	<content>Parameters</content>
+	<content>  mode: integer, 0: disable, 1: enable</content>
+	<content>Returns</content>
+	<content>  result: integer, 1: successed, -1: invalid arg</content>
+</function>
+<function name="wifi.Enable" >
+	<content>result = wifi.Enable()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  result: integer, 1: successed</content>
+</function>
+<function name="wifi.Disable" >
+	<content>result = wifi.Disable()</content>
+	<content>Parameters</content>
+	<content>  N/A</content>
+	<content>Returns</content>
+	<content>  result: integer, 1: successed</content>
+</function>
+<function name="sql.Connect" >
+	<content>result, id = sql.Connect(dbType, host, port, db_name, user, pwd)</content>
+	<content>Parameters</content>
+	<content>  dbType: integer, 0 is MySQL, 1 is SQL Server</content>
+	<content>  host: string, connection IP address</content>
+	<content>  port: integer, connection port</content>
+	<content>  db_name: string, database name</content>
+	<content>  user: string, login name</content>
+	<content>  pwd: string, login password</content>
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Fail: 0</content>
+	<content>  id: integer, connection id</content>
+</function>
+<function name="sql.CloseConnect" >
+	<content>result, error = sql.CloseConnect(id)</content>
+	<content>Parameters</content>
+	<content>  id: integer, connection id</content>	
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Fail: 0</content>
+	<content>  error: integer, error code</content>
+</function>
+<function name="sql.ExecCommand" >
+	<content>result, error = sql.ExecCommand(id, sql_command)</content>
+	<content>Parameters</content>
+	<content>  id: integer, connection id</content>
+	<content>  sql_command: string, SQL command</content>	
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Fail: 0</content>
+	<content>  error: integer, error code</content>
+</function>
+<function name="sql.RecordCount" >
+	<content>result, record_count = sql.RecordCount(id)</content>
+	<content>Parameters</content>
+	<content>  id: integer, connection id</content>	
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Fail: 0</content>
+	<content>  record_count: </content>
+	<content>  		greater or equal to 0 : The number of record count returned from the last call to sql. ExecCommand</content>
+	<content>  		less than 0 : erro code</content>
+</function>
+<function name="sql.FieldCount" >
+	<content>result, field_count = sql.FieldCount(id)</content>
+	<content>Parameters</content>
+	<content>  id: integer, connection id</content>	
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Fail: 0</content>
+	<content>  field_count: </content>
+	<content>  		greater or equal to  0 : The number of field count returned from the last call to sql. ExecCommand</content>
+	<content>  		less than 0 : error code</content>
+</function>
+<function name="sql.RecordData" >
+	<content>result, recorddata  = sql.RecordData(id, recordIndex)</content>
+	<content>Parameters</content>
+	<content>  id: integer, connection id</content>	
+	<content>  recordIndex: integer, the index of requested data</content>	
+	<content>Returns</content>
+	<content>  result: integer, Success: 1, Fail: 0</content>
+	<content>  recorddata : </content>
+	<content>  		use recorddata[1], recorddata[2]…recorddata[FiledCount]</content>	
+</function>
+<function name="sql.ConnectError" >
+	<content>result, desc = sql.ConnectError(id)</content>
+	<content>Parameters</content>
+	<content>  id: integer, connection id</content>		
+	<content>Returns</content>
+	<content>  result: integer, the length of error message string when success, Success: > 0, Fail: 0</content>
+	<content>  desc : </content>
+	<content>  		error description</content>	
+</function>
+<function name="sql.BeginInsertCommand" >
+	<content>result = sql.BeginInsertCommand()</content>	
+	<content>Returns</content>
+	<content>  result: integer, 1: Success, 0: Fail</content>	
+</function>
+<function name="sql.SetInsertPattern" >
+	<content>result, desc = sql.SetInsertPattern(field, value)</content>
+	<content>Parameters</content>
+	<content>  field: field name</content>		
+	<content>  vlaue: field value</content>		
+	<content>Returns</content>
+	<content>  result: integer, 1: Success, 0: Fail</content>
+	<content>  desc : </content>
+	<content>  		error description</content>	
+</function>
+<function name="sql.EndInsertCommand" >
+	<content>result, desc = sql.EndInsertCommand(id, table)</content>
+	<content>Parameters</content>
+	<content>  id: integer, connection id</content>		
+	<content>  table: table name</content>
+	<content>Returns</content>
+	<content>  result: integer, 1: Success, 0: Fail</content>
+	<content>  desc : </content>
+	<content>  		error description</content>	
+</function>
+<function name="sql.ExecUpdateCommand" >
+	<content>result, desc = sql.ExecUpdateCommand(id, table, field, value, where_condition_field, where_condition_value)</content>
+	<content>Parameters</content>
+	<content>  id: integer, connection id</content>		
+	<content>  table: table name</content>	
+	<content>  field: field name</content>
+	<content>  vlaue: field value</content>			
+	<content>  where_condition_field: where condition field name</content>			
+	<content>  where_condition_value: where condition field value</content>			
+	<content>Returns</content>
+	<content>  result: integer, 1: Success, 0: Fail</content>
+	<content>  desc : </content>
+	<content>  		error description</content>	
+</function>
+<function name="sql.SetConnectionTimeout" >
+	<content>result, setvalue = sql.SetConnectionTimeout(value)</content>
+	<content>Parameters</content>
+	<content>  value: integer, Timeout</content>				
+	<content>Returns</content>
+	<content>  result: integer, 1: Success, 0: Fail</content>
+	<content>  setvalue: Timeout value</content>
+</function>
+<!-- contact list -->
+<function name="contact.Import" >
+	<content>result = contact.Import(diskID, filePath)</content>
+	<content>Parameters</content>
+	<content>     diskID: integer; 0: HMI, 2: USB, 3: SD</content>
+	<content>   filePath: string; file path</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: Function not enabled</content>
+	<content>       0: Error or unknown</content>
+	<content>       1: Success</content>
+	<content>      -1: Invalid argument</content>
+	<content>    -106: Disk is not ready</content>
+</function>
+<function name="contact.Export" >
+	<content>result = contact.Export(diskID, filePath)</content>
+	<content>Parameters</content>
+	<content>     diskID: integer; 0: HMI, 2: USB, 3: SD</content>
+	<content>   filePath: string; file path</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: Function not enabled</content>
+	<content>       0: Error or unknown</content>
+	<content>       1: Success</content>
+	<content>      -1: Invalid argument</content>
+	<content>    -106: Disk is not ready</content>
+</function>
+<function name="contact.GetLastErrorCode" >
+	<content>result = contact.GetLastErrorCode()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: Function not enabled</content>
+	<content>       0: No error</content>
+	<content>    != 0: Error</content>
+</function>
+<function name="contact.GetLastErrorMsg" >
+	<content>result, msg = contact.GetLastErrorMsg()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: Function not enabled</content>
+	<content>  others: Message length</content>
+</function>
+<function name="contact.GetBackendLastErrorCode" >
+	<content>result = contact.GetBackendLastErrorCode()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: Function not enabled</content>
+	<content>       0: No error</content>
+	<content>    != 0: Error</content>
+</function>
+<function name="contact.GetBackendLastErrorMsg" >
+	<content>result, msg = contact.GetBackendLastErrorMsg()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: Function not enabled</content>
+	<content>  others: Message length</content>
+</function>
+<function name="contact.GetSourceLastErrorCode" >
+	<content>result = contact.GetSourceLastErrorCode()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: Function not enabled</content>
+	<content>       0: No error</content>
+	<content>    != 0: Error</content>
+</function>
+<function name="contact.GetSourceLastErrorMsg" >
+	<content>result, msg = contact.GetSourceLastErrorMsg()</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    -999: Function not enabled</content>
+	<content>  others: Message length</content>
+</function>
+<function name="sys.GetHardwareID" >
+	<content>HWID = sys.GetHardwareID()</content>
+	<content>Returns</content>
+	<content>  HWID: string. Fail: ""</content>
+</function>
+<function name="mqtt.GetClientID" >
+	<content>ClientID = mqtt.GetClientID(index)</content>
+	<content>Parameters</content>
+	<content>  index: Integer，index: 1~5</content>
+	<content>Returns</content>
+	<content>  ClientID: string. Fail: ""</content>
+</function>
+<!-- history -->
+<function name="history.ExportCSV" >
+	<content>ret, errCode = history.ExportCSV(disk_id, buffNum, pathname, prefixname)</content>
+	<content>Parameters</content>
+	<content>     disk_id: Disk ID, integer; 2: USB, 3: SD, 6: USB2</content>
+	<content>     buffNum: Historical buffer number, integer, starting from 1</content>
+	<content>    pathname: The path of output folder, string, can be nil</content>
+	<content>  prefixname: The prefix name of output file, string, can be nil</content>
+	<content>Returns</content>
+	<content>  result: integer</content>
+	<content>    1: Success</content>
+	<content>   -1: Invalid argument</content>
+	<content> -106: Disk is not ready</content>
+	<content> -128: No historical buffer enabled</content>
+	<content> -129: Wrong historical buffer number</content>
+	<content> -131: Fail to output CSV</content>
+	<content> -136: Wrong path or name</content>
+	<content> -163: Cannot support when Non-volatile was enabled</content>
+	<content> -164: Fail to make the output path</content>
+	<content>Example</content>
+	<content>    -- Export historical buffer 1 to the path 'history/abc/H01.csv' under USB disk</content>
+	<content>    ret = history.ExportCSV(2, 1, "history1/abc", "H")</content>
+</function>

@@ -1,0 +1,4 @@
+# Wszystko, co nie ma trafic do repozytorium (projekty HMI, testy, wyniki budowania, smietnik),
+# trzymamy w plikach/folderach o nazwie zaczynajacej sie od _ns_ (NoSynch).
+__pycache__
+_ns_*
