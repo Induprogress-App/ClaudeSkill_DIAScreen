@@ -17,6 +17,7 @@ parametrów i rodzajów jest dostępny przez `types` i `params`).
 | `decode PROJEKT.dpa` | folder `PROJEKT/` obok pliku (nadpisuje go!) |
 | `info KAT` | panel (model z instalacji DIAScreen), rozdzielczość, łącza i adresy IP, języki, programy Lua |
 | `lua-api [TEKST] [--full]` | funkcje Lua DIAScreen (bez argumentu: grupy; np. `lua-api mem.inter`, `lua-api screen.Open`) |
+| `diff STARY NOWY [--out=ROZNICE.dpa] [--all]` | porównanie projektów (`.dpa` albo KAT): zmiany ustawień, Lua, ekranów; elementy `+` dodane, `~` zmienione (klucz: stara -> nowa), `-` usunięte. `--out` = kopia NOWEGO tylko z elementami `+`/`~` (tylko ekrany ze zmianami + ich ekrany bazowe) |
 | `screens KAT` | ekrany: ID, nazwa, plik, liczba elementów, ekran bazowy |
 | `list KAT EKRAN [--xy]` | linia na element: nr, rodzaj, adresy (R/W/Trg/Vis/Lock/Scr), teksty |
 | `show KAT EKRAN EL [--all]` | parametry elementu bez wartości pustych, stany jako różnice |

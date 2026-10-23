@@ -42,7 +42,8 @@ Dane użytkownika (poza repozytorium): `%USERPROFILE%\.claude\skills\diascreen\`
 - Prace i testy commitować do lokalnej gałęzi `tests` (utworzyć ją z `main`, jeśli nie istnieje).
   Gałęzi `tests` **nie wysyłać na serwer** (żadnego `git push` tej gałęzi).
 - Do `main` trafiają tylko zmiany przetestowane i działające (po `verify` i sprawdzeniu w DIAScreen przez
-  użytkownika) – przeniesione z `tests` (merge / cherry-pick) dopiero po potwierdzeniu.
+  użytkownika) – przeniesione z `tests` dopiero po potwierdzeniu, **jednym commitem**:
+  `git checkout main && git merge --squash tests && git commit` (nie `merge --no-ff` – przenosi całą historię `tests`).
 - Wysyłać na serwer (GitHub) wyłącznie `main`, i tylko na prośbę użytkownika.
 
 ## Poufność i zakres analizy
@@ -62,6 +63,8 @@ Dane użytkownika (poza repozytorium): `%USERPROFILE%\.claude\skills\diascreen\`
 
 ## Konwencje kodu
 - `dpa_tool.py`: jeden plik, bez zależności, komunikaty i komentarze po polsku bez polskich znaków.
+  Nie czytać go w całości: spis sekcji jest w docstringu na początku, sekcje zaczynają się od `# ----`;
+  miejsce znaleźć Grepem (`^# ----`, `^def `), czytać tylko potrzebny zakres linii. Nowa sekcja → dopisać do spisu.
   Dokumentacja (`.md`) z polskimi znakami.
 - Pliki tekstowe po `decode`: UTF-8, końce linii LF (w `.dpa` CRLF); pliki `.lua` – bajty 1:1 z projektu.
 - Każda zmiana formatu musi zachować bezstratność: `decode` sprawdza, że podział treści jest bezstratny,

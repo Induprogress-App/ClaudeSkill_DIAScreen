@@ -79,6 +79,26 @@ i `dane/lua_api.xml` (kopia `ProgList_English.xml` z DIAScreen 1.6).
 - `lua-api` – funkcje Lua z `ScrEditApp\Language\ProgList_English.xml`: bez argumentu lista grup, z tekstem –
   sygnatury pasujących funkcji, pełny opis przy ≤ 3 trafieniach, dokładnej nazwie albo `--full`.
 
+### Porównanie projektów
+```
+python dpa_tool.py diff STARY.dpa NOWY.dpa [--out=ROZNICE.dpa] [--all]
+```
+Działa na plikach `.dpa` i folderach po `decode`. Ekrany dopasowuje po `ID`, elementy po `nPartsID` + rodzaju + opisie
+(`wDescTextLen0`) – DIAScreen nadaje nowemu elementowi numer usuniętego, a rodzaju i opisu nie da się zmienić.
+Wiersz elementu kończy się opisem, np. `~   1 Numeric Entry  W=$10  "####"  "Numeric Entry_001"`. Wynik:
+- `# Ustawienia projektu` – zmienione klucze `project.txt` (np. `Application0.SmtpHWInf: "-1" -> "255"`),
+  baza `sram_data.db`, pliki Lua (dodane / usunięte / zmienione),
+- `# ekran ID Nazwa (plik): N zm.` – zmiany nagłówka ekranu, potem elementy: `+` dodany, `~` zmieniony
+  (pod nim `klucz: stara -> nowa`; klucze stanów z przedrostkiem, np. `State1.wTextLen0`), `-` usunięty,
+- `+ ekran` / `- ekran` – ekran dodany / usunięty.
+
+Bez `--all` pod elementem jest najwyżej 8 zmian. `MeMeCode` zmienia się przy każdym zapisie w DIAScreen.
+
+`--out=ROZNICE.dpa` zapisuje kopię NOWEGO projektu, w której zostają tylko elementy dodane i zmienione
+(z nowego ekranu – wszystkie). Zostają tylko ekrany ze zmianami oraz ich ekrany bazowe (`BaseScreenID`,
+bez elementów, jeśli same się nie zmieniły). Przyciski przejścia mogą wskazywać ekrany, których w pliku nie ma.
+Z `[Group]` zostają tylko grupy użyte przez pozostawione elementy. Elementów usuniętych tam nie ma.
+
 ### Edycja elementów
 ```
 python dpa_tool.py set KATALOG EKRAN ELEMENT|- KLUCZ=WART ... [--state=N|all] [--lang=N]
@@ -87,7 +107,8 @@ python dpa_tool.py add KATALOG EKRAN RODZAJ|ZRODLO_EKRAN:ELEMENT [KLUCZ=WART ...
 `KLUCZ` to nazwa z pliku (lista: `params`) albo skrót: `text` (`wTextLen0`), `desc` (`wDescTextLen0`),
 `read` (`ReadVar`), `write` (`WriteVar`), `visible` (`VisibleVar`), `screen` (`GoToScreenID`), `x`, `y`, `w`, `h`,
 dla ekranu `name` (`wTextLen`), `base` (`BaseScreenID`). `--lang=N` – skróty `text`/`desc` dla języka N.
-- `set` – zmienia istniejące klucze (nowych nie dodaje): najpierw w części wspólnej elementu, potem w stanach;
+- `set` – zmienia istniejące klucze (nowych nie dodaje; wyjątek: brakujące `VisibleLink`/`VisibleVar` – DIAScreen
+  pomija je w elementach bez adresu widoczności – są wstawiane przed `VisibleCondition`): najpierw w części wspólnej elementu, potem w stanach;
   przy kilku stanach `--state=N` (od 0) albo `--state=all`. `ELEMENT` = `-` zmienia nagłówek ekranu.
   Tekst dłuższy niż 256 znaków: uzupełnia kopię `Base64TextLenN`. Ostrzega, gdy adres ma `…Link=0`.
 - `add RODZAJ` – nowy element (`RODZAJ` = nazwa z `types`, np. `"Numeric Display"`/`Numeric_Display`, albo `5/1`).

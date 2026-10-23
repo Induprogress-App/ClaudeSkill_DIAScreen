@@ -27,6 +27,11 @@ Katalog po dekodowaniu:
 Kolejnosc ekranow w pliku = kolejnosc linii @@screen w project.txt.
 
 Uzycie: patrz USAGE (python dpa_tool.py bez argumentow)
+
+Sekcje pliku (znaczniki "# ----"; szukac grep "^# ----", czytac tylko potrzebny zakres):
+  kontener, tresc <-> tekst, komendy (decode/encode/verify), przegladanie (screens/list/show/find),
+  edycja elementow (set/add), ekrany, projekty, slownik (add-screen/new/params), dane z instalacji
+  DIAScreen (info/lua-api), porownanie projektow (diff), USAGE + main
 """
 import base64
 import json
@@ -686,12 +691,28 @@ def _section_ranges(lines):
     return idx[0], [(idx[n], idx[n + 1]) for n in range(len(idx) - 1) if lines[idx[n]] == "[State]"]
 
 
+# Klucze pomijane przez DIAScreen, gdy adres nie jest ustawiony: wstawiane przed VisibleCondition
+OPTIONAL_LINK = {"VisibleLink": "VisibleCondition", "VisibleVar": "VisibleCondition"}
+
+
+def _add_link(head, key):
+    """Dopisuje brakujace VisibleLink=1 i VisibleVar=None przed VisibleCondition (jak DIAScreen)."""
+    pos = next((i for i, l in enumerate(head) if l.startswith(OPTIONAL_LINK[key] + "=")), None)
+    if pos is None:
+        return
+    new = [l for l in ("VisibleLink=1", "VisibleVar=None")
+           if not any(x.startswith(l.split("=")[0] + "=") for x in head)]
+    head[pos:pos] = new
+
+
 def set_element(lines, assigns, state=None):
     """Zmienia parametry w liniach elementu (lista modyfikowana w miejscu). state: None, numer albo 'all'."""
     msgs = []
     for key, value in assigns:
         head_end, states = _section_ranges(lines)
         head = lines[:head_end]
+        if state in (None, "all") and key in OPTIONAL_LINK and not any(l.startswith(key + "=") for l in head):
+            _add_link(head, key)
         if state in (None, "all") and _set_in(head, key, value):
             lines[:head_end] = head
             msgs.append("%s=%s" % (key, value))
@@ -1228,6 +1249,197 @@ def cmd_lua_api(pattern=None, full=False):
             print(body[0] if body else name)
 
 
+# ---------------------------------------------------------------- porownanie projektow
+
+def _flat(lines):
+    """Linie bloku (bez naglowka) -> {klucz: wartosc}; klucze podsekcji z przedrostkiem, np. State1.Width.
+    Bajty makr (@@hex) trafiaja pod klucz '<klucz makra> bajty'."""
+    out, sec, count, last = {}, "", {}, None
+    for l in lines[1:]:
+        if l.startswith("["):
+            name = l[1:-1]
+            count[name] = count.get(name, -1) + 1
+            sec, last = "%s%d." % (name, count[name]), None
+            continue
+        if last and (l.startswith("@@hex ") or "Base64" in last and B64_LINE.fullmatch(l)):
+            out[last + " bajty"] = out.get(last + " bajty", "") + l
+            continue
+        kv = _kv(l)
+        if kv is None and l.startswith("@@"):  # @@lenhex, @@blob32...: tresc binarna
+            k, _, v = l.partition(" ")[2].partition("=")
+            last = sec + k
+            out[last + " bajty"] = v
+            continue
+        last = sec + (kv[0] if kv else l)
+        out[last] = kv[1] if kv else ""
+    return out
+
+
+def _flat_diff(a, b):
+    """Roznice dwoch slownikow z _flat jako lista opisow 'klucz: stara -> nowa'."""
+    out = []
+    for k in list(a) + [k for k in b if k not in a]:
+        va, vb = a.get(k), b.get(k)
+        if va == vb:
+            continue
+        if k.endswith(" bajty"):
+            out.append("%s zmienione" % k)
+        else:
+            show = lambda v: "brak" if v is None else json.dumps(_short(v, 30), ensure_ascii=False)
+            out.append("%s: %s -> %s" % (k, show(va), show(vb)))
+    return out
+
+
+def _screen_parts(s):
+    """Ekran -> (naglowek, elementy, reszta po ostatnim elemencie, np. [Group])."""
+    if not s.elements:
+        return s.lines, [], []
+    last = s.elements[-1]
+    end = last.start - 1 + len(last.lines)
+    return s.lines[:s.elements[0].start - 1], s.elements, s.lines[end:]
+
+
+def _diff_key(e):
+    """Tozsamosc elementu przy porownaniu: DIAScreen uzywa ponownie nPartsID usunietego elementu,
+    a rodzaju i opisu elementu nie da sie zmienic."""
+    return e.id, e.type, e.props.get("wDescTextLen0", "")
+
+
+def _diff_summary(e):
+    s = element_summary(e)
+    desc = json.dumps(e.props.get("wDescTextLen0", ""), ensure_ascii=False)
+    return s if "desc=" + desc in s else s + "  " + desc
+
+
+def _print_changes(changes, full, indent="    "):
+    for c in changes if full else changes[:8]:
+        print(indent + c)
+    if not full and len(changes) > 8:
+        print(indent + "... (+%d, --all pokazuje wszystkie)" % (len(changes) - 8))
+
+
+def _dir_files(d):
+    return sorted(os.listdir(d)) if os.path.isdir(d) else []
+
+
+def _same_file(a, b):
+    with open(a, "rb") as fa, open(b, "rb") as fb:
+        return fa.read() == fb.read()
+
+
+def cmd_diff(proj_a, proj_b, out=None, full=False):
+    """Zmiany B wzgledem A: ekrany i elementy (wg ID i nPartsID), ustawienia projektu, Lua.
+    out = plik .dpa: kopia B, na ktorej zostaja tylko elementy zmienione i dodane."""
+    pa = _flat(["[Project]"] + [l for l in _read_text(os.path.join(proj_a, "project.txt")).split("\n")
+                                if not l.startswith(SCREEN_FILE_REF)])
+    pb = _flat(["[Project]"] + [l for l in _read_text(os.path.join(proj_b, "project.txt")).split("\n")
+                                if not l.startswith(SCREEN_FILE_REF)])
+    changes = _flat_diff(pa, pb)
+    if os.path.isfile(os.path.join(proj_a, SQLITE_NAME)) and os.path.isfile(os.path.join(proj_b, SQLITE_NAME)) \
+            and not _same_file(os.path.join(proj_a, SQLITE_NAME), os.path.join(proj_b, SQLITE_NAME)):
+        changes.append("%s (hasla, siec...) zmieniona" % SQLITE_NAME)
+    la, lb = os.path.join(proj_a, LUA_DIR), os.path.join(proj_b, LUA_DIR)
+    for f in sorted(set(_dir_files(la)) | set(_dir_files(lb))):
+        if f not in _dir_files(la):
+            changes.append("Lua %s: dodany" % f)
+        elif f not in _dir_files(lb):
+            changes.append("Lua %s: usuniety" % f)
+        elif not _same_file(os.path.join(la, f), os.path.join(lb, f)):
+            changes.append("Lua %s: zmieniony" % f)
+    if changes:
+        print("# Ustawienia projektu: %d zmian" % len(changes))
+        _print_changes(changes, full, "  ")
+
+    screens_a = {s.id: s for s in load_screens(proj_a)}
+    screens_b = load_screens(proj_b)
+    ids_b = {s.id for s in screens_b}
+    kept = {}  # plik ekranu B -> nPartsID elementow do zostawienia w projekcie roznic
+    total = 0
+    for s in screens_b:
+        a = screens_a.get(s.id)
+        if a is None:
+            print("+ ekran %d %s (%s): nowy, %d el." % (s.id, s.name, s.file, len(s.elements)))
+            kept[s.path] = {e.id for e in s.elements}
+            total += len(s.elements)
+            continue
+        head_a, els_a, tail_a = _screen_parts(a)
+        head_b, els_b, tail_b = _screen_parts(s)
+        head = _flat_diff(_flat(head_a), _flat(head_b))
+        by_key = {_diff_key(e): e for e in els_a}
+        rows, keep = [], set()
+        for e in els_b:
+            old = by_key.get(_diff_key(e))
+            if old is None:
+                rows.append(("+ " + _diff_summary(e), []))
+            elif old.lines != e.lines:
+                rows.append(("~ " + _diff_summary(e), _flat_diff(_flat(old.lines), _flat(e.lines))
+                             or ["kolejnosc linii"]))
+            else:
+                continue
+            keep.add(e.id)
+        keys = {_diff_key(e) for e in els_b}
+        rows += [("- " + _diff_summary(e), []) for e in els_a if _diff_key(e) not in keys]
+        if tail_a != tail_b:
+            head.append("grupy ([Group]) zmienione")
+        if not rows and not head:
+            continue
+        kept[s.path] = keep
+        total += len(rows)
+        print("# ekran %d %s (%s): %d zm." % (s.id, s.name, s.file, len(rows))
+              + (" (nazwa w A: %s)" % a.name if a.name != s.name else ""))
+        _print_changes(head, full, "  ekran: ")
+        for title, ch in rows:
+            print("  " + title)
+            _print_changes(ch, full)
+    for i, a in screens_a.items():
+        if i not in ids_b:
+            print("- ekran %d %s (%s): usuniety, %d el." % (i, a.name, a.file, len(a.elements)))
+    if not changes and not kept and set(screens_a) <= ids_b:
+        print("Brak roznic.")
+    if out:
+        _write_diff_project(proj_b, screens_b, kept, out)
+        print("Projekt roznic (%d el.): %s" % (sum(len(k) for k in kept.values()), out))
+
+
+def _write_diff_project(proj_b, screens_b, kept, out):
+    """Kopia B z samymi ekranami ze zmianami (i ich ekranami bazowymi) i samymi elementami z 'kept'."""
+    import tempfile
+    by_id = {s.id: s for s in screens_b}
+    files = set()
+    for s in [s for s in screens_b if s.path in kept]:
+        while s is not None and s.file not in files:
+            files.add(s.file)
+            s = by_id.get(int(s.props.get("BaseScreenID", "0") or 0))  # ekran bazowy musi zostac
+    if not files and screens_b:
+        files.add(screens_b[0].file)  # projekt musi miec choc jeden ekran
+    with tempfile.TemporaryDirectory() as tmp:
+        d = os.path.join(tmp, "diff")
+        shutil.copytree(proj_b, d)
+        proj_lines = _read_text(os.path.join(d, "project.txt")).split("\n")
+        proj_lines = [l for l in proj_lines if not l.startswith(SCREEN_FILE_REF)
+                      or os.path.basename(l[len(SCREEN_FILE_REF):].strip()) in files]
+        _write(os.path.join(d, "project.txt"), "\n".join(proj_lines).encode("utf-8"))
+        for s in screens_b:
+            keep = kept.get(s.path, set())
+            head, els, tail = _screen_parts(s)
+            els = [e for e in els if e.id in keep]
+            groups = {e.props.get("GroupID") for e in els} - {None, "0"}
+            if tail and tail[0] == "[Group]":  # zostaw tylko grupy uzywane przez pozostale elementy
+                grp = re.compile(r"^Group(ID|XVar|YVar)(\d+)=(.*)$")
+                rest = [l for l in tail[1:] if not grp.match(l)]
+                vals = {}  # numer grupy -> {ID/XVar/YVar: wartosc}
+                for l in tail[1:]:
+                    m = grp.match(l)
+                    if m:
+                        vals.setdefault(int(m.group(2)), {})[m.group(1)] = m.group(3)
+                g = [v for _, v in sorted(vals.items()) if v.get("ID") in groups]
+                tail = (["[Group]"] + ["Group%s%d=%s" % (k, n, v[k]) for n, v in enumerate(g)
+                                       for k in ("ID", "XVar", "YVar")] if g else []) + rest
+            lines = head + [l for e in els for l in e.lines] + tail
+            _write(os.path.join(d, SCREEN_DIR, s.file), "\n".join(lines).encode("utf-8"))
+        encode(d, out)
+
+
 USAGE = """Uzycie (KAT = katalog po decode; przegladanie dziala tez na PROJEKT.dpa):
   files   [FOLDER]                      pliki .dpa w folderze
   new     NOWY.dpa [--name=NAZWA] [--template=PLIK]   nowy projekt z szablonu (+ folder po decode)
@@ -1243,6 +1455,7 @@ USAGE = """Uzycie (KAT = katalog po decode; przegladanie dziala tez na PROJEKT.d
   params  [TEKST] [--type=T/S|NAZWA] [--scope=ekran|element|stan|akcja]   slownik parametrow
   info    KAT                           panel, lacza, jezyki, ekrany, programy Lua
   lua-api [TEKST] [--full]              funkcje Lua DIAScreen (z instalacji programu)
+  diff    STARY NOWY [--out=ROZNICE.dpa] [--all]   zmienione ekrany i elementy (+ projekt z samymi zmianami)
 KLUCZ: nazwa z pliku albo skrot text, desc, read, write, visible, screen, x, y, w, h, name, base.
 EKRAN = ID, nazwa albo plik ekranu; ELEMENT = nPartsID albo opis; RODZAJ = np. "Numeric Display" albo 5/1."""
 
@@ -1253,7 +1466,7 @@ def main(argv):
     args = [a for a in argv[1:] if not a.startswith("--")]
     flags = dict((a[2:].partition("=")[0], a.partition("=")[2]) for a in argv[1:] if a.startswith("--"))
     need = {"decode": 2, "encode": 2, "verify": 2, "screens": 2, "list": 3, "show": 4, "find": 3,
-            "set": 4, "add": 4, "add-screen": 4, "files": 1, "new": 2, "types": 1, "params": 1, "info": 2, "lua-api": 1}
+            "set": 4, "add": 4, "add-screen": 4, "files": 1, "new": 2, "types": 1, "params": 1, "info": 2, "lua-api": 1, "diff": 3}
     if not args or args[0] not in need or len(args) < need[args[0]]:
         print(USAGE)
         return 2
@@ -1273,6 +1486,8 @@ def main(argv):
         cmd_lua_api(args[1] if len(args) > 1 else None, "full" in flags)
     elif cmd == "types":
         cmd_types()
+    elif cmd == "diff":
+        cmd_diff(_project_dir(args[1]), _project_dir(args[2]), flags.get("out"), "all" in flags)
     elif cmd == "params":
         cmd_params(args[1] if len(args) > 1 else None, flags.get("type"), flags.get("scope"))
     elif cmd == "set":
