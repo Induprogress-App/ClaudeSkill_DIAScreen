@@ -77,5 +77,5 @@ Dane użytkownika (poza repozytorium): `%USERPROFILE%\.claude\skills\diascreen\`
 ## Otwarte sprawy
 - Brak ochrony przed utratą pracy jak w `isp_codec` (kontrola, czy `.dpa` zapisano w DIAScreen po `decode`,
   i czy folder ma niezapisane zmiany) – `decode` nadpisuje folder bez pytania.
-- Niezbadane: obrazy (`[Picture]`, `[Background]`), makra, receptury, alarmy, kodowanie znaków spoza ASCII
+- Niezbadane: obrazy (`[Picture]`, `[Background]`), znaczenie nagłówków i flag poleceń makr, `[SubMacro]`, receptury, alarmy, kodowanie znaków spoza ASCII
   w zwykłych liniach, inne panele niż AX-8. Wzorce ze skilla pochodzą z różnych wersji DIAScreen (6.6.0–6.6.2). Klucz pola „Read Offset Address” wyświetlacza numerycznego nieznany.

@@ -59,7 +59,11 @@ Skróty kluczy: `text` (tekst, wszystkie stany), `desc`, `read`, `write`, `visib
    Typ danych: `MemLen` 0 bit / 1 Word / 2 DWord / 6 QWord, `MemFmt` 1 = ze znakiem, 2 = bez znaku.
 6. Teksty ponad 256 znaków: `set text=` sam uzupełnia kopię `Base64TextLen`. Nazwy ekranów/teksty mogą mieć
    polskie znaki; zwykłe wartości (`klucz=` bez `@@u16`) – tylko ASCII.
-7. Makra (`…MacroLen`, linie `@@hex`) są binarne – `show` pokazuje ich tekst; zmieniaj je w DIAScreen.
+7. Makra: pod `…MacroLen=` linie `@@m <nagłówek> <flagi> ["tekst", "op1", "op2", "op3", "op4"]`, jedna na
+   polecenie (`show` pokazuje teksty, `find` przeszukuje). Zmieniając adres/wartość, popraw tekst **i** operand
+   (np. `["$11 = 5", "$11", "5", "Var3", "Var4"]`); nagłówka i flag nie ruszaj, długość liczy `encode`.
+   Nowe polecenie – skopiuj linię polecenia tego samego rodzaju. Kopia elementu (`add`) kopiuje też makro –
+   popraw jego adresy. Ostatnia linia `@@m 00000067` musi zostać.
 8. Po zmianach `encode`, potem użytkownik otwiera projekt w DIAScreen i **kompiluje** – tylko to potwierdza
    poprawność. W `params` „(?)” = znaczenie przypuszczalne; gdy użytkownik je potwierdzi, zaproponuj poprawkę
    słownika.

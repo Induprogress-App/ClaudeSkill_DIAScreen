@@ -14,6 +14,9 @@ Reprezentacja tekstowa (project.txt, UTF-8, jedna linia = jedna linia INI):
   @@blob32 KEY=<hex>          -> "KEY=" + uint32 LE dlugosc + bajty (np. MeMeCode)
   @@sqlite <plik>             -> uint32 LE dlugosc + zawartosc pliku bazy SQLite
   @@hex <hex>                 -> surowe bajty linii (nierozpoznane dane binarne)
+  KEYMacroLen=<n> + linie @@m -> makro: "\\x02REV" + polecenia zakonczone CRLF; n liczone przy encode
+  @@m <naglowek> <flagi> [tekst, op1, op2, op3, op4]  -> jedno polecenie makra (napisy latin-1)
+  @@m 00000067                -> rekord konczacy (bez pol)
   @@screen screens/<plik>     -> wstawia w tym miejscu zawartosc pliku ekranu (ten sam format)
   @@luaxml KEY=lua/_lua_files.xml -> "KEY=<n>" + XML z programami Lua; w XML-u
                                  <content>@@lua:Main.lua</content> = base64 pliku lua/Main.lua
@@ -48,6 +51,9 @@ BLOB32_KEYS = {b"MeMeCode"}
 SQLITE_SECTIONS = {b"[100_SRAM_DATA]"}
 RAW_LEN_KEYS = {b"SysKeyPwd"}  # "KEY=n" + n bajtow, mimo braku "Len" w nazwie
 LEN_LINE = re.compile(rb"^([A-Za-z0-9_\-]+)=(\d+)$")
+MACRO_LINE = re.compile(rb"^([A-Za-z0-9_]*MacroLen)=(\d+)$")
+MACRO_HEAD = b"\x02REV"
+MACRO_END = b"\x00\x00\x00\x67"
 LUA_LINE = re.compile(rb"^(<EXTENT>LuaXmlFileLen)=(\d+)$")
 LUA_CONTENT = re.compile(r'(<file\b[^>]*\bname="([^"]*)"[^>]*>\s*<content>)([^<]*)(</content>)')
 LUA_REF = re.compile(r"<content>@@lua:([^<]+)</content>")
@@ -189,14 +195,103 @@ def items_to_body(items):
             out.append(it[1] + b"=" + struct.pack("<I", len(it[2])) + it[2])
         elif kind == "sqlite":
             out.append(struct.pack("<I", len(it[1])) + it[1])
+        elif kind == "macro":
+            raw = macro_bytes(it[2])
+            out.append(it[1] + b"=" + str(len(raw)).encode() + b"\r\n" + raw[:-2])
     return b"\r\n".join(out)
+
+
+def parse_macro(raw):
+    """Bajty makra -> lista polecen: MACRO_END albo (naglowek 4 B, flagi 12 B, [5 napisow]).
+    Polecenie = naglowek + 5x (uint32 LE dlugosc + bajty) + 12 B flag, zakonczone CRLF.
+    Zwraca None, gdy bajty nie pasuja do tego ukladu."""
+    if not raw.startswith(MACRO_HEAD):
+        return None
+    p, out = len(MACRO_HEAD), []
+    try:
+        while p < len(raw):
+            head = raw[p:p + 4]
+            p += 4
+            if head == MACRO_END:
+                out.append(MACRO_END)
+            else:
+                fields = []
+                for _ in range(5):
+                    (n,) = struct.unpack_from("<I", raw, p)
+                    if p + 4 + n > len(raw):
+                        return None
+                    fields.append(raw[p + 4:p + 4 + n].decode("latin-1"))
+                    p += 4 + n
+                out.append((head, raw[p:p + 12], fields))
+                p += 12
+            if raw[p:p + 2] != b"\r\n":
+                return None
+            p += 2
+    except struct.error:
+        return None
+    return out if macro_bytes(out) == raw else None
+
+
+def macro_bytes(cmds):
+    out = [MACRO_HEAD]
+    for c in cmds:
+        if c == MACRO_END:
+            out.append(MACRO_END)
+        else:
+            out.append(c[0])
+            for f in c[2]:
+                b = f.encode("latin-1")
+                out.append(struct.pack("<I", len(b)) + b)
+            out.append(c[1])
+        out.append(b"\r\n")
+    return b"".join(out)
+
+
+def macro_line(c):
+    if c == MACRO_END:
+        return "@@m " + MACRO_END.hex()
+    return "@@m %s %s %s" % (c[0].hex(), c[1].hex(), json.dumps(c[2]))
+
+
+def parse_macro_line(line):
+    parts = line[4:].split(" ", 2)
+    if len(parts) == 1:
+        return bytes.fromhex(parts[0])
+    return bytes.fromhex(parts[0]), bytes.fromhex(parts[1]), json.loads(parts[2])
+
+
+def _macro_at(items, i):
+    """Linia 'KEYMacroLen=n' w items[i] -> (polecenia, indeks za makrem) albo None.
+    Bajty makra to kolejne linie (przedzielone CRLF), lacznie z koncowym CRLF = n bajtow."""
+    m = MACRO_LINE.match(items[i][1])
+    n = int(m.group(2)) if m else 0
+    if not n:
+        return None
+    j, size, parts = i + 1, -2, []
+    while j < len(items) and items[j][0] == "line" and size + 2 < n:
+        parts.append(items[j][1])
+        size += len(items[j][1]) + 2
+        j += 1
+    if size + 2 != n:
+        return None
+    cmds = parse_macro(b"\r\n".join(parts) + b"\r\n")
+    return (cmds, j) if cmds else None
 
 
 def items_to_text(items, out_dir):
     """Zwraca linie project.txt; pliki poboczne (SQLite, Lua) zapisuje w out_dir."""
     lines = []
-    for it in items:
+    i = 0
+    while i < len(items):
+        it = items[i]
+        i += 1
         kind = it[0]
+        mac = _macro_at(items, i - 1) if kind == "line" else None
+        if mac:
+            lines.append(it[1].decode("ascii"))
+            lines.extend(macro_line(c) for c in mac[0])
+            i = mac[1]
+            continue
         if kind == "line":
             line = it[1]
             if _printable(line) and not line.startswith(b"@@"):
@@ -316,7 +411,14 @@ def text_to_items(text, base_dir):
             items.append(("line", line.encode("ascii")))
             continue
         tag, _, rest = line.partition(" ")
-        if tag == "@@hex":
+        if tag == "@@m":
+            if items[-1][0] != "macro":
+                m = MACRO_LINE.match(items[-1][1]) if items[-1][0] == "line" else None
+                if not m:
+                    raise ValueError("linia @@m bez poprzedzajacej linii ...MacroLen=: " + line[:60])
+                items[-1] = ("macro", m.group(1), [])
+            items[-1][2].append(parse_macro_line(line))
+        elif tag == "@@hex":
             items.append(("line", bytes.fromhex(rest)))
         elif tag == "@@sqlite":
             with open(os.path.join(base_dir, rest.strip()), "rb") as f:
@@ -561,8 +663,12 @@ def cmd_list(proj, screen, xy=False):
         print(element_summary(e, xy))
 
 
-def _macro_text(hex_lines):
-    raw = b"".join(bytes.fromhex(l[6:]) for l in hex_lines)
+def _macro_text(mlines, sep=" ; "):
+    """Linie makra (@@m albo nierozpoznane @@hex) -> teksty polecen."""
+    if mlines and mlines[0].startswith("@@m "):
+        cmds = (parse_macro_line(l) for l in mlines)
+        return sep.join(c[2][0].strip() for c in cmds if c != MACRO_END)
+    raw = b"".join(bytes.fromhex(l[6:]) for l in mlines)
     return " ".join(m.decode("ascii") for m in re.findall(rb"[\x20-\x7e]{4,}", raw))
 
 
@@ -574,7 +680,7 @@ def _show_lines(lines, skip_empty, prev=None):
         kv = _kv(l)
         if kv and kv[0].endswith("MacroLen") and kv[1] not in EMPTY_VALUES:
             j = i + 1
-            while j < len(lines) and lines[j].startswith("@@hex "):
+            while j < len(lines) and lines[j].startswith(("@@hex ", "@@m ")):
                 j += 1
             out.append("%s: %s" % (kv[0][:-3], _macro_text(lines[i + 1:j])))
             i = j
@@ -622,7 +728,12 @@ def cmd_find(proj, text):
         for e in s.elements:
             for n, l in enumerate(e.lines):
                 kv = _kv(l)
-                if kv and low in kv[1].lower():
+                if l.startswith("@@m "):
+                    c = parse_macro_line(l)
+                    if c != MACRO_END and any(low in f.lower() for f in c[2]):
+                        print("%s:%d  [%d %s] el.%d %s  makro: %s" % (s.file, e.start + n, s.id, s.name, e.id,
+                                                                     e.type_name, _short(c[2][0].strip())))
+                elif kv and low in kv[1].lower():
                     print("%s:%d  [%d %s] el.%d %s  %s=%s" % (s.file, e.start + n, s.id, s.name, e.id,
                                                               e.type_name, kv[0], _short(kv[1])))
 
@@ -1260,6 +1371,11 @@ def _flat(lines):
             name = l[1:-1]
             count[name] = count.get(name, -1) + 1
             sec, last = "%s%d." % (name, count[name]), None
+            continue
+        if last and l.startswith("@@m "):
+            c = parse_macro_line(l)
+            if c != MACRO_END:
+                out[last + " makro"] = (out.get(last + " makro", "") + " ; " + c[2][0].strip()).lstrip(" ;")
             continue
         if last and (l.startswith("@@hex ") or "Base64" in last and B64_LINE.fullmatch(l)):
             out[last + " bajty"] = out.get(last + " bajty", "") + l

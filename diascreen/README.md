@@ -40,7 +40,7 @@ Zamiast katalogu można podać plik `.dpa` (zostanie rozłożony do folderu tymc
   względem poprzedniego, makra jako odczytany tekst. Podaje zakres linii w pliku ekranu. `--all` – cały blok
   z numerami linii.
 - `find` – wyszukuje tekst (bez rozróżniania wielkości liter) w wartościach elementów wszystkich ekranów:
-  adresach, tekstach, opisach.
+  adresach, tekstach, opisach i poleceniach makr elementów.
 
 ### Projekty, słownik, ekrany
 ```
@@ -146,12 +146,16 @@ Zapis wartości w plikach tekstowych:
 - `@@u16 KLUCZ="tekst"` – tekst UTF-16 (napisy, nazwy, opisy); zmieniasz tylko tekst w cudzysłowie, polskie
   znaki są dozwolone, długość liczy narzędzie.
 - `@@screen screens/…` – miejsce ekranu w projekcie; kolejność linii = kolejność ekranów.
+- `@@m <nagłówek> <flagi> ["tekst", "op1", "op2", "op3", "op4"]` – jedno polecenie makra (pod linią
+  `…MacroLen=`). Można zmieniać tekst i operandy (np. adres `$10` → `$20` w tekście **i** w operandzie),
+  dodawać/usuwać/kopiować całe linie poleceń; nagłówka i flag nie zmieniać. Długość makra liczy `encode`.
 - `@@blob32`, `@@lenhex`, `@@hex`, `@@sqlite`, `@@luaxml` – dane binarne i odnośniki do plików – nie edytować.
 
 ## Ograniczenia
 - Sprawdzone na panelu AX-8 (projekt `Version=6.6.2.48`); inna wersja lub panel – najpierw `verify` → otwarcie
   w DIAScreen bez zmian.
-- Obrazy (`[Picture]`, `[Background]`) i makra nie były jeszcze badane – zostają zapisane bez zmian, ale nie
-  są rozpisywane na osobne pliki.
+- Obrazy (`[Picture]`, `[Background]`) nie były jeszcze badane – zostają zapisane bez zmian.
+- Makra: zmiana adresów i wartości w istniejących poleceniach sprawdzona bajtowo; nowe rodzaje poleceń
+  najlepiej dodać raz w DIAScreen i potem kopiować ich linie `@@m`.
 - DIAScreen przy ponownym zapisie zmienia sam kilka pól (`MeMeCode`, `SmtpHWInf`, `FTPHWInf`, `*SyncConfirm`) –
   to normalne.
