@@ -131,6 +131,28 @@ python dpa_tool.py decode Projekt.dpa
 python dpa_tool.py encode Projekt Projekt_v2.dpa
 ```
 
+### Obrazy i układ elementów
+```
+python dpa_tool.py pictures KATALOG
+python dpa_tool.py picture-export KATALOG OFFSET WYJSCIE.png
+python dpa_tool.py picture-add KATALOG PLIK.png
+python dpa_tool.py picture-replace KATALOG OFFSET PLIK.png [--name=NAZWA]
+python dpa_tool.py picture-set KATALOG EKRAN ELEMENT PLIK.png|--offset=N [--state=N|all] [--bank=BANK] [--name=NAZWA] [--fit] [--invisible]
+python dpa_tool.py remove KATALOG EKRAN ELEMENT
+python dpa_tool.py lower KATALOG EKRAN ELEMENT [--front]
+```
+- `pictures` – wpisy bloku `[Picture]`: offset, rozmiar, liczba użyć i bank/nazwa. Offset to adres wpisu w bloku
+  (`PictureOffset` elementów); zmienia się, gdy DIAScreen zapisze projekt, więc czytaj go na bieżąco.
+- `picture-export` – obraz do PNG (24 i 32 bpp; GIF zapisuje jako GIF). Po edycji w programie graficznym:
+  `picture-replace` wymienia obraz we wszystkich stanach, które go używają (nowy wpis na końcu bloku, stary zostaje
+  nieużywany), `picture-add` tylko dopisuje.
+- `picture-set` – obraz w stanach elementu (`--state=N|all`, domyślnie wszystkie). Stany bez pól obrazu dostają je
+  po `UsePictureCoord`. `--fit` ustawia pole obrazu na prostokąt elementu (rozciągany), `--invisible` daje elementowi
+  `Style=3` (widać obraz i tekst, nie wypełnienie), `--bank` i `--name` ustawiają `PIB Name` i `Picture Name`.
+- `remove` usuwa element, `lower` zmienia warstwę (pierwszy element w pliku leży najniżej).
+- PNG: 8 lub 16 bitów, bez przeplotu (czytany i zapisywany przez `zlib`, bez dodatkowych bibliotek). Zapisuj projekt
+  tylko przy zamkniętym DIAScreen – zapis z otwartego okna nadpisze zmiany.
+
 ## Układ folderu po `decode`
 | Plik | Zawartość |
 |---|---|
@@ -154,7 +176,7 @@ Zapis wartości w plikach tekstowych:
 ## Ograniczenia
 - Sprawdzone na panelu AX-8 (projekt `Version=6.6.2.48`); inna wersja lub panel – najpierw `verify` → otwarcie
   w DIAScreen bez zmian.
-- Obrazy (`[Picture]`, `[Background]`) nie były jeszcze badane – zostają zapisane bez zmian.
+- Obrazy: blok `[Picture]` obsługują polecenia `pictures` i `picture-*` (format: `FORMAT_DPA.md`); `[Background]` nie był badany.
 - Makra: zmiana adresów i wartości w istniejących poleceniach sprawdzona bajtowo; nowe rodzaje poleceń
   najlepiej dodać raz w DIAScreen i potem kopiować ich linie `@@m`.
 - DIAScreen przy ponownym zapisie zmienia sam kilka pól (`MeMeCode`, `SmtpHWInf`, `FTPHWInf`, `*SyncConfirm`) –

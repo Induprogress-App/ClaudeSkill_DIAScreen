@@ -33,7 +33,7 @@ Uzycie: patrz USAGE (python dpa_tool.py bez argumentow)
 
 Sekcje pliku (znaczniki "# ----"; szukac grep "^# ----", czytac tylko potrzebny zakres):
   kontener, tresc <-> tekst, komendy (decode/encode/verify), przegladanie (screens/list/show/find),
-  edycja elementow (set/add), ekrany, projekty, slownik (add-screen/new/params), dane z instalacji
+  edycja elementow (set/add), obrazy i uklad (pictures/picture-*/remove/lower), ekrany, projekty, slownik (add-screen/new/params), dane z instalacji
   DIAScreen (info/lua-api), porownanie projektow (diff), USAGE + main
 """
 import base64
@@ -1123,6 +1123,326 @@ def cmd_add(proj, screen, source, assigns, src_proj=None, state=None, lang=0, fo
             print(m)
 
 
+# ---------------------------------------------------------------- obrazy ([Picture]) i uklad elementow
+
+PIC_START = 15  # blok [Picture] zaczyna sie naglowkiem "DOP-100IMAGE1.0"; pierwszy wpis od offsetu 15
+
+
+def _read_picture_block(proj):
+    """(linie project.txt, indeks linii [Picture], indeks pierwszej linii po bloku, blob bajtow).
+    Linie @@hex w bloku to surowe linie rozdzielone CRLF; Size = dlugosc bloku (z CRLF)."""
+    lines = _read_text(os.path.join(proj, "project.txt")).split("\n")
+    if "[Picture]" not in lines:
+        raise SystemExit("Projekt nie ma sekcji [Picture]")
+    a = lines.index("[Picture]")
+    b = next((i for i in range(a + 1, len(lines)) if lines[i].startswith("[")), len(lines))
+    hexl = [l for l in lines[a + 2:b]]
+    if not lines[a + 1].startswith("Size=") or any(not l.startswith("@@hex ") for l in hexl):
+        raise SystemExit("Nieznany zapis bloku [Picture]")
+    blob = b"\r\n".join(bytes.fromhex(l[6:]) for l in hexl)
+    if int(lines[a + 1][5:]) != len(blob):
+        raise SystemExit("Blok [Picture]: Size nie zgadza sie z dlugoscia danych")
+    return lines, a, b, blob
+
+
+def _write_picture_block(proj, lines, a, b, blob):
+    new = ["Size=%d" % len(blob)] + ["@@hex " + x.hex() for x in bytes(blob).split(b"\r\n")]
+    lines[a + 1:b] = new
+    _write(os.path.join(proj, "project.txt"), "\n".join(lines).encode("utf-8"))
+
+
+def _picture_entries(blob):
+    """Wpisy bloku: (offset, rozmiar danych). Kazdy wpis = uint32 LE rozmiar + dane (DIB 40 B naglowka albo GIF)."""
+    out, o = [], PIC_START
+    while o + 4 <= len(blob):
+        sz = struct.unpack_from("<I", blob, o)[0]
+        if sz == 0 or o + 4 + sz > len(blob):
+            break
+        out.append((o, sz))
+        o += 4 + sz
+    return out
+
+
+def _dib_info(data):
+    """(szer, wys, bpp) wpisu DIB albo tekst z rodzajem ('GIF', '?')."""
+    if data[:4] == b"\x28\x00\x00\x00":
+        _, w, h, _pl, bpp = struct.unpack_from("<IiiHH", data)
+        return w, abs(h), bpp
+    return "GIF" if data[:3] == b"GIF" else "?"
+
+
+# --- PNG bez zaleznosci (8 bitow, bez przeplotu; zapis zawsze RGBA)
+
+def _png_read(path):
+    import zlib
+    with open(path, "rb") as f:
+        d = f.read()
+    if d[:8] != b"\x89PNG\r\n\x1a\n":
+        raise SystemExit("To nie jest plik PNG: " + path)
+    p, idat, plte, trns = 8, b"", b"", b""
+    while p < len(d):
+        n, typ = struct.unpack_from(">I4s", d, p)
+        body = d[p + 8:p + 8 + n]
+        if typ == b"IHDR":
+            w, h, depth, ctype, _c, _f, inter = struct.unpack(">IIBBBBB", body)
+        elif typ == b"IDAT":
+            idat += body
+        elif typ == b"PLTE":
+            plte = body
+        elif typ == b"tRNS":
+            trns = body
+        p += 12 + n
+    if inter or depth not in (8, 16) or ctype not in (0, 2, 3, 4, 6) or (ctype == 3 and depth != 8):
+        raise SystemExit("PNG: obslugiwane 8/16 bitow bez przeplotu (zapisz obraz jako zwykly PNG RGBA)")
+    ch = {0: 1, 2: 3, 3: 1, 4: 2, 6: 4}[ctype]
+    step = ch * (depth // 8)
+    raw = zlib.decompress(idat)
+    stride, prev, rows, o = w * step, bytearray(w * step), [], 0
+    for _ in range(h):
+        ft, row = raw[o], bytearray(raw[o + 1:o + 1 + stride])
+        o += 1 + stride
+        for i in range(stride):
+            a = row[i - step] if i >= step else 0
+            b = prev[i]
+            c = prev[i - step] if i >= step else 0
+            if ft == 1:
+                row[i] = (row[i] + a) & 255
+            elif ft == 2:
+                row[i] = (row[i] + b) & 255
+            elif ft == 3:
+                row[i] = (row[i] + ((a + b) >> 1)) & 255
+            elif ft == 4:
+                pa, pb, pc = abs(b - c), abs(a - c), abs(a + b - 2 * c)
+                row[i] = (row[i] + (a if pa <= pb and pa <= pc else b if pb <= pc else c)) & 255
+        rows.append(row)
+        prev = row
+    out = bytearray()
+    for row in rows:
+        px = row[::2] if depth == 16 else row
+        for x in range(w):
+            if ctype == 6:
+                out += px[x * 4:x * 4 + 4]
+            elif ctype == 2:
+                out += px[x * 3:x * 3 + 3] + b"\xff"
+            elif ctype == 0:
+                out += bytes((px[x],) * 3) + b"\xff"
+            elif ctype == 4:
+                out += bytes((px[x * 2],) * 3) + px[x * 2 + 1:x * 2 + 2]
+            else:
+                i = px[x]
+                out += plte[i * 3:i * 3 + 3] + bytes((trns[i] if i < len(trns) else 255,))
+    return w, h, bytes(out)
+
+
+def _png_write(path, w, h, rgba):
+    import zlib
+
+    def chunk(t, b):
+        return struct.pack(">I", len(b)) + t + b + struct.pack(">I", zlib.crc32(t + b) & 0xffffffff)
+    raw = b"".join(b"\x00" + rgba[y * w * 4:(y + 1) * w * 4] for y in range(h))
+    with open(path, "wb") as f:
+        f.write(b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", w, h, 8, 6, 0, 0, 0))
+                + chunk(b"IDAT", zlib.compress(raw, 9)) + chunk(b"IEND", b""))
+
+
+def _dib_from_rgba(w, h, rgba):
+    """Wpis 32 bpp: BGRA z alfa przemnozona (premultiplied), wiersze od dolu - jak zapisuje DIAScreen."""
+    px = bytearray()
+    for y in range(h - 1, -1, -1):
+        row = rgba[y * w * 4:(y + 1) * w * 4]
+        for x in range(w):
+            r, g, b, a = row[x * 4:x * 4 + 4]
+            px += bytes((b * a // 255, g * a // 255, r * a // 255, a))
+    hdr = struct.pack("<IiiHHIIiiII", 40, w, h, 1, 32, 0, len(px), 0, 0, 0, 0)
+    return struct.pack("<I", len(hdr) + len(px)) + hdr + bytes(px)
+
+
+def _rgba_from_dib(data):
+    w, h, bpp = _dib_info(data)
+    if bpp not in (24, 32):
+        raise SystemExit("Eksport obsluguje wpisy 24 i 32 bpp (ten ma %s)" % (bpp,))
+    base = struct.unpack_from("<I", data)[0]
+    stride = w * bpp // 8 if bpp == 32 else (w * 3 + 3) // 4 * 4
+    out = bytearray(w * h * 4)
+    for y in range(h):
+        src = data[base + (h - 1 - y) * stride:][:stride]
+        for x in range(w):
+            if bpp == 32:
+                b, g, r, a = src[x * 4:x * 4 + 4]
+                if a and a != 255:  # odwrocenie alfa przemnozonej
+                    r, g, b = min(255, r * 255 // a), min(255, g * 255 // a), min(255, b * 255 // a)
+                out[(y * w + x) * 4:(y * w + x) * 4 + 4] = bytes((r, g, b, a))
+            else:
+                b, g, r = src[x * 3:x * 3 + 3]
+                out[(y * w + x) * 4:(y * w + x) * 4 + 4] = bytes((r, g, b, 255))
+    return w, h, bytes(out)
+
+
+def _picture_uses(proj):
+    """offset -> lista (plik ekranu, nPartsID, nr stanu, 'PIB Name/Picture Name')."""
+    uses = {}
+    for s in load_screens(proj):
+        for e in s.elements:
+            for n, st in enumerate(e.state_blocks()):
+                kv = dict(x for x in map(_kv, st) if x)
+                if "PictureOffset" in kv:
+                    uses.setdefault(int(kv["PictureOffset"]), []).append(
+                        (s.file, e.id, n, "%s/%s" % (kv.get("PIB Name", ""), kv.get("Picture Name", ""))))
+    return uses
+
+
+def cmd_pictures(proj):
+    _, _, _, blob = _read_picture_block(proj)
+    uses = _picture_uses(proj)
+    ents = _picture_entries(blob)
+    print("blok [Picture]: %d B, wpisow: %d, uzywanych offsetow: %d" % (len(blob), len(ents), len(uses)))
+    for o, sz in ents:
+        info = _dib_info(blob[o + 4:o + 4 + sz])
+        kind = "%dx%d %dbpp" % info if isinstance(info, tuple) else info
+        u = uses.get(o, [])
+        names = sorted({x[3] for x in u})
+        print("%9d  %-14s %8d B  uzyc: %-3d %s" % (o, kind, sz, len(u), ", ".join(names[:2]) + (" ..." if len(names) > 2 else "")))
+    orphan = [o for o in uses if o not in {x[0] for x in ents}]
+    if orphan:
+        print("UWAGA: elementy wskazuja offsety spoza wpisow:", orphan[:5])
+
+
+def cmd_picture_export(proj, offset, out):
+    _, _, _, blob = _read_picture_block(proj)
+    ent = dict(_picture_entries(blob))
+    o = int(offset)
+    if o not in ent:
+        raise SystemExit("Brak wpisu o offsecie %s (lista: pictures)" % offset)
+    data = blob[o + 4:o + 4 + ent[o]]
+    if data[:3] == b"GIF":
+        with open(out, "wb") as f:
+            f.write(data)
+        print("Zapisano GIF:", out)
+        return
+    w, h, rgba = _rgba_from_dib(data)
+    _png_write(out, w, h, rgba)
+    print("Zapisano %s (%dx%d)" % (out, w, h))
+
+
+def _add_picture(proj, png):
+    """Dopisuje PNG na koniec bloku [Picture]; zwraca (offset, szer, wys)."""
+    lines, a, b, blob = _read_picture_block(proj)
+    w, h, rgba = _png_read(png)
+    off = len(blob)
+    blob = bytearray(blob) + _dib_from_rgba(w, h, rgba)
+    _write_picture_block(proj, lines, a, b, blob)
+    return off, w, h
+
+
+def cmd_picture_add(proj, png):
+    off, w, h = _add_picture(proj, png)
+    print("Dodano %s (%dx%d), offset=%d" % (os.path.basename(png), w, h, off))
+
+
+def _repoint(proj, old, new, name=None):
+    """Zmienia PictureOffset=old na new we wszystkich stanach wszystkich ekranow (opcjonalnie Picture Name)."""
+    n = 0
+    for s in load_screens(proj):
+        changed = False
+        for i, l in enumerate(s.lines):
+            if l == "PictureOffset=%d" % old:
+                s.lines[i] = "PictureOffset=%d" % new
+                if name and s.lines[i + 1].startswith("PIB Name=") and s.lines[i + 2].startswith("Picture Name="):
+                    s.lines[i + 2] = "Picture Name=" + name
+                changed = True
+                n += 1
+        if changed:
+            _write(s.path, "\n".join(s.lines).encode("utf-8"))
+    return n
+
+
+def cmd_picture_replace(proj, offset, png, name=None):
+    """Wymienia obraz: nowy wpis na koncu bloku, wszystkie elementy z danym offsetem wskazuja na niego."""
+    old = int(offset)
+    _, _, _, blob = _read_picture_block(proj)
+    if old not in dict(_picture_entries(blob)):
+        raise SystemExit("Brak wpisu o offsecie %s (lista: pictures)" % offset)
+    info = _dib_info(blob[old + 4:old + 4 + dict(_picture_entries(blob))[old]])
+    new, w, h = _add_picture(proj, png)
+    n = _repoint(proj, old, new, name)
+    if isinstance(info, tuple) and info[:2] != (w, h):
+        print("UWAGA: rozmiar obrazu zmieniony %dx%d -> %dx%d; sprawdz PictureWidth/PictureHeight elementow" % (info[0], info[1], w, h))
+    print("Offset %d -> %d w %d stanach (stary wpis zostaje w bloku bez uzycia)" % (old, new, n))
+
+
+def cmd_picture_set(proj, screen, ident, png, state=None, bank="Icons", name=None, invisible=False,
+                    fit=False, offset=None):
+    """Ustawia obraz stanow elementu (--state=N|all; domyslnie wszystkie). Brakujace pola obrazu sa dopisywane
+    po UsePictureCoord. --fit: pole obrazu = prostokat elementu (rozciagany), --invisible: Style=3 (tylko obraz i tekst)."""
+    if offset is not None:
+        off, w, h = int(offset), None, None
+    else:
+        off, w, h = _add_picture(proj, png)
+    s = find_screen(load_screens(proj), screen)
+    e = s.element(ident)
+    lines = list(e.lines)
+    head_end, states = _section_ranges(lines)
+    sel = range(len(states)) if state in (None, "all") else [int(state)]
+    pname = name or (os.path.basename(png) if png else "")
+    box = [e.props.get(k, "0") for k in ("X", "Y", "Width", "Height")]
+    for n in reversed(list(sel)):
+        a, b = states[n]
+        blk = lines[a:b]
+        if not any(l.startswith("PictureOffset=") for l in blk):
+            pos = next((i for i, l in enumerate(blk) if l.startswith("UsePictureCoord=")), None)
+            if pos is None:
+                raise SystemExit("Stan %d nie ma pola UsePictureCoord - obrazu nie da sie dopisac" % n)
+            blk[pos + 1:pos + 1] = ["PictureCoordX=%s" % box[0], "PictureCoordY=%s" % box[1],
+                                    "PictureWidth=%s" % (w or box[2]), "PictureHeight=%s" % (h or box[3]),
+                                    "SvgPropCount=0", "PictureOffset=0", "PIB Name=", "Picture Name="]
+            fit = True
+        _set_in(blk, "PictureOffset", str(off))
+        _set_in(blk, "PIB Name", bank)
+        if pname:
+            _set_in(blk, "Picture Name", pname)
+        if fit:
+            for k, v in zip(("PictureCoordX", "PictureCoordY", "PictureWidth", "PictureHeight"), box):
+                _set_in(blk, k, v)
+            _set_in(blk, "PictureStretch", "1")
+        lines[a:b] = blk
+    if invisible:
+        h2 = lines[:head_end]
+        if not _set_in(h2, "Style", "3"):
+            raise SystemExit("Element nie ma klucza Style")
+        lines[:head_end] = h2
+    _save_screen(s, e.start - 1, lines, len(e.lines))
+    print("%s el.%d: obraz offset=%d (%s), stany: %s%s" % (s.file, e.id, off, bank + "/" + pname,
+          "wszystkie" if state in (None, "all") else state, ", tlo niewidoczne" if invisible else ""))
+
+
+def cmd_remove(proj, screen, ident):
+    s = find_screen(load_screens(proj), screen)
+    e = s.element(ident)
+    if e.props.get("GroupID", "0") not in ("0", ""):
+        print("UWAGA: element nalezy do grupy", e.props["GroupID"])
+    _save_screen(s, e.start - 1, [], len(e.lines))
+    print("%s: usunieto el.%d %s" % (s.file, e.id, e.type_name))
+
+
+def cmd_lower(proj, screen, ident, front=False):
+    """Zmienia warstwe: na spod (domyslnie) albo na wierzch (--front). Pierwszy element w pliku jest najnizej."""
+    s = find_screen(load_screens(proj), screen)
+    e = s.element(ident)
+    lines = list(e.lines)
+    _save_screen(s, e.start - 1, [], len(e.lines))
+    s2 = find_screen(load_screens(proj), screen)
+    if front and s2.elements:
+        last = s2.elements[-1]
+        idx = last.start - 1 + len(last.lines)
+    elif s2.elements:
+        idx = s2.elements[0].start - 1
+    else:
+        idx = len(s2.lines)
+    s2.lines[idx:idx] = lines
+    _write(s2.path, "\n".join(s2.lines).encode("utf-8"))
+    print("%s: el.%d %s" % (s.file, e.id, "na wierzch" if front else "na spod"))
+
+
 # ---------------------------------------------------------------- ekrany, projekty, slownik
 
 WINDOW_KEYS = ("Width", "Height", "CenterSubScreen", "SubScreenX", "SubScreenY", "AutoCloseTime")
@@ -1567,6 +1887,12 @@ USAGE = """Uzycie (KAT = katalog po decode; przegladanie dziala tez na PROJEKT.d
   set     KAT EKRAN ELEMENT|- KLUCZ=WART ... [--state=N|all] [--lang=N] [--states=N]   (- = naglowek ekranu)
   add     KAT EKRAN RODZAJ|EKRAN:ELEMENT [KLUCZ=WART ...] [--from=KAT2] [--state=N|all] [--lang=N] [--states=N] [--force]
   add-screen KAT ID NAZWA [--base=ID] [--sub|--confirm] [--size=SZERxWYS] [--pos=X,Y] [--title=TYTUL] [--from=EKRAN]
+  pictures KAT                          obrazy w projekcie: offset, rozmiar, uzycia
+  picture-export KAT OFFSET WYJSCIE.png  zapis obrazu do PNG (wpisy 24/32 bpp)
+  picture-add KAT PLIK.png              dopisuje obraz na koniec bloku [Picture], pokazuje offset
+  picture-replace KAT OFFSET PLIK.png [--name=N]   wymienia obraz we wszystkich stanach, ktore go uzywaja
+  picture-set KAT EKRAN EL PLIK.png|--offset=N [--state=N|all] [--bank=B] [--name=N] [--fit] [--invisible]
+  remove  KAT EKRAN EL                  usuwa element   |  lower KAT EKRAN EL [--front]   zmiana warstwy
   types                                 rodzaje elementow z parametrami wymaganymi
   params  [TEKST] [--type=T/S|NAZWA] [--scope=ekran|element|stan|akcja]   slownik parametrow
   info    KAT                           panel, lacza, jezyki, ekrany, programy Lua
@@ -1582,7 +1908,7 @@ def main(argv):
     args = [a for a in argv[1:] if not a.startswith("--")]
     flags = dict((a[2:].partition("=")[0], a.partition("=")[2]) for a in argv[1:] if a.startswith("--"))
     need = {"decode": 2, "encode": 2, "verify": 2, "screens": 2, "list": 3, "show": 4, "find": 3,
-            "set": 4, "add": 4, "add-screen": 4, "files": 1, "new": 2, "types": 1, "params": 1, "info": 2, "lua-api": 1, "diff": 3}
+            "set": 4, "add": 4, "add-screen": 4, "pictures": 2, "picture-export": 4, "picture-add": 3, "picture-replace": 4, "picture-set": 4, "remove": 4, "lower": 4, "files": 1, "new": 2, "types": 1, "params": 1, "info": 2, "lua-api": 1, "diff": 3}
     if not args or args[0] not in need or len(args) < need[args[0]]:
         print(USAGE)
         return 2
@@ -1613,6 +1939,22 @@ def main(argv):
         src = _project_dir(flags["from"], False) if flags.get("from") else None
         cmd_add(_project_dir(args[1], False), args[2], args[3], args[4:], src, flags.get("state"), lang,
                 "force" in flags, flags.get("states"))
+    elif cmd == "pictures":
+        cmd_pictures(_project_dir(args[1]))
+    elif cmd == "picture-export":
+        cmd_picture_export(_project_dir(args[1]), args[2], args[3])
+    elif cmd == "picture-add":
+        cmd_picture_add(_project_dir(args[1], False), args[2])
+    elif cmd == "picture-replace":
+        cmd_picture_replace(_project_dir(args[1], False), args[2], args[3], flags.get("name"))
+    elif cmd == "picture-set":
+        cmd_picture_set(_project_dir(args[1], False), args[2], args[3], args[4] if len(args) > 4 else None,
+                        flags.get("state"), flags.get("bank") or "Icons", flags.get("name"), "invisible" in flags,
+                        "fit" in flags, flags.get("offset"))
+    elif cmd == "remove":
+        cmd_remove(_project_dir(args[1], False), args[2], args[3])
+    elif cmd == "lower":
+        cmd_lower(_project_dir(args[1], False), args[2], args[3], "front" in flags)
     elif cmd == "add-screen":
         cmd_add_screen(_project_dir(args[1], False), args[2], args[3], flags.get("base"), "sub" in flags,
                        flags.get("from"), "confirm" in flags, flags.get("size"), flags.get("pos"),
