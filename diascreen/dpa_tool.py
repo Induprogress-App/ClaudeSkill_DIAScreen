@@ -1125,7 +1125,8 @@ def cmd_add(proj, screen, source, assigns, src_proj=None, state=None, lang=0, fo
 
 # ---------------------------------------------------------------- obrazy ([Picture]) i uklad elementow
 
-PIC_START = 15  # blok [Picture] zaczyna sie naglowkiem "DOP-100IMAGE1.0"; pierwszy wpis od offsetu 15
+PIC_HEADER = b"DOP-100IMAGE1.0"  # blok [Picture] zaczyna sie tym naglowkiem (15 B), pierwszy wpis od offsetu 15
+PIC_START = len(PIC_HEADER)
 
 
 def _read_picture_block(proj):
@@ -1137,7 +1138,11 @@ def _read_picture_block(proj):
     a = lines.index("[Picture]")
     b = next((i for i in range(a + 1, len(lines)) if lines[i].startswith("[")), len(lines))
     hexl = [l for l in lines[a + 2:b]]
-    if not lines[a + 1].startswith("Size=") or any(not l.startswith("@@hex ") for l in hexl):
+    if not lines[a + 1].startswith("Size="):
+        raise SystemExit("Nieznany zapis bloku [Picture]")
+    if lines[a + 1] == "Size=0" and all(l == "" for l in hexl):
+        return lines, a, b, b""  # pusty blok (nowy projekt): za Size=0 jest jedna pusta linia
+    if any(not l.startswith("@@hex ") for l in hexl):
         raise SystemExit("Nieznany zapis bloku [Picture]")
     blob = b"\r\n".join(bytes.fromhex(l[6:]) for l in hexl)
     if int(lines[a + 1][5:]) != len(blob):
@@ -1147,6 +1152,8 @@ def _read_picture_block(proj):
 
 def _write_picture_block(proj, lines, a, b, blob):
     new = ["Size=%d" % len(blob)] + ["@@hex " + x.hex() for x in bytes(blob).split(b"\r\n")]
+    if not blob:
+        new = ["Size=0", ""]
     lines[a + 1:b] = new
     _write(os.path.join(proj, "project.txt"), "\n".join(lines).encode("utf-8"))
 
@@ -1328,8 +1335,9 @@ def _add_picture(proj, png):
     """Dopisuje PNG na koniec bloku [Picture]; zwraca (offset, szer, wys)."""
     lines, a, b, blob = _read_picture_block(proj)
     w, h, rgba = _png_read(png)
+    blob = bytearray(blob) if blob else bytearray(PIC_HEADER)  # pusty blok zaczyna sie naglowkiem
     off = len(blob)
-    blob = bytearray(blob) + _dib_from_rgba(w, h, rgba)
+    blob += _dib_from_rgba(w, h, rgba)
     _write_picture_block(proj, lines, a, b, blob)
     return off, w, h
 
