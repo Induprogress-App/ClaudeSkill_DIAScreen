@@ -22,6 +22,11 @@ parametrów i rodzajów jest dostępny przez `types` i `params`).
 | `list KAT EKRAN [--xy]` | linia na element: nr, rodzaj, adresy (R/W/Trg/Vis/Lock/Scr), teksty |
 | `show KAT EKRAN EL [--all]` | parametry elementu bez wartości pustych, stany jako różnice |
 | `find KAT TEKST` | gdzie występuje adres/tekst (wszystkie ekrany) |
+| `pictures KAT` | obrazy projektu: offset, rozmiar, liczba użyć, bank/nazwa |
+| `picture-export KAT OFFSET WYJ.png` | obraz do PNG (do edycji poza narzędziem) |
+| `picture-add KAT PLIK.png` / `picture-replace KAT OFFSET PLIK.png` | dopisanie / wymiana obrazu (wymiana przepina wszystkie stany z tym offsetem) |
+| `picture-set KAT EKRAN EL PLIK.png\|--offset=N [--state=N\|all] [--bank=B] [--name=N] [--fit] [--invisible]` | obraz w stanach elementu (dopisuje brakujące pola obrazu); `--invisible` = tło niewidoczne (`Style=3`) |
+| `remove KAT EKRAN EL` / `lower KAT EKRAN EL [--front]` | usunięcie elementu / zmiana warstwy (na spód albo `--front` na wierzch) |
 | `types` | rodzaje elementów `T/S`, parametry wymagane i typowe opcjonalne |
 | `params [TEKST] [--type=RODZAJ] [--scope=ekran\|element\|stan\|akcja]` | słownik: klucz = domyślna \| wartości \| opis |
 | `add KAT EKRAN RODZAJ klucz=wart …` | nowy element (np. `"Numeric Display" read=$10 x=20 y=60`) |
@@ -57,6 +62,11 @@ Skróty kluczy: `text` (tekst, wszystkie stany), `desc`, `read`, `write`, `visib
    `add-screen KAT 65500 Nazwa --confirm`, na nim `Keypad Key` z `ASCIIValue0=13` (OK) / `27` (Anuluj),
    w przycisku `ConFirmWindow=3 ConfirmScreenID=65500 ConfirmScreenName=Nazwa`.
    Typ danych: `MemLen` 0 bit / 1 Word / 2 DWord / 6 QWord, `MemFmt` 1 = ze znakiem, 2 = bez znaku.
+   Wygląd, dalsze ustalenia: prostokąt (`Rectangle`) ma `RoundRadius` (zaokrąglenie narożników, px) i `FillStyle`
+   (0 = sama obwódka, 1 = wypełniony); pole wpisu (`Numeric Entry`) ma tło w `BgFillColor`/`BgFillStopColor0..4` –
+   gdy jest zbliżone do `FontColor`, wartość jest niewidoczna, więc po zmianie kolorów sprawdź też te klucze;
+   `BgColor` ekranu (`set KAT EKRAN - BgColor=`) jest rysowany pod elementami ekranów bazowych; element bez obwódki:
+   kolor `BorderColor` = kolor wypełnienia albo `ShowBorder=0`.
 6. Teksty ponad 256 znaków: `set text=` sam uzupełnia kopię `Base64TextLen`. Nazwy ekranów/teksty mogą mieć
    polskie znaki; zwykłe wartości (`klucz=` bez `@@u16`) – tylko ASCII.
 7. Makra: pod `…MacroLen=` linie `@@m <nagłówek> <flagi> ["tekst", "op1", "op2", "op3", "op4"]`, jedna na
@@ -67,6 +77,12 @@ Skróty kluczy: `text` (tekst, wszystkie stany), `desc`, `read`, `write`, `visib
 8. Po zmianach `encode`, potem użytkownik otwiera projekt w DIAScreen i **kompiluje** – tylko to potwierdza
    poprawność. W `params` „(?)” = znaczenie przypuszczalne; gdy użytkownik je potwierdzi, zaproponuj poprawkę
    słownika.
+9. Obrazy: `pictures` pokazuje wpisy bloku `[Picture]` (offset = adres w bloku, którego używa `PictureOffset` elementów).
+   Edycja ikony: `picture-export` → zmiana PNG → `picture-replace KAT OFFSET nowy.png` (przepina wszystkie użycia),
+   nowa ikona na elemencie: `picture-set KAT EKRAN EL ikona.png --fit --state=all` (`--invisible`, gdy ma być bez tła).
+   Offsety zmieniają się po zapisie projektu w DIAScreen – zawsze odczytaj je ponownie. Bank obrazów DIAScreen jest
+   globalny (poza projektem); obrazy dopisane narzędziem trafiają prosto do projektu. Szczegóły i ostrzeżenie o CRLF
+   w bloku: `FORMAT_DPA.md`. Przed zapisem projektu zamknij DIAScreen – zapis z otwartego okna nadpisze zmiany.
 
 ## Lua
 Programy są w `KAT/lua/<nazwa>.lua` (zwykły tekst) – to jedyne pliki, które czytasz i edytujesz bezpośrednio.
