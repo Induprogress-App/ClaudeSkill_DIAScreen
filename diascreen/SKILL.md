@@ -55,6 +55,9 @@ Skróty kluczy: `text` (tekst, wszystkie stany), `desc`, `read`, `write`, `visib
    adresów `$`; dla zmiennych sterownika sprawdź. Nowa linia w tekście: `
 `.
    Wygląd (sprawdzone): `Style=3` = Invisible (Multistate), `Style=32768` = przezroczysty Text,
+   **obraz z przezroczystym tłem** (PNG z kanałem alfa, np. ikona/przycisk z grafiki): `Style=32771`
+   (= 32768 + 3) – samo `Style=3` (`picture-set --invisible`) zostawia tło obrazu nieprzezroczyste;
+   po `picture-set … --invisible` ustaw `set KAT EKRAN EL Style=32771`,
    `FgColor`/`FgFillColor` = kolor wypełnienia, `FgFillType` 1 = Solid / 6 = gradient, `FontColor`, `FontBold`,
    `Twinkles=1` = miganie, `FontAlign` = 1/2/4 (lewo/środek/prawo) + 16/32/64 (góra/środek/dół). Kolory COLORREF:
    R + G·256 + B·65536 (255 = czerwony, 65280 = zielony, 16711680 = niebieski).
