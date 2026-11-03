@@ -91,6 +91,12 @@ Skróty kluczy: `text` (tekst, wszystkie stany), `desc`, `read`, `write`, `visib
 Programy są w `KAT/lua/<nazwa>.lua` (zwykły tekst) – to jedyne pliki, które czytasz i edytujesz bezpośrednio.
 Naśladuj styl istniejącego programu. Składnię funkcji (`mem.*`, `screen.*`, `sys.*`, `recipe.*`…) sprawdzaj
 `lua-api` – czyta dokumentację z zainstalowanego DIAScreen; nie zgaduj funkcji, których tam nie ma.
+- Lua w panelu to starsza wersja: bez operatora `//` (używaj `math.floor(a / b)`).
+- Funkcje `recipe.GetCurEnRcpGIndex()` / `GetCurEnRcpNoIndex()` zwracają **dwie wartości** (`ret, idx`):
+  pisz `local _, g = recipe.GetCurEnRcpGIndex()`.
+- Zapis do receptury z Lua: `recipe.ChangeEnRcpGIndex(g)` i `ChangeEnRcpNoIndex(n)` wybierają grupę i wiersz,
+  potem `SetEnRcpWord(idx, v)` i `SetEnRcpAscii(idx, tekst, dł)` (idx = słowo w wierszu 🔶). Na koniec przywróć poprzedni wybór.
+- Krótkie przyciski Momentary czytaj w pętli co ≤100 ms i zeruj bit po obsłużeniu.
 
 ## Ograniczenia
 Sprawdzone na panelach AX-8 (`Version` 6.6.0–6.6.2). Inna wersja/panel: najpierw `verify`, potem otwarcie
