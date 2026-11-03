@@ -40,7 +40,7 @@ Po nagłówku ekranu: `[AuxKeyElement]`, potem kolejne `[Element]`, każdy z jed
 | `nPartsID` | numer elementu na ekranie (kolejny) ✅ |
 | `@@u16 wDescTextLen0` | Element Description (np. „Numeric Display_001”) ✅ |
 | `AutoResizeByText`, `AutoResizeMargin` | „Automatically resized based” / Margin ✅ |
-| `Style` | styl ramki: `2` = Sunken (Numeric Display) ✅; `32768` u pola Text 🔶 |
+| `Style` | styl ramki: `2` = Sunken (Numeric Display) ✅; `32768` u pola Text 🔶; `32771` (= 32768 + 3) = element z obrazem bez tła, przezroczyste piksele obrazu widoczne jako przezroczyste ✅ (pokazane przez użytkownika na Rectangle z obrazem PNG) |
 | `BorderColor` | Border Color ✅ |
 | `EnableShadowEffect`, `ShadowOffsetX/Y`, `ShadowColor`, `ShadowBlurRadius` | Show shadow / Offset X/Y / Shadow color / blur radius ✅ |
 | `VisibleLink`, `VisibleVar`, `VisibleCondition` | Operating conds. – widoczność 🔶 |

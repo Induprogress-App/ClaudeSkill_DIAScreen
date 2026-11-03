@@ -55,6 +55,9 @@ Skróty kluczy: `text` (tekst, wszystkie stany), `desc`, `read`, `write`, `visib
    adresów `$`; dla zmiennych sterownika sprawdź. Nowa linia w tekście: `
 `.
    Wygląd (sprawdzone): `Style=3` = Invisible (Multistate), `Style=32768` = przezroczysty Text,
+   **obraz z przezroczystym tłem** (PNG z kanałem alfa, np. ikona/przycisk z grafiki): `Style=32771`
+   (= 32768 + 3) – samo `Style=3` (`picture-set --invisible`) zostawia tło obrazu nieprzezroczyste;
+   po `picture-set … --invisible` ustaw `set KAT EKRAN EL Style=32771`,
    `FgColor`/`FgFillColor` = kolor wypełnienia, `FgFillType` 1 = Solid / 6 = gradient, `FontColor`, `FontBold`,
    `Twinkles=1` = miganie, `FontAlign` = 1/2/4 (lewo/środek/prawo) + 16/32/64 (góra/środek/dół). Kolory COLORREF:
    R + G·256 + B·65536 (255 = czerwony, 65280 = zielony, 16711680 = niebieski).
@@ -88,6 +91,12 @@ Skróty kluczy: `text` (tekst, wszystkie stany), `desc`, `read`, `write`, `visib
 Programy są w `KAT/lua/<nazwa>.lua` (zwykły tekst) – to jedyne pliki, które czytasz i edytujesz bezpośrednio.
 Naśladuj styl istniejącego programu. Składnię funkcji (`mem.*`, `screen.*`, `sys.*`, `recipe.*`…) sprawdzaj
 `lua-api` – czyta dokumentację z zainstalowanego DIAScreen; nie zgaduj funkcji, których tam nie ma.
+- Lua w panelu to starsza wersja: bez operatora `//` (używaj `math.floor(a / b)`).
+- Funkcje `recipe.GetCurEnRcpGIndex()` / `GetCurEnRcpNoIndex()` zwracają **dwie wartości** (`ret, idx`):
+  pisz `local _, g = recipe.GetCurEnRcpGIndex()`.
+- Zapis do receptury z Lua: `recipe.ChangeEnRcpGIndex(g)` i `ChangeEnRcpNoIndex(n)` wybierają grupę i wiersz,
+  potem `SetEnRcpWord(idx, v)` i `SetEnRcpAscii(idx, tekst, dł)` (idx = słowo w wierszu 🔶). Na koniec przywróć poprzedni wybór.
+- Krótkie przyciski Momentary czytaj w pętli co ≤100 ms i zeruj bit po obsłużeniu.
 
 ## Ograniczenia
 Sprawdzone na panelach AX-8 (`Version` 6.6.0–6.6.2). Inna wersja/panel: najpierw `verify`, potem otwarcie
