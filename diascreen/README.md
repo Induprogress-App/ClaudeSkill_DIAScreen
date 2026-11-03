@@ -153,6 +153,18 @@ python dpa_tool.py lower KATALOG EKRAN ELEMENT [--front]
 - PNG: 8 lub 16 bitów, bez przeplotu (czytany i zapisywany przez `zlib`, bez dodatkowych bibliotek). Zapisuj projekt
   tylko przy zamkniętym DIAScreen – zapis z otwartego okna nadpisze zmiany.
 
+## Kompilacja bez DIAScreen w ręku
+
+```
+powershell -ExecutionPolicy Bypass -File kompiluj.ps1 PROJEKT.dpa [WYNIK.txt]
+```
+
+- Skrypt kompiluje kopię projektu w osobnym oknie DIAScreen. Okna otwarte przez użytkownika zostają nietknięte.
+- Pełny panel Output trafia do `WYNIK.txt` (domyślnie `PROJEKT.kompilacja.txt`).
+- Na ekranie skrypt wypisuje podsumowanie komunikatów z numerem ekranu i elementem.
+- DIAScreen nie ma kompilacji z wiersza poleceń. Skrypt wysyła do okna polecenie Compile (`WM_COMMAND` 50067) i czyta listę Output z pamięci procesu.
+- Instalacja: najnowsza w `Program Files`, inną wskazuje zmienna `DIASCREEN_DIR`.
+
 ## Układ folderu po `decode`
 | Plik | Zawartość |
 |---|---|

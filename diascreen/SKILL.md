@@ -77,9 +77,15 @@ Skróty kluczy: `text` (tekst, wszystkie stany), `desc`, `read`, `write`, `visib
    (np. `["$11 = 5", "$11", "5", "Var3", "Var4"]`); nagłówka i flag nie ruszaj, długość liczy `encode`.
    Nowe polecenie – skopiuj linię polecenia tego samego rodzaju. Kopia elementu (`add`) kopiuje też makro –
    popraw jego adresy. Ostatnia linia `@@m 00000067` musi zostać.
-8. Po zmianach `encode`, potem użytkownik otwiera projekt w DIAScreen i **kompiluje** – tylko to potwierdza
-   poprawność. W `params` „(?)” = znaczenie przypuszczalne; gdy użytkownik je potwierdzi, zaproponuj poprawkę
-   słownika.
+8. Po zmianach `encode`, potem **kompilacja** – tylko ona potwierdza poprawność. Możesz ją uruchomić sam:
+   `powershell -ExecutionPolicy Bypass -File "<katalog skilla>/kompiluj.ps1" PROJEKT.dpa [WYNIK.txt]`
+   (kompiluje kopię w osobnym oknie DIAScreen, okien użytkownika nie rusza; wypisuje komunikaty z ekranem
+   i elementem, ostatnia linia `Compilation successful`/`failed`). Częste błędy „Element address input error”:
+   bit powyżej 15 (`$N.16`), element z `PosVary=1` bez `ReadVar`, akcje Multiple Actions z `WriteVar=None`;
+   „address is undefined” w trendzie: `LocalCurveAddrN` (bit włączenia krzywej); Alarm History Table wymaga
+   alarmów (`[Alarm]`: `ReadAlarmVar` + `AlarmEnableNNN`); receptury rozszerzone – `ReadEnRecipeVar`;
+   „Incorrect element position” – element wystaje poza ekran. W `params` „(?)” = znaczenie przypuszczalne;
+   gdy użytkownik je potwierdzi, zaproponuj poprawkę słownika.
 9. Obrazy: `pictures` pokazuje wpisy bloku `[Picture]` (offset = adres w bloku, którego używa `PictureOffset` elementów).
    Edycja ikony: `picture-export` → zmiana PNG → `picture-replace KAT OFFSET nowy.png` (przepina wszystkie użycia),
    nowa ikona na elemencie: `picture-set KAT EKRAN EL ikona.png --fit --state=all` (`--invisible`, gdy ma być bez tła).
