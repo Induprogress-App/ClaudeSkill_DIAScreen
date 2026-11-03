@@ -80,7 +80,10 @@ Skróty kluczy: `text` (tekst, wszystkie stany), `desc`, `read`, `write`, `visib
 8. Po zmianach `encode`, potem użytkownik otwiera projekt w DIAScreen i **kompiluje** – tylko to potwierdza
    poprawność. W `params` „(?)” = znaczenie przypuszczalne; gdy użytkownik je potwierdzi, zaproponuj poprawkę
    słownika.
-9. Obrazy: `pictures` pokazuje wpisy bloku `[Picture]` (offset = adres w bloku, którego używa `PictureOffset` elementów).
+9. Klawiatury własne: ekran z `IsKeypadScreen=1` (`set KAT EKRAN - IsKeypadScreen=1`), klawisze `add … "Keypad Key" ASCIIValue0=<kod>`
+   (Enter 13, CLR 24, ESC 27, DEL 127); pole wartości i Min/Max (15/5, 15/6) oraz wzory gotowych klawiatur –
+   `FORMAT_DPA.md` (biblioteki DIAScreen `Library\*.bin` = XOR 0xAA). Pole wpisu: `UseCustKeypad=1 KeypadScreenID=N` 🔶.
+10. Obrazy: `pictures` pokazuje wpisy bloku `[Picture]` (offset = adres w bloku, którego używa `PictureOffset` elementów).
    Edycja ikony: `picture-export` → zmiana PNG → `picture-replace KAT OFFSET nowy.png` (przepina wszystkie użycia),
    nowa ikona na elemencie: `picture-set KAT EKRAN EL ikona.png --fit --state=all` (`--invisible`, gdy ma być bez tła).
    Offsety zmieniają się po zapisie projektu w DIAScreen – zawsze odczytaj je ponownie. Bank obrazów DIAScreen jest
