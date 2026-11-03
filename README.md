@@ -4,12 +4,23 @@ Jeden plik `dpa_tool.py`, wymaga tylko Pythona 3 (bez dodatkowych bibliotek).
 Sprawdzone na projektach DIAScreen dla panelu serii AX-8. Opis formatu pliku `.dpa`: [FORMAT_DPA.md](FORMAT_DPA.md),
 znaczenie parametrów: [PARAMETRY.md](PARAMETRY.md).
 
+## Ostatnie zmiany
+- **Kompilacja przez Claude** – `kompiluj.ps1`:
+  - kompiluje kopię projektu w osobnym oknie DIAScreen i czyta błędy z panelu Output;
+  - w `SKILL.md` (zasada 8) jest lista częstych błędów kompilacji i ich przyczyn.
+- **Klawiatury własne** – ekran klawiatury (`IsKeypadScreen=1`), elementy Keypad Key 15/4–6 i kody klawiszy specjalnych.
+  Biblioteki DIAScreen `Library\*.bin` (XOR 0xAA) służą jako źródło wzorów elementów.
+- **Receptury rozszerzone** – budowa `[EnhanceRcp]`, Recipe Viewer, zapis do receptury z Lua.
+- **Trend** – bufor historii `[History]` dla trendu historycznego.
+- **Lua** – brak operatora `//`; `GetCurEnRcp*Index` zwraca `(ret, idx)`.
+- **Obraz z przezroczystym tłem** – `Style=32771`.
+
 ## Zasada pracy
 1. Zamknij projekt w DIAScreen.
 2. `decode` rozkłada `PROJEKT.dpa` na pliki tekstowe w folderze `PROJEKT` obok projektu.
 3. Edytujesz pliki tekstowe (dowolnym edytorem).
 4. `encode` składa folder z powrotem do pliku `.dpa` (domyślnie `PROJEKT_edited.dpa` – oryginał zostaje).
-5. Otwierasz projekt w DIAScreen i **kompilujesz** – to jest ostateczna kontrola poprawności.
+5. Otwierasz projekt w DIAScreen i **kompilujesz** (albo `kompiluj.ps1`) – to jest ostateczna kontrola poprawności.
 
 ## Polecenia
 ```
