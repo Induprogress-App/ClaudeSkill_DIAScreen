@@ -107,6 +107,32 @@ Naśladuj styl istniejącego programu. Składnię funkcji (`mem.*`, `screen.*`, 
   potem `SetEnRcpWord(idx, v)` i `SetEnRcpAscii(idx, tekst, dł)` (idx = słowo w wierszu 🔶). Na koniec przywróć poprzedni wybór.
 - Krótkie przyciski Momentary czytaj w pętli co ≤100 ms i zeruj bit po obsłużeniu.
 
+## Ustalenia praktyczne (konwersja Weintek → DIAScreen 1.9)
+- **Pozostałości:** `kompiluj.ps1` zostawia w `%TEMP%` kopie `dpa_kompilacja_*` (+ `.bak`) – usuwaj swoje po pracy.
+  Wiszące instancje DIAScreen/emulatora z wcześniejszych prób blokują kompilację: zamykaj tylko te, które
+  otwierały Twoje pliki robocze. Pełny dysk C = kompilacja urywa się bez komunikatu (pusty log, np. na
+  „Picture Data”); przekierowanie `TEMP` nie pomaga, DIAScreen i tak pisze na C.
+- **Bar Graph / Meter / Slider:** skill nie ma ich wzorców, a konwersja zostawia w ich miejscu szare pola liczbowe.
+  Działające wzorce weź z przykładowego projektu Delta `DOP100_FullDemo.dpa` (skopiuj element, popraw adresy,
+  skalę i kolory). Tarcza Meter domyślnie niebieska – ustaw jasną i usuń zdublowane cyfry skali, gdy pod spodem
+  jest grafika łuku.
+- **Biblioteki:** `Library\*.bin` w katalogu DIAScreen (XOR 0xAA) to też źródło wzorców elementów, nie tylko klawiatur.
+- **Linie:** `Style=769` = linia z grotami strzałek; zwykła linia bez grotów wymaga innego `Style` (sprawdź na
+  linii z projektu). Linie po konwersji mogą mieć włączone przesuwanie wg adresów – wyłącz je.
+  Bit widoczności (`visible`) bywa odwrotny: element widoczny przy bicie 0 – sprawdź w symulacji.
+- **Prostokąty:** wzorzec prostokąta ze skilla może psuć kompilację w projektach innej wersji – wtedy skopiuj
+  prostokąt z samego projektu (`add` bierze wzorzec z projektu, gdy taki istnieje). `EnableCustomRadius=1`
+  psuje kompilację – zostaje `RoundRadius` (rzeczywiście ok. 3 px). Przyciski i pola wpisu nie mają zaokrąglenia:
+  pod element połóż zaokrąglony prostokąt (`FillStyle=1`, `ShowBorder=0`, opis np. „Rounded bg”), a element
+  ustaw jako przezroczysty, płaski (`FgFillType=1`).
+- **Receptury:** przeglądarka receptur nie pokazuje danych wpisanych z Lua (Lua zmienia tylko bieżący wiersz,
+  nie zapisuje tabeli). Listę do wyboru buduj z elementów ekranu (teksty + niewidoczne przyciski) albo pól
+  tekstowych wypełnianych z Lua.
+- **Obrazy:** gdy ikona nie przeszła (element bez pól obrazu), `picture-set … --offset` dopisuje brakujące pola.
+- **Emulator (zrzuty/klikanie automatyczne):** pierwsze kliknięcie w nieaktywne okno tylko je aktywuje – najpierw
+  kliknij pasek tytułu; kliknięcia muszą trwać dłużej (~120 ms między down/up); szybkie serie przepadają.
+  Przed klikaniem sprawdź pozycję okna. Zrzut okna: `PrintWindow` (flaga 2).
+
 ## Ograniczenia
 Sprawdzone na panelach AX-8 (`Version` 6.6.0–6.6.2). Inna wersja/panel: najpierw `verify`, potem otwarcie
 w DIAScreen. Szczegóły formatu (tylko przy rozwoju narzędzia): `FORMAT_DPA.md`, `README.md`.
