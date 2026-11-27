@@ -133,6 +133,24 @@ Naśladuj styl istniejącego programu. Składnię funkcji (`mem.*`, `screen.*`, 
   kliknij pasek tytułu; kliknięcia muszą trwać dłużej (~120 ms między down/up); szybkie serie przepadają.
   Przed klikaniem sprawdź pozycję okna. Zrzut okna: `PrintWindow` (flaga 2).
 
+## Ustalenia praktyczne (zmiana wyglądu, obrazy, teksty)
+- **Widoczność:** `VisibleCondition=0` = element widoczny, gdy bit `VisibleVar` jest **OFF** (1 = przy ON).
+  Zmieniając wygląd wskaźnika stanu (np. „aktywny = niebieski”), sprawdź warunek – przy 0 kolor aktywny
+  pokaże się przy elementach nieaktywnych.
+- **Kolejność kluczy:** nie wstawiaj kluczy w dowolne miejsce elementu ani stanu – zły układ = DIAScreen nie otwiera
+  projektu. Zmieniaj istniejące klucze; brakujące pola obrazu dopisuj tuż po `UsePictureCoord=` (tak robi `picture-set`).
+- **Puste teksty:** `@@u16 wTextLen0=""`; pusta wartość (`@@u16 KLUCZ=`) też oznacza pusty tekst.
+- **Nowa linia w tekście** przy edycji skryptem/regexem: zapisuj dosłownie `\r\n` (znaki `\` + litera) –
+  prawdziwy znak CR/LF w linii psuje plik ekranu.
+- **Napis pod rysunkiem:** `FontAlign=66` (dół, środek) + `\r\n` na końcu tekstu podnosi napis nad dolną krawędź;
+  obraz w górnej części przycisku.
+- **Obraz a element:** `set … x= y= w= h=` przesuwa też obraz w stanach (obraz na całym elemencie dostaje nowy
+  prostokąt, mniejszy przesuwa się razem z elementem). Przy edycji plików ręcznie pilnuj `PictureCoordX/Y`,
+  `PictureWidth/Height` – inaczej obraz zostaje w starym miejscu (także poza ekranem). Obraz większy niż element =
+  ostrzeżenie kompilacji: rozmiar PNG ≤ rozmiar elementu.
+- **Nazwy obrazów po zapisie w DIAScreen:** DIAScreen nadaje obrazom nowe nazwy (`PicBank01/…`) i zmienia offsety.
+  Własnych grafik nie szukaj po nazwie – porównuj zawartość (np. skrót danych wpisu w bloku `[Picture]`).
+
 ## Ograniczenia
 Sprawdzone na panelach AX-8 (`Version` 6.6.0–6.6.2). Inna wersja/panel: najpierw `verify`, potem otwarcie
 w DIAScreen. Szczegóły formatu (tylko przy rozwoju narzędzia): `FORMAT_DPA.md`, `README.md`.

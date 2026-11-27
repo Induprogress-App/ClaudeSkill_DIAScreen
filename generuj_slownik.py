@@ -73,7 +73,7 @@ OPISY = {
     "WriteMemType": ("typ pamieci adresu zapisu", "?"),
     "VisibleVar": ("bit widocznosci elementu (None = zawsze widoczny)", "?"),
     "VisibleLink": ("lacze bitu widocznosci", "?"),
-    "VisibleCondition": ("warunek widocznosci: 1 = widoczny przy ON, 0 = przy OFF", "?"),
+    "VisibleCondition": ("warunek widocznosci: 1 = widoczny przy ON, 0 = przy OFF", "ok"),
     "InterLockVar": ("bit blokady dzialania", "?"), "InterLockLink": ("lacze bitu blokady", "?"),
     "InterLockLevel": ("stan bitu blokady zezwalajacy", "?"), "InterLockViewMode": ("wyglad zablokowanego elementu", "?"),
     "TriggerVar": ("bit ustawiany po wpisaniu/wykonaniu", "?"), "TriggerLink": ("lacze bitu Trigger", "?"),
