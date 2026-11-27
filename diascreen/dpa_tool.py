@@ -427,7 +427,7 @@ def text_to_items(text, base_dir):
             key, _, val = rest.partition("=")
             key = key.strip().encode("ascii")
             if tag == "@@u16":
-                items.append(("u16", key, _u16_bytes(json.loads(val))))
+                items.append(("u16", key, _u16_bytes(json.loads(val) if val.strip() else "")))  # puste = ""
             elif tag == "@@lenhex":
                 items.append(("lenhex", key, bytes.fromhex(val)))
             elif tag == "@@blob32":
@@ -1030,8 +1030,48 @@ def cmd_set(proj, screen, ident, assigns, state=None, lang=0, states=None):
     if states:
         set_state_count(lines, int(states))
     msgs = (set_element(lines, given, state) if given else []) + (["stanow: %s" % states] if states else [])
+    msgs += _follow_picture(lines, e.props)
     _save_screen(s, e.start - 1, lines, len(e.lines))
     print("%s el.%d %s: %s" % (s.file, e.id, e.type_name, "; ".join(msgs)))
+
+
+def _follow_picture(lines, old_props):
+    """Po zmianie X/Y/Width/Height obraz idzie za elementem: obraz na calym elemencie dostaje nowy prostokat,
+    mniejszy obraz przesuwa sie o te sama odleglosc (rozmiar bez zmian). DIAScreen sam tego nie poprawia."""
+    keys = ("X", "Y", "Width", "Height")
+    try:
+        old = tuple(int(old_props[k]) for k in keys)
+        new = tuple(int(dict(x for x in map(_kv, lines) if x).get(k, v)) for k, v in zip(keys, old))
+    except (KeyError, ValueError):
+        return []
+    if old == new:
+        return []
+    pk = ("PictureCoordX", "PictureCoordY", "PictureWidth", "PictureHeight")
+    moved = 0
+    for i, l in enumerate(lines):
+        if not l.startswith("PictureCoordX="):
+            continue
+        idx = {}
+        for j in range(i, min(i + 8, len(lines))):
+            k = lines[j].split("=", 1)[0]
+            if k in pk:
+                idx[k] = j
+        if len(idx) < 4:
+            continue
+        try:
+            box = tuple(int(lines[idx[k]].split("=", 1)[1]) for k in pk)
+        except ValueError:
+            continue
+        if box[2] <= 0 or box[3] <= 0:
+            continue
+        if box == old:
+            nb = new
+        else:
+            nb = (box[0] + new[0] - old[0], box[1] + new[1] - old[1], box[2], box[3])
+        for k, v in zip(pk, nb):
+            lines[idx[k]] = "%s=%d" % (k, v)
+        moved += 1
+    return ["obraz za elementem: %d stan(y)" % moved] if moved else []
 
 
 def _max_desc_number(screens):
